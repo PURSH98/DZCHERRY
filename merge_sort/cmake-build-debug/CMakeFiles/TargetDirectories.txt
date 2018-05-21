@@ -1,3 +1,0 @@
-C:/Users/SEMYON/Documents/GitHub/DZCHERRY/merge_sort/cmake-build-debug/CMakeFiles/merge_sort.dir
-C:/Users/SEMYON/Documents/GitHub/DZCHERRY/merge_sort/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/SEMYON/Documents/GitHub/DZCHERRY/merge_sort/cmake-build-debug/CMakeFiles/rebuild_cache.dir

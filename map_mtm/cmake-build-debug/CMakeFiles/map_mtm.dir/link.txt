@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2018.1.2\bin\cmake\bin\cmake.exe" -E remove -f CMakeFiles\map_mtm.dir/objects.a
-C:\TDM-GCC-64\bin\ar.exe cr CMakeFiles\map_mtm.dir/objects.a @CMakeFiles\map_mtm.dir\objects1.rsp
-C:\TDM-GCC-64\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\map_mtm.dir/objects.a -Wl,--no-whole-archive  -o map_mtm.exe -Wl,--out-implib,libmap_mtm.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\map_mtm.dir\linklibs.rsp

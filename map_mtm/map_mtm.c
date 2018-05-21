@@ -12,8 +12,8 @@ struct Node {
 
 struct Map_t {
     int size;
-    Node first;
-    Node current;
+    MapKeyElement first;
+    MapKeyElement current;
     copyMapDataElements copyData;
     copyMapKeyElements copyKey;
     freeMapDataElements freeData;
@@ -58,10 +58,16 @@ Map mapCopy(Map map) {       //???
     if (map == NULL) {
         return NULL;
     }
-    Map copy = malloc(sizeof(*copy));
-    if (copy == NULL) {
+    Map map_copy = malloc(sizeof(*map_copy));
+    if (map_copy == NULL) {
         return NULL;
     }
+    map_copy->size = map->size;
+    map_copy->copyData = map->copyData;
+    map_copy->copyKey = map->copyKey;
+    map_copy->freeData = map->freeData;
+    map_copy->freeKey = map->freeKey;
+    map_copy->compareKey = map->compareKey;
 }
 
 int mapGetSize(Map map) {

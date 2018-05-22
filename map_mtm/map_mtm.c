@@ -2,24 +2,40 @@
 #include <stdio.h>
 #include "map_mtm.h"
 
-typedef struct Node *Node;
+typedef struct Node_t *Node;
 
-struct Node {
+struct Node_t {
     MapKeyElement key;
     MapDataElement data;
-    Node *next;
+    Node next;
 };
 
 struct Map_t {
     int size;
-    MapKeyElement first;
-    MapKeyElement current;
+    Node first;
+    Node current;
     copyMapDataElements copyData;
     copyMapKeyElements copyKey;
     freeMapDataElements freeData;
     freeMapKeyElements freeKey;
     compareMapKeyElements compareKey;
 };
+
+static Node nodeCopy(Map map, Node node);
+
+static Node nodeCopy(Map map, Node node) {
+    if ((map && node) == NULL) {
+        return NULL;
+    }
+    Node node_copy = malloc(sizeof(*node));
+    if (node_copy == NULL) {
+        return NULL;
+    }
+    node_copy->data = map->copyData(node->data);
+    node_copy->key = map->copyKey(node->key);
+    node_copy->next = NULL;
+    return node_copy;
+}
 
 Map mapCreate(copyMapDataElements copyDataElement, copyMapKeyElements copyKeyElement,
               freeMapDataElements freeDataElement, freeMapKeyElements freeKeyElement,
@@ -58,16 +74,22 @@ Map mapCopy(Map map) {       //???
     if (map == NULL) {
         return NULL;
     }
-    Map map_copy = malloc(sizeof(*map_copy));
+    Map map_copy = mapCreate(map->copyData, map->copyKey,
+                             map->freeData, map->freeKey,
+                             map->compareKey);
     if (map_copy == NULL) {
         return NULL;
     }
-    map_copy->size = map->size;
-    map_copy->copyData = map->copyData;
-    map_copy->copyKey = map->copyKey;
-    map_copy->freeData = map->freeData;
-    map_copy->freeKey = map->freeKey;
-    map_copy->compareKey = map->compareKey;
+    map_copy->first = nodeCopy(map, map->first);
+    map_copy->current = map_copy->first;
+    map->current = map->first->next;
+    while (map->current != NULL) {
+        Node temp_node = nodeCopy(map, map->current);
+        map_copy->current->next = temp_node;
+        map_copy->current = map_copy->current->next;
+        map->current = map->current->next;
+    }
+    return map_copy;
 }
 
 int mapGetSize(Map map) {
@@ -80,5 +102,51 @@ int mapGetSize(Map map) {
 bool mapContains(Map map, MapKeyElement element) {       //???
     if ((map && element) == NULL) {
         return false;
+    }
+    map->current = map->first;
+    while (map->current != NULL) {
+        if (map->compareKey(map->current->key, element) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+MapResult mapPut(Map map, MapKeyElement keyElement, MapDataElement dataElement) {
+    if (map == NULL) {
+        return MAP_NULL_ARGUMENT;
+    }
+    map->current = map->first;
+    while (map->current != NULL) {
+        if (map->compareKey(map->current->key, keyElement) == 0) {
+            map->freeData(map->current->data);
+            map->current->data = dataElement;
+        }
+    }
+    return MAP_SUCCESS;
+}
+
+MapDataElement mapGet(Map map, MapKeyElement keyElement) {
+    if ((map && keyElement) == NULL ||
+        mapContains(map, keyElement) == false) {
+        return NULL;
+    }
+    Node iterator_init = map->current;
+    map->current = map->first;
+    while (map->current != NULL) {
+        if (map->compareKey(map->current->key, keyElement) == 0) {
+            return map->current->data;
+        }
+    }
+    map->current = iterator_init;
+    return NULL;
+}
+
+MapResult mapRemove(Map map, MapKeyElement keyElement) {
+    if ((map && keyElement) == NULL) {
+        return MAP_NULL_ARGUMENT;
+    }
+    if (mapContains(map, keyElement) == false) {
+        return MAP_ITEM_DOES_NOT_EXIST;
     }
 }

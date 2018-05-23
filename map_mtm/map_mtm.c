@@ -70,7 +70,7 @@ void mapDestroy(Map map) {
     free(map);
 }
 
-Map mapCopy(Map map) {       //???
+Map mapCopy(Map map) {
     if (map == NULL) {
         return NULL;
     }
@@ -99,7 +99,7 @@ int mapGetSize(Map map) {
     return map->size;
 }
 
-bool mapContains(Map map, MapKeyElement element) {       //???
+bool mapContains(Map map, MapKeyElement element) {
     if ((map && element) == NULL) {
         return false;
     }
@@ -108,6 +108,7 @@ bool mapContains(Map map, MapKeyElement element) {       //???
         if (map->compareKey(map->current->key, element) == 0) {
             return true;
         }
+        map->current = map->current->next;
     }
     return false;
 }
@@ -121,9 +122,11 @@ MapResult mapPut(Map map, MapKeyElement keyElement, MapDataElement dataElement) 
         if (map->compareKey(map->current->key, keyElement) == 0) {
             map->freeData(map->current->data);
             map->current->data = dataElement;
+            return MAP_SUCCESS;
         }
+        map->current = map->current->next;
     }
-    return MAP_SUCCESS;
+    return MAP_OUT_OF_MEMORY;
 }
 
 MapDataElement mapGet(Map map, MapKeyElement keyElement) {
@@ -137,6 +140,7 @@ MapDataElement mapGet(Map map, MapKeyElement keyElement) {
         if (map->compareKey(map->current->key, keyElement) == 0) {
             return map->current->data;
         }
+        map->current = map->current->next;
     }
     map->current = iterator_init;
     return NULL;
@@ -146,7 +150,64 @@ MapResult mapRemove(Map map, MapKeyElement keyElement) {
     if ((map && keyElement) == NULL) {
         return MAP_NULL_ARGUMENT;
     }
-    if (mapContains(map, keyElement) == false) {
-        return MAP_ITEM_DOES_NOT_EXIST;
+    map->current = map->first;
+    Node previous_node = map->first;
+    if (map->compareKey(map->current->key, keyElement) == 0) {
+        map->first = map->current->next;
+        map->freeData(map->current->data);
+        map->freeKey(map->current->key);
+        free(map->current);
+        return MAP_SUCCESS;
     }
+    map->current = map->current->next;
+    while (map->current != NULL) {
+        if (map->compareKey(map->current->key, keyElement) == 0) {
+            previous_node->next = map->current->next;
+            map->freeData(map->current->data);
+            map->freeKey(map->current->key);
+            free(map->current);
+            map->size--;
+            return MAP_SUCCESS;
+        }
+        previous_node = map->current;
+        map->current = map->current->next;
+    }
+    return MAP_ITEM_DOES_NOT_EXIST;
+}
+
+MapKeyElement mapGetFirst(Map map) {
+    if (map == NULL) {
+        return NULL;
+    }
+    map->current = map->first;
+    return map->first->key;
+}
+
+MapKeyElement mapGetNext(Map map) {
+    if (map == NULL) {
+        return NULL;
+    }
+    if (map->current == NULL
+        || map->current->next == NULL) {
+        return NULL;
+    }
+    map->current = map->current->next;
+    return map->current->key;
+}
+
+MapResult mapClear(Map map) {
+    if (map == NULL) {
+        return MAP_NULL_ARGUMENT;
+    }
+    map->current = map->first;
+    while (map->current != NULL) {
+        Node previous_node = map->current;
+        map->current = map->current->next;
+        map->freeData(previous_node->data);
+        map->freeKey(previous_node->key);
+        free(previous_node);
+        map->size--;
+    }
+    map->first = NULL;
+    return MAP_SUCCESS;
 }

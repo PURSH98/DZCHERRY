@@ -21,9 +21,9 @@ struct Map_t {
     compareMapKeyElements compareKey;
 };
 
-static Node nodeCopy(Map map, Node node);
-
 static Node nodeCreate(Map map, MapKeyElement key, MapDataElement data);
+
+static Node nodeCopy(Map map, Node node);
 
 static Node nodeCreate(Map map, MapKeyElement key, MapDataElement data) {
     if (key == NULL || data == NULL) {
@@ -158,7 +158,7 @@ MapResult mapPut(Map map, MapKeyElement keyElement, MapDataElement dataElement) 
             map->current = map->current->next;
         }
     } else {
-        if (map->compareKey(map->first->key, keyElement) == 1) {
+        if (map->compareKey(map->first->key, keyElement) > 0) {
             Node new_node = nodeCreate(map, keyElement, dataElement);
             new_node->next = map->first;
             map->first = new_node;
@@ -168,7 +168,7 @@ MapResult mapPut(Map map, MapKeyElement keyElement, MapDataElement dataElement) 
         map->current = map->first->next;
         Node previous_node = map->first;
         while (map->current != NULL) {
-            if (map->compareKey(map->current->key, keyElement) == 1) {
+            if (map->compareKey(map->current->key, keyElement) > 0) {
                 previous_node->next = nodeCreate(map, keyElement, dataElement);
                 previous_node->next->next = map->current;
                 map->size++;

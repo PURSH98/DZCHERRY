@@ -146,7 +146,18 @@ MapResult mapPut(Map map, MapKeyElement keyElement, MapDataElement dataElement) 
         map->size++;
         return MAP_SUCCESS;
     }
-    if (mapContains(map, keyElement) == false) {
+    if (mapContains(map, keyElement) == true) {
+        map->current = map->first;
+        while (map->current != NULL) {
+            if (map->compareKey(map->current->key, keyElement) == 0) {
+                map->freeData(map->current->data);
+                map->current->data = map->copyData(dataElement);
+                map->size++;
+                return MAP_SUCCESS;
+            }
+            map->current = map->current->next;
+        }
+    } else {
         if (map->compareKey(map->first->key, keyElement) == 1) {
             Node new_node = nodeCreate(map, keyElement, dataElement);
             new_node->next = map->first;
@@ -158,29 +169,17 @@ MapResult mapPut(Map map, MapKeyElement keyElement, MapDataElement dataElement) 
         Node previous_node = map->first;
         while (map->current != NULL) {
             if (map->compareKey(map->current->key, keyElement) == 1) {
-                Node new_node = nodeCreate(map, keyElement, dataElement);
-                previous_node->next = new_node;
-                new_node->next = map->current;
+                previous_node->next = nodeCreate(map, keyElement, dataElement);
+                previous_node->next->next = map->current;
                 map->size++;
                 return MAP_SUCCESS;
             }
-            previous_node = map->current;
+            previous_node = previous_node->next;
             map->current = map->current->next;
         }
-        Node new_node = nodeCreate(map, keyElement, dataElement);
-        previous_node->next = new_node;
+        previous_node->next = nodeCreate(map, keyElement, dataElement);
         map->size++;
         return MAP_SUCCESS;
-    } else {
-        map->current = map->first;
-        while (map->current != NULL) {
-            if (map->compareKey(map->current->key, keyElement) == 0) {
-                map->freeData(map->current->data);
-                map->current->data = map->copyData(dataElement);
-                return MAP_SUCCESS;
-            }
-            map->current = map->current->next;
-        }
     }
     return MAP_SUCCESS;
 }

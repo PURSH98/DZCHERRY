@@ -4,6 +4,8 @@
 
 typedef struct Node_t *Node;
 
+/*Element of map that contains key, data
+ * and pointer to the next element of map*/
 struct Node_t {
     MapKeyElement key;
     MapDataElement data;
@@ -25,8 +27,12 @@ static Node nodeCreate(Map map, MapKeyElement key, MapDataElement data);
 
 static Node nodeCopy(Map map, Node node);
 
+/*-Creates new node assigning copies of key and data
+ * parameters to key and data fields
+ * of the new node using map functions
+ *-Returns NULL if one of the parameters is NULL*/
 static Node nodeCreate(Map map, MapKeyElement key, MapDataElement data) {
-    if (key == NULL || data == NULL) {
+    if (map == NULL || key == NULL || data == NULL) {
         return NULL;
     }
     Node new_node = malloc(sizeof(*new_node));
@@ -36,6 +42,10 @@ static Node nodeCreate(Map map, MapKeyElement key, MapDataElement data) {
     return new_node;
 }
 
+/*-Creates new node assigning copies of key and data
+ * values of the node parameter to key and
+ * data fields of the new node using map functions
+ *-Returns NULL if one of the parameters is NULL*/
 static Node nodeCopy(Map map, Node node) {
     if (map == NULL || node == NULL) {
         return NULL;

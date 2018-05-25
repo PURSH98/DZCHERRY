@@ -2,3 +2,5 @@
 checkstring
 copystring
 deletestring
+
+maptolist

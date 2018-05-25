@@ -3,7 +3,7 @@
 struct user_t {
 	Age age;
 	Series fav_series;
-	Friends friends;
+	Friends friends; //list, dictionary or set? set seems more logical, but I'm not sure
 };
 
 MtmFlixResult UserAddFavSeries (User user, Series series) {

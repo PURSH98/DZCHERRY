@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "libmtm.h"
 #include "libmtm_ex3.h"
+#include "utilities.h"
 
 
 struct mtmFlix_t {
@@ -67,7 +68,7 @@ MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const ch
 }
 
 MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
-	User user = UserCreate(age);
+	User user = UserCreate(age); //should we add username to user struct too? but then we will keep two instances of a name
 	if (mapPut mtmflix->users(mtmflix, username, user) ==
 }
 
@@ -86,16 +87,3 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, i
 MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputStream);
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream);
-
-
-static SeriesMapToList (Map map, Type type) {
-	List list = listCreate(copy, destroy);
-	mapGetFirst(Map map);
-	MAP_FOREACH(type,iterator,map) {
-
-	}
-	//empty list
-	//for series in series
-	//add series contents to list
-}
-

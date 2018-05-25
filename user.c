@@ -4,7 +4,7 @@ struct user_t {
 	Age age;
 	Series fav_series;
 	Friends friends;
-} *User;
+};
 
 MtmFlixResult UserAddFavSeries (User user, Series series) {
 	//add to dict

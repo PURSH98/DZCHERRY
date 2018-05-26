@@ -1,4 +1,6 @@
 //ifndef include
+#include "mtmflix.h"
+#include "series.h"
 
 struct series_t {
 	//Name name;

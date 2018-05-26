@@ -3,18 +3,30 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "mtmflix.h"
-#include "map.h"
-#include "list.h"
-
-// StringCopy
-// StringCompare
-// StringFree
+#include "utilities.h"
 
 //create a private copy of a string. do we need this?
 // const char* stringDuplicate(char* str) {
 // 	char* copy = malloc(strlen(str) + 1);
 // 	return copy ? strcpy(copy, str) : NULL;
 // }
+
+char* copyString(char* str) {
+  int length = strlen(str);
+  char* new_str = malloc(length+1);
+  // TODO: handle memory allocation error
+  assert(new_str);
+  strcpy(new_str, str);
+  return new_str;
+}
+
+void freeString(char* str) {
+  free(str);
+}
+
+int compareStrings(char* str_a, char* str_b) {
+  return strcmp(str_a, str_b);
+}
 
 bool stringCheck (char* string) {
 	int length = strlen(string);
@@ -29,17 +41,17 @@ bool stringCheck (char* string) {
 //map element to set element
 //list element to set element
 
-typedef struct key_val_pairs {
+typedef struct key_val_pair_t {
   void* key;
   void* value;
-} *KeyValuePair;
+};
 
 /* Adapted from the reference implementation
    of copyString */
 ListElement copyKeyValuePair(ListElement keyValuePair) {
   assert(keyValuePair);
-  KeyValuePair copy = malloc(sizeof(key_val_pair));
-  if (copy == NULL) {
+  KeyValuePair copy = malloc(sizeof(KeyValuePair));
+  if (keyValuePair == NULL) {
     return NULL;
   }
   copy->key   = ((KeyValuePair) keyValuePair)->key;
@@ -63,7 +75,7 @@ List mapToList(Map map, ListResult* status) {
     return newList;
   }
   MAP_FOREACH(KeyValuePair, keyValuePair, map) {
-    KeyValuePair listElement = malloc(sizeof(key_val_pair));
+    KeyValuePair listElement = malloc(sizeof(KeyValuePair));
     if (listElement == NULL) {
       *status = LIST_OUT_OF_MEMORY;
       return NULL;
@@ -76,4 +88,8 @@ List mapToList(Map map, ListResult* status) {
     }
   }
   return newList;
+}
+
+int main() {
+  return 0;
 }

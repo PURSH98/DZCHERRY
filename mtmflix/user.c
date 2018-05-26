@@ -1,19 +1,26 @@
+#include <stdlib.h>
+#include "utilities.h"
+#include "mtmflix.h"
+#include "user.h"
+#include "series.h"
+#include "set.h"
+
 //ifndef include
 
 struct user_t {
 	int age;
 	Series fav_series; //set of names
-	Friends friends; //set of names
+	Set friends; //set of names
 };
 
-User userCreate(int age, Series fav_series, Friends friends) {
+User userCreate(int age) {
 	User user = malloc(sizeof(User));
 	if (user == NULL) {
 		return NULL;
 	}
 	user->age = age;
-	user->fav_series = setCreate(copySeriesElement, freeSeriesElement, compareSeriesElements);
-	user->friends = setCreate(copyFriendElement, freeFriendElement, compareFriendElements);
+	user->fav_series = setCreate(copyString, freeString, compareStrings);
+	user->friends = setCreate(copyString, freeString, compareStrings);
 	return user;
 }
 
@@ -21,7 +28,7 @@ User userCopy (User user) {
 	if (user == NULL) {
 		return NULL;
 	}
-	User new_user = malloc(User);
+	User new_user = malloc(sizeof(User));
 	new_user->age = user->age;
 	//copy series or just pointer? the same about friends
 	if (new_user == NULL) {
@@ -36,9 +43,9 @@ void userFree(User user) {
 	user = NULL;
 }
 
-MtmFlixResult userAddFavSeries (User user, SeriesElement series_element) {
+MtmFlixResult userAddFavSeries(User user, char* series_name) {
 	//series must be a series element here
-	setAdd(user->fav_series, series_element);
+	setAdd(user->fav_series, series_name);
 	//errors
 }
 

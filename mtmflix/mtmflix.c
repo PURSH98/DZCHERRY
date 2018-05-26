@@ -163,27 +163,27 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputSt
 }
 
 MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName) {
- 	userAddFavSeries(mapGet(mtmflix->user, username1), seriesName);
+ 	userAddFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), seriesName);
  	return MTMFLIX_SUCCESS;
  	//add errors
 }
 
 MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName) {
-	userDeleteFavSeries(mapGet(mtmflix->user, username1), seriesName);
+	userDeleteFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), seriesName);
 	return MTMFLIX_SUCCESS;
 	//add errors
 }
 
 
 MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
-	userAddFriend(mapGet(mtmflix->user, username1), username2);
+	userAddFriend(mapGet(mtmflix->users, (MapKeyElement)username1), username2);
 	return MTMFLIX_SUCCESS;
 	//add errors
 
 }
 
 MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
-	userRemoveFriend(mapGet(mtmflix->user, username1), username2);
+	userRemoveFriend(mapGet(mtmflix->users, (MapKeyElement)username1), username2);
 	return MTMFLIX_SUCCESS;
 	//add errors
 }

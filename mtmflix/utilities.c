@@ -4,6 +4,7 @@
 #include <assert.h>
 #include "mtmflix.h"
 #include "utilities.h"
+#include "set.h"
 
 //create a private copy of a string. do we need this?
 // const char* stringDuplicate(char* str) {
@@ -85,4 +86,30 @@ List mapToList(Map map, ListResult* status) {
     }
   }
   return newList;
+}
+
+List setToList(Set set, ListResult* status){
+    *status=LIST_SUCCESS;
+    if (set == NULL) {
+        *status = LIST_NULL_ARGUMENT;
+        return NULL;
+    }
+    List newList = listCreate(copyString,freeString);
+    int setSize = setGetSize(set);
+    if (setSize == 0) {
+        return newList;
+    }
+    SET_FOREACH(ListElement, iterator, set) {
+        ListElement listElement = malloc(sizeof(ListElement));
+        if (listElement == NULL) {
+            *status = LIST_OUT_OF_MEMORY;
+            return NULL;
+        }
+        listElement = iterator;
+        if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
+            *status = LIST_INVALID_CURRENT;
+            return NULL;
+        }
+    }
+    return newList;
 }

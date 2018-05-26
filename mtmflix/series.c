@@ -1,6 +1,6 @@
 //ifndef include
 
-struct mtmFlix_t {
+struct series_t {
 	//Name name;
 	int episodesNum;
 	Genre genre;

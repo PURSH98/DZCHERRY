@@ -7,7 +7,6 @@
 
 
 struct mtmFlix_t {
-	Name name;
 	Series series;
 	User user;
 };

@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "mtmflix.h": "c",
+        "series.h": "c"
     }
 }

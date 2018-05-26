@@ -1,9 +1,8 @@
 #include <stdlib.h>
+#include <assert.h>
 #include "utilities.h"
 #include "mtmflix.h"
 #include "user.h"
-#include "series.h"
-#include "set.h"
 
 MtmFlixResult userRemoveFriend(User user1, User user2);
 User userCreate(int age);
@@ -17,7 +16,7 @@ MtmFlixResult userRemoveFriend(User user1, char* username);
 
 struct user_t {
 	int age;
-	Series fav_series; //set of names
+	Set fav_series; //set of names
 	Set friends; //set of names
 };
 
@@ -27,8 +26,8 @@ User userCreate(int age) {
 		return NULL;
 	}
 	user->age = age;
-	user->fav_series = setCreate(copyString, freeString, compareStrings);
-	user->friends = setCreate(copyString, freeString, compareStrings);
+	user->fav_series = setCreate((copySetElements)copyString, (freeSetElements)freeString, (compareSetElements)compareStrings);
+	user->friends = setCreate((copySetElements)copyString, (freeSetElements)freeString, (compareSetElements)compareStrings);
 	return user;
 }
 
@@ -52,9 +51,13 @@ void userFree(User user) {
 }
 
 MtmFlixResult userAddFavSeries(User user, char* series_name) {
-	setAdd(user->fav_series, series_name);
-	return MTMFLIX_SUCCESS;
-	//add errors
+	//series must be a series element here
+	switch(setAdd(user->fav_series, (SetElement)series_name)) {
+		default : return MTMFLIX_SUCCESS;
+	}
+	// Unreachable
+	assert(false);
+	return MTMFLIX_NO_SERIES;
 }
 
 MtmFlixResult userDeleteFavSeries(User user, char* series_name) {
@@ -74,5 +77,4 @@ MtmFlixResult userRemoveFriend(User user1, char* username) {
 	setRemove(user1->friends, username);
 	return MTMFLIX_SUCCESS;
 	//add errors
-
 }

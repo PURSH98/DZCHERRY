@@ -29,7 +29,7 @@ bool stringCheck (char* string) {
 //map element to set element
 //list element to set element
 
-typedef struct key_val_pairs {
+typedef struct key_val_pair_t {
   void* key;
   void* value;
 } *KeyValuePair;
@@ -38,8 +38,8 @@ typedef struct key_val_pairs {
    of copyString */
 ListElement copyKeyValuePair(ListElement keyValuePair) {
   assert(keyValuePair);
-  KeyValuePair copy = malloc(sizeof(key_val_pair));
-  if (copy == NULL) {
+  KeyValuePair copy = malloc(sizeof(KeyValuePair));
+  if (keyValuePair == NULL) {
     return NULL;
   }
   copy->key   = ((KeyValuePair) keyValuePair)->key;
@@ -63,7 +63,7 @@ List mapToList(Map map, ListResult* status) {
     return newList;
   }
   MAP_FOREACH(KeyValuePair, keyValuePair, map) {
-    KeyValuePair listElement = malloc(sizeof(key_val_pair));
+    KeyValuePair listElement = malloc(sizeof(KeyValuePair));
     if (listElement == NULL) {
       *status = LIST_OUT_OF_MEMORY;
       return NULL;
@@ -76,4 +76,8 @@ List mapToList(Map map, ListResult* status) {
     }
   }
   return newList;
+}
+
+int main() {
+  return 0;
 }

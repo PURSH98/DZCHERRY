@@ -1,10 +1,8 @@
-//Add ifndef?
-
 #include <stdlib.h>
-#include "libmtm.h"
-#include "libmtm_ex3.h"
+#include "mtmflix.h"
 #include "utilities.h"
-
+#include "series.h"
+#include "user.h"
 
 struct mtmFlix_t {
 	Name name;
@@ -12,22 +10,22 @@ struct mtmFlix_t {
 	User user;
 };
 
-MtmFlix mtmFlixCreate();
-void mtmFlixDestroy(MtmFlix mtmflix);
+// MtmFlix mtmFlixCreate();
+// void mtmFlixDestroy(MtmFlix mtmflix);
 
-MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNum, Genre genre, int* ages, int episodesDuration);
-MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name);
-MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName);
-MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName);
+// MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNum, Genre genre, int* ages, int episodesDuration);
+// MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name);
+// MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName);
+// MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName);
 
-MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age);
-MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username);
-MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2);
-MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2);
-MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream);
+// MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age);
+// MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username);
+// MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2);
+// MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2);
+// MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream);
 
-MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputStream);
-MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream);
+// MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputStream);
+// MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream);
 
 
 MtmFlix mtmFlixCreate() {
@@ -145,24 +143,24 @@ int seriesListCompare(Series_node series_node_a, Series_node series_node_b)
 	return strcmp(series_node_a->key, series_node_b->key);
 }
 
-MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream);
+// MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream);
 
 
-MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName) {
-	userAddFavSeries(username, seriesName);
-}
+// MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName) {
+// 	userAddFavSeries(username, seriesName);
+// }
 
-MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName) {
-	//delete from dictionary via user's function
-}
+// MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName) {
+// 	//delete from dictionary via user's function
+// }
 
 
-MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
-	userAddFriend(mapGet(mtmflix->user, username1), username2);
-}
+// MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
+// 	userAddFriend(mapGet(mtmflix->user, username1), username2);
+// }
 
-MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
-	userRemoveFriend(mapGet(mtmflix->user, username1), username2);
-}
+// MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
+// 	userRemoveFriend(mapGet(mtmflix->user, username1), username2);
+// }
 
-MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream);
+// MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream);

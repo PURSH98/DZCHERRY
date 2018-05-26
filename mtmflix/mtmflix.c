@@ -61,25 +61,60 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (mtmflix == NULL || username == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
-	if (!CheckString(username) || age <= MTM_MIN_AGE || age >= MTM_MAX_AGE) {
+	if (!CheckString(username)) {
 		return MTMFLIX_ILLEGAL_USERNAME; //why are errors commented out in header? and why there's no such error?
 	}
 	if (mapContains(mtmflix->user, username)) {
 		return MTMFLIX_USERNAME_ALREADY_USED;
 	}
+	if (age <= MTM_MIN_AGE || age >= MTM_MAX_AGE) {
+		return MTMFLIX_ILLEGAL_AGE;
+	}
 	User user = UserCreate(age, NULL, NULL);
 	if (user == NULL) {
 		return MTMFLIX_OUT_OF_MEMORY;
 	}
-	switch (mapPut(mtmflix, username, user)) {
+	switch (mapPut(mtmflix->user, username, user)) {
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY; break;
 		case MAP_SUCCESS : return MTM_SUCCESS; break; //check stilistic guidelines
 	}
 }
 
+MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username) {
+	if (mtmflix == NULL || username == NULL) {
+		return MTMFLIX_NULL_ARGUMENT;
+	}
+	switch (mapRemove (mtmflix->user, username)) {
+		case MAP_ITEM_DOES_NOT_EXIST : return MTMFLIX_USER_DOES_NOT_EXIST;
+		case MAP_SUCCESS : return MTM_SUCCESS;
+	}
+	//was this user removed from the friend lists of their friends or should we add this separately?
+}
+
 MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNum, Genre genre, int* ages, int episodesDuration) {
+	if (mtmflix == NULL || name == NULL) {
+		return MTMFLIX_NULL_ARGUMENT;
+	}
+	if (!CheckString(name)) {
+		return MTMFLIX_ILLEGAL_SERIES_NAME; //why are errors commented out in header? and why there's no such error?
+	}
+	if (mapContains(mtmflix->series, name)) {
+		return MTMFLIX_SERIES_ALREADY_EXISTS;
+	}
+	if (episodesNum <= 0) {
+		return MTMFLIX_ILLEGAL_EPISODES_NUM;
+	}
+	if (episodesDuration <= 0) {
+		return MTMFLIX_ILLEGAL_EPISODES_DURATION;
+	}
 	Series series = SeriesCreate(episodesNum, genre, ages, episodesDuration);
-	if (mapPut(mtmflix->series, name, series) == //проверить статусы, поступить соответствующим образом
+	if (series == NULL) {
+		return MTMFLIX_OUT_OF_MEMORY;
+	}
+	switch (mapPut(mtmflix->series, name, series)) {
+		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY; break;
+		case MAP_SUCCESS : return MTM_SUCCESS; break; //check stilistic guidelines
+	}
 }
 
 MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name) {
@@ -94,7 +129,6 @@ MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const ch
 	//delete from dictionary via user's function
 }
 
-MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username);
 
 MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
 	UserAddFriend(mapGet(mtmflix->user, username1), username2);

@@ -1,31 +1,30 @@
 //ifndef include
 
 struct user_t {
-	Age age;
+	int age;
 	Series fav_series; //set of pointers?
 	Friends friends; //set of pointers?
 };
 
-MtmFlixResult UserAddFavSeries (User user, Series series) {
-	//add to dict
-}
-
-MtmFlixResult UserAddFriend(User user1, User user2) {
-
-}
-
-MtmFlixResult UserRemoveFriend(User user1, User user2) {
-
+User UserCreate(int age, Series fav_series, Friends friends) {
+	User user = malloc(sizeof(User));
+	if (user == NULL) {
+		return NULL;
+	}
+	user->age = age;
+	user->fav_series = fav_series;
+	user->friends = friends;
+	return user;
 }
 
 User UserCopy (User user) {
-	User new_user = malloc(sizeof(User));
+	if (user == NULL) {
+		return NULL;
+	}
+	User new_user = UserCreate(user->age, user->fav_series, user->friends);
 	if (new_user == NULL) {
 		return NULL;
 	}
-	new_user->age = user->age; //just passing indexes, not really copying, looks like that's what is needed
-	new_user->fav_series = fav_series;
-	new_user->friends = friends;
 	return new_user;
 }
 
@@ -34,4 +33,16 @@ void UserFree(User user) {
 	user->friends = NULL;
 	free(user);
 	user = NULL;
+}
+
+MtmFlixResult UserAddFavSeries (User user, Series series) {
+
+}
+
+MtmFlixResult UserAddFriend(User user1, User user2) {
+
+}
+
+MtmFlixResult UserRemoveFriend(User user1, User user2) {
+
 }

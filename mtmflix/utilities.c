@@ -15,4 +15,8 @@ StringCopy
 StringCompare
 StringFree
 
-createprivetestringcopy
+//create a private copy of a string
+const char* StringDuplicate(char* str) {
+	char* copy = malloc(strlen(str) + 1);
+	return copy ? strcpy(copy, str) : NULL;
+}

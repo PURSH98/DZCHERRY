@@ -4,6 +4,14 @@
 #include "mtmflix.h"
 #include "user.h"
 
+MtmFlixResult userRemoveFriend(User user1, User user2);
+User userCreate(int age);
+User userCopy (User user);
+void userFree(User user);
+MtmFlixResult userAddFavSeries(User user, char* series_name);
+MtmFlixResult userDeleteFavSeries(User user, char* series_name);
+MtmFlixResult userAddFriend(User user1, char* username);
+MtmFlixResult userRemoveFriend(User user1, char* username);
 //ifndef include
 
 struct user_t {
@@ -52,37 +60,21 @@ MtmFlixResult userAddFavSeries(User user, char* series_name) {
 	return MTMFLIX_NO_SERIES;
 }
 
-// MtmFlixResult userAddFriend(User user1, User user2) {
+MtmFlixResult userDeleteFavSeries(User user, char* series_name) {
+	setRemove(user->fav_series, series_name);
+	return MTMFLIX_SUCCESS;
+	//add errors
+}
 
-// }
 
-// void freeSeriesElement(SeriesElement series_element) {
-// 	//just set pointer to null?
-// }
+MtmFlixResult userAddFriend(User user1, char* username) {
+	setAdd(user1->friends, username);
+	return MTMFLIX_SUCCESS;
+	//add errors
+}
 
-// int compareSeriesElements(SeriesElement series_element_a, SeriesElement series_element_b) {
-// 	//compare names
-// }
-
-// SeriesElement copySeriesElement (Series_element series_element) {
-// 	if (series_element == NULL) {
-// 		return NULL;
-// 	}
-
-// }
-
-// void freeFriendElement(SeriesElement series_element) {
-// 	//just set pointer to null?
-// }
-
-// int compareFriendElements(SeriesElement series_element_a, SeriesElement series_element_b) {
-// 	//irrelevant, can compare names, for example
-// }
-
-// SeriesElement copyFriendElement (Friend_element friend_element) {
-
-// }
-
-// MtmFlixResult UserRemoveFriend(User user1, User user2) {
-
-// }
+MtmFlixResult userRemoveFriend(User user1, char* username) {
+	setRemove(user1->friends, username);
+	return MTMFLIX_SUCCESS;
+	//add errors
+}

@@ -105,7 +105,7 @@ MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNu
 		return MTMFLIX_NULL_ARGUMENT;
 	}
 	if (!stringCheck(name)) {
-		return MTMFLIX_ILLEGAL_SERIES_NAME; //why are errors commented out in header? and why there's no such error?
+		return MTMFLIX_ILLEGAL_SERIES_NAME;
 	}
 	if (mapContains(mtmflix->series, (MapKeyElement)name)) {
 		return MTMFLIX_SERIES_ALREADY_EXISTS;
@@ -162,6 +162,32 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputSt
 	return MTMFLIX_SUCCESS;
 }
 
+MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName) {
+ 	userAddFavSeries(mapGet(mtmflix->user, username1), seriesName);
+ 	return MTMFLIX_SUCCESS;
+ 	//add errors
+}
+
+MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName) {
+	userDeleteFavSeries(mapGet(mtmflix->user, username1), seriesName);
+	return MTMFLIX_SUCCESS;
+	//add errors
+}
+
+
+MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
+	userAddFriend(mapGet(mtmflix->user, username1), username2);
+	return MTMFLIX_SUCCESS;
+	//add errors
+
+}
+
+MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
+	userRemoveFriend(mapGet(mtmflix->user, username1), username2);
+	return MTMFLIX_SUCCESS;
+	//add errors
+}
+
 int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {
 	void* series_a = ((KeyValuePair)list_element_a)->value;
 	void* series_b = ((KeyValuePair)list_element_b)->value;
@@ -174,27 +200,10 @@ int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {
 	return strcmp(key_a, key_b);
 }
 
-// MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream);
+// а эти сделай ты (и заодно проверь, пожалуйста, что Report выше работает)
+// MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream); 
 
-
-// MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName) {
-// 	userAddFavSeries(username, seriesName);
-// }
-
-// MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName) {
-// 	//delete from dictionary via user's function
-// }
-
-
-// MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
-// 	userAddFriend(mapGet(mtmflix->user, username1), username2);
-// }
-
-// MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
-// 	userRemoveFriend(mapGet(mtmflix->user, username1), username2);
-// }
-
-// MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream);
+// MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream); 
 
 // Windows expects a main function
 // in a console app.

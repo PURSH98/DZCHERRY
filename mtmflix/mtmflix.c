@@ -106,7 +106,7 @@ MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNu
 		return MTMFLIX_NULL_ARGUMENT;
 	}
 	if (!stringCheck(name)) {
-		return MTMFLIX_ILLEGAL_SERIES_NAME; //why are errors commented out in header? and why there's no such error?
+		return MTMFLIX_ILLEGAL_SERIES_NAME;
 	}
 	if (mapContains(mtmflix->series, (MapKeyElement)name)) {
 		return MTMFLIX_SERIES_ALREADY_EXISTS;
@@ -163,21 +163,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputSt
 	return MTMFLIX_SUCCESS;
 }
 
-int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {
-	void* series_a = ((KeyValuePair)list_element_a)->value;
-	void* series_b = ((KeyValuePair)list_element_b)->value;
-	int genre_comparison_result = compareSeriesByGenre(series_a, series_b);
-	if (genre_comparison_result != 0) {
-		return genre_comparison_result;
-	}
-	void* key_a = ((KeyValuePair)list_element_a)->key;
-	void* key_b = ((KeyValuePair)list_element_b)->key;
-	return strcmp(key_a, key_b);
-}
-
-// MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream);
-
-
+// Функции, которые ниже, я доделаю
 // MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName) {
 // 	userAddFavSeries(username, seriesName);
 // }
@@ -195,7 +181,22 @@ int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {
 // 	userRemoveFriend(mapGet(mtmflix->user, username1), username2);
 // }
 
-// MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream);
+int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {
+	void* series_a = ((KeyValuePair)list_element_a)->value;
+	void* series_b = ((KeyValuePair)list_element_b)->value;
+	int genre_comparison_result = compareSeriesByGenre(series_a, series_b);
+	if (genre_comparison_result != 0) {
+		return genre_comparison_result;
+	}
+	void* key_a = ((KeyValuePair)list_element_a)->key;
+	void* key_b = ((KeyValuePair)list_element_b)->key;
+	return strcmp(key_a, key_b);
+}
+
+// а эти сделай ты (и заодно проверь, пожалуйста, что Report выше работает)
+// MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream); 
+
+// MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream); 
 
 // Windows expects a main function
 // in a console app.

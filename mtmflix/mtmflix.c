@@ -211,3 +211,7 @@ int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {
 int main() {
 	return 0;
 }
+
+MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
+
+}

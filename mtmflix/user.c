@@ -46,28 +46,27 @@ MtmFlixResult userAddFriend(User user1, User user2) {
 
 }
 
-SeriesElement copySeriesElement {
-
-}
-
 void freeSeriesElement(SeriesElement series_element) {
-
+	//just set pointer to null?
 }
 
 int compareSeriesElements(SeriesElement series_element_a, SeriesElement series_element_b) {
-
+	//compare names
 }
 
-
-SeriesElement copyFriendElement {
+SeriesElement copySeriesElement (Series_element series_element) {
 
 }
 
 void freeFriendElement(SeriesElement series_element) {
-
+	//just set pointer to null?
 }
 
 int compareFriendElements(SeriesElement series_element_a, SeriesElement series_element_b) {
+	//irrelevant, can compare names, for example
+}
+
+SeriesElement copyFriendElement (Friend_element friend_element) {
 
 }
 

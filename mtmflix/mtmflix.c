@@ -164,13 +164,13 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputSt
 }
 
 MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName) {
- 	userAddFavSeries(username, seriesName);
+ 	userAddFavSeries(mapGet(mtmflix->user, username1), seriesName);
  	return MTMFLIX_SUCCESS;
  	//add errors
 }
 
 MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName) {
-	userDeleteFavSeries(username, seriesName);
+	userDeleteFavSeries(mapGet(mtmflix->user, username1), seriesName);
 	return MTMFLIX_SUCCESS;
 	//add errors
 }

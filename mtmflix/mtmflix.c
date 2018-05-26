@@ -212,6 +212,16 @@ int main() {
 }
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
+    ListResult list_result;
+    List users_node = mapKeyToList(mtmflix->users, &list_result);
+    // TODO: handle status
+    // case (status) {
+    // }
+    listSort(users_node, seriesListCompare);
+    LIST_FOREACH(ListElement ,list_iter,users_node) {
+
+    }
+    return MTMFLIX_SUCCESS;
 
 }
 

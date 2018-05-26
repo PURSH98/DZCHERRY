@@ -99,13 +99,13 @@ List setToList(Set set, ListResult* status){
     if (setSize == 0) {
         return newList;
     }
-    SET_FOREACH(ListElement, iterator, set) {
+    SET_FOREACH(ListElement, setElement, set) {
         ListElement listElement = malloc(sizeof(ListElement));
         if (listElement == NULL) {
             *status = LIST_OUT_OF_MEMORY;
             return NULL;
         }
-        listElement = iterator;
+        listElement = setElement;
         if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
             *status = LIST_INVALID_CURRENT;
             return NULL;
@@ -113,3 +113,32 @@ List setToList(Set set, ListResult* status){
     }
     return newList;
 }
+
+List mapKeyToList(Map map, ListResult* status){
+    *status=LIST_SUCCESS;
+    if (map == NULL) {
+        *status = LIST_NULL_ARGUMENT;
+        return NULL;
+    }
+    List newList = listCreate(copyString,freeString);
+    int mapSize = mapGetSize(map);
+    if (mapSize == 0) {
+        return newList;
+    }
+    MAP_FOREACH(ListElement, mapKeyElement, map) {
+        ListElement listElement = malloc(sizeof(ListElement));
+        if (listElement == NULL) {
+            *status = LIST_OUT_OF_MEMORY;
+            return NULL;
+        }
+        listElement = mapKeyElement;
+        if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
+            *status = LIST_INVALID_CURRENT;
+            return NULL;
+        }
+    }
+    return newList;
+}
+
+
+

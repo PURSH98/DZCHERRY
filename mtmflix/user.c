@@ -11,6 +11,9 @@ MtmFlixResult userAddFavSeries(User user, char* series_name);
 MtmFlixResult userDeleteFavSeries(User user, char* series_name);
 MtmFlixResult userAddFriend(User user1, char* username);
 MtmFlixResult userRemoveFriend(User user1, char* username);
+Set userGetFriends(User user);
+int userGetAge(User user);
+Set userGetFavSeries(User user);
 //ifndef include
 
 struct user_t {
@@ -76,4 +79,25 @@ MtmFlixResult userRemoveFriend(User user1, char* username) {
 	setRemove(user1->friends, username);
 	return MTMFLIX_SUCCESS;
 	//add errors
+}
+
+Set userGetFavSeries(User user){
+    if(user==NULL){
+        return NULL;
+    }
+    return user->fav_series;
+}
+
+int userGetAge(User user){
+    if(user==NULL){
+        return 0;
+    }
+    return user->age;
+}
+
+Set userGetFriends(User user){
+    if(user==NULL){
+        return NULL;
+    }
+    return user->friends;
 }

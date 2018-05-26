@@ -4,7 +4,6 @@
 #include "mtmflix.h"
 #include "user.h"
 
-MtmFlixResult userRemoveFriend(User user1, User user2);
 User userCreate(int age);
 User userCopy (User user);
 void userFree(User user);

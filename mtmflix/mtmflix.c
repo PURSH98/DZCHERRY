@@ -168,7 +168,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputSt
 }
 
 MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName) {
- 	userAddFavSeries(mapGet(mtmflix->user, username1), seriesName);
+ 	userAddFavSeries(mapGet(mtmflix->user, username), seriesName);
  	return MTMFLIX_SUCCESS;
  	//add errors
 }

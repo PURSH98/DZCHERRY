@@ -11,9 +11,9 @@
 // 	return copy ? strcpy(copy, str) : NULL;
 // }
 
-char* copyString(char* str) {
+const char* copyString(const char* str) {
   int length = strlen(str);
-  char* new_str = malloc(length+1);
+  const char* new_str = malloc(length+1);
   // TODO: handle memory allocation error
   assert(new_str);
   strcpy(new_str, str);
@@ -28,7 +28,7 @@ int compareStrings(char* str_a, char* str_b) {
   return strcmp(str_a, str_b);
 }
 
-bool stringCheck (char* string) {
+bool stringCheck(const char* string) {
 	int length = strlen(string);
 	for (int i = 0; i < length; i++) {
 		if (!((string[i] >= 'A' && string[i] <= 'Z') || (string[i] >= 'a' && string[i] <= 'z') || (string[i] >= '0' && string[i] <= '9'))) {
@@ -41,10 +41,7 @@ bool stringCheck (char* string) {
 //map element to set element
 //list element to set element
 
-typedef struct key_val_pair_t {
-  void* key;
-  void* value;
-};
+
 
 /* Adapted from the reference implementation
    of copyString */

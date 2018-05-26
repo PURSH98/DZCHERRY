@@ -59,9 +59,20 @@ int compareSeriesByGenre(Series series_a, Series series_b) {
 	return strcmp(series_a->genre, series_b->genre);
 }
 
-Genre seriesGetGenre (Series series) {
+char* seriesGetGenre (Series series) {
 	if (series == NULL) {
 		return NULL;
 	}
-	return series->genre;
+	switch (series->genre) {
+		case SCIENCE_FICTION: return "science fiction";
+        case DRAMA : return "drama";
+        case COMEDY : return "comedy";
+        case CRIME : return "crime";
+        case MYSTERY : return "mystery";
+        case DOCUMENTARY : return "documentary";
+        case ROMANCE : return "romance";
+        case HORROR : return "horror";
+	}
+	// Unreachable
+	assert(false);
 }

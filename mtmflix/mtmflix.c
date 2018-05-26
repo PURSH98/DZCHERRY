@@ -1,13 +1,17 @@
 #include <stdlib.h>
+#include <string.h>
 #include "mtmflix.h"
 #include "utilities.h"
 #include "series.h"
 #include "user.h"
+#include "assert.h"
+
+int seriesListCompare(ListElement list_element_a, ListElement list_element_b);
 
 struct mtmFlix_t {
 	Map series;     // keys: string; values: Series
 	Map users;       // keys: string; values: User
-}
+};
 
 // MtmFlix mtmFlixCreate();
 // void mtmFlixDestroy(MtmFlix mtmflix);
@@ -57,10 +61,10 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (mtmflix == NULL || username == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
-	if (!checkString(username)) {
+	if (!stringCheck(username)) {
 		return MTMFLIX_ILLEGAL_USERNAME; //why are errors commented out in header? and why there's no such error?
 	}
-	if (mapContains(mtmflix->user, username)) {
+	if (mapContains(mtmflix->users, (MapKeyElement) username)) {
 		return MTMFLIX_USERNAME_ALREADY_USED;
 	}
 	if (age <= MTM_MIN_AGE || age >= MTM_MAX_AGE) {
@@ -70,10 +74,15 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (user == NULL) {
 		return MTMFLIX_OUT_OF_MEMORY;
 	}
-	switch (mapPut(mtmflix->user, username, user)) {
+	switch (mapPut(mtmflix->users, (MapKeyElement)username, (MapDataElement)user)) {
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY; break;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS; break; //check stilistic guidelines
+		// Unreachable
+		default : assert(false);
 	}
+	// Unreachable
+	assert(false);
+	return MTMFLIX_NO_USERS;
 }
 
 MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username) {
@@ -81,20 +90,25 @@ MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username) {
 		return MTMFLIX_NULL_ARGUMENT;
 	} 
 	//iterate over users to remove from friends
-	switch (mapRemove (mtmflix->user, username)) {
+	switch (mapRemove (mtmflix->users, (MapKeyElement)username)) {
 		case MAP_ITEM_DOES_NOT_EXIST : return MTMFLIX_USER_DOES_NOT_EXIST;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
+		// Unreachable
+		default : assert(false);
 	}
+	// Unreachable
+	assert(false);
+	return MTMFLIX_NO_USERS;
 }
 
 MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNum, Genre genre, int* ages, int episodesDuration) {
 	if (mtmflix == NULL || name == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
-	if (!CheckString(name)) {
+	if (!stringCheck(name)) {
 		return MTMFLIX_ILLEGAL_SERIES_NAME; //why are errors commented out in header? and why there's no such error?
 	}
-	if (mapContains(mtmflix->series, name)) {
+	if (mapContains(mtmflix->series, (MapKeyElement)name)) {
 		return MTMFLIX_SERIES_ALREADY_EXISTS;
 	}
 	if (episodesNum <= 0) {
@@ -103,14 +117,19 @@ MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNu
 	if (episodesDuration <= 0) {
 		return MTMFLIX_ILLEGAL_EPISODES_DURATION;
 	}
-	Series series = SeriesCreate(episodesNum, genre, ages, episodesDuration);
+	Series series = seriesCreate(episodesNum, genre, ages, episodesDuration);
 	if (series == NULL) {
 		return MTMFLIX_OUT_OF_MEMORY;
 	}
-	switch (mapPut(mtmflix->series, name, series)) {
+	switch (mapPut(mtmflix->series, (MapKeyElement)name, (MapDataElement)series)) {
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS; //check stilistic guidelines
+		// Unreachable
+		default : assert(false);
 	}
+	// Unreachable
+	assert(false);
+	return MTMFLIX_NO_USERS;
 }
 
 MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name) {
@@ -118,18 +137,30 @@ MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name) {
 	if (mtmflix == NULL || name == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
-	switch (mapRemove (mtmflix->series, name)) {
+	switch (mapRemove (mtmflix->series, (MapKeyElement)name)) {
 		case MAP_ITEM_DOES_NOT_EXIST : return MTMFLIX_NO_SERIES;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
+		// Unreachable
+		default : assert(false);
 	}
+	// Unreachable
+	assert(false);
+	return MTMFLIX_NO_USERS;
 }
 
-MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputStream {
-	List series_node = mapToList(mtmflix->series);
+MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputStream) {
+	ListResult list_result;
+	List series_node = mapToList(mtmflix->series, &list_result);
+	// TODO: handle status
+	// case (status) {
+	// }
 	listSort(series_node, seriesListCompare); //not sure about the first parameter
-	LIST_FOREACH(KeyValuePair,series,series_node) {
-		mtmPrintSeries(series->key, seriesGetGenre(series->key)); //check
+	LIST_FOREACH(KeyValuePair,list_iter,series_node) {
+		void* key = (KeyValuePair)list_iter->key;
+		void* value = (KeyValuePair)list_iter->value;
+		mtmPrintSeries((char*)key, seriesGetGenre((Series)value)); //check
 	}
+	return MTMFLIX_SUCCESS;
 }
 
 int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {

@@ -3,13 +3,14 @@
 
 //https://moodle.technion.ac.il/mod/hsuforum/discuss.php?d=440
 
-typedef struct key_val_pair_t* KeyValuePair;
+typedef struct key_val_pair_t {
+  void* key;
+  void* value;
+}* KeyValuePair;
 
-// copystring
 char* copyString(char* str);
 void freeString(char* str);
 int compareStrings(char* str_a, char* str_b);
-bool stringCheck (char* string);
+bool stringCheck(const char* string);
 
-// maptolist
 List mapToList(Map map, ListResult* status);

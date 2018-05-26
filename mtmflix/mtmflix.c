@@ -57,6 +57,25 @@ void mtmFlixDestroy(MtmFlix mtmflix) {
 	mtmflix = NULL;
 }
 
+MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
+	if (mtmflix == NULL || username == NULL) {
+		return MTMFLIX_NULL_ARGUMENT;
+	}
+	if (!CheckString(username) || age <= MTM_MIN_AGE || age >= MTM_MAX_AGE) {
+		return MTMFLIX_ILLEGAL_USERNAME; //why are errors commented out in header? and why there's no such error?
+	}
+	if (mapContains(mtmflix->user, username)) {
+		return MTMFLIX_USERNAME_ALREADY_USED;
+	}
+	User user = UserCreate(age, NULL, NULL);
+	if (user == NULL) {
+		return MTMFLIX_OUT_OF_MEMORY;
+	}
+	switch (mapPut(mtmflix, username, user)) {
+		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY; break;
+		case MAP_SUCCESS : return MTM_SUCCESS; break; //check stilistic guidelines
+	}
+}
 
 MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNum, Genre genre, int* ages, int episodesDuration) {
 	Series series = SeriesCreate(episodesNum, genre, ages, episodesDuration);
@@ -73,11 +92,6 @@ MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const cha
 
 MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName) {
 	//delete from dictionary via user's function
-}
-
-MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
-	User user = UserCreate(age); //should we add username to user struct too? but then we will keep two instances of a name
-	if (mapPut mtmflix->users(mtmflix, username, user) ==
 }
 
 MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username);

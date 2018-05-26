@@ -20,3 +20,5 @@ const char* StringDuplicate(char* str) {
 	char* copy = malloc(strlen(str) + 1);
 	return copy ? strcpy(copy, str) : NULL;
 }
+
+bool CheckString

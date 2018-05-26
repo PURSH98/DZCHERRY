@@ -8,7 +8,7 @@ struct mtmFlix_t {
 	int episodesDuration;
 };
 
-Series SeriesCreate (int episodesNum, Genre genre, int* ages, int episodesDuration) {
+Series seriesCreate (int episodesNum, Genre genre, int* ages, int episodesDuration) {
 	Series series = malloc(sizeof(Series));
 	if (series == NULL) {
 		return NULL;
@@ -35,20 +35,31 @@ Series SeriesCreate (int episodesNum, Genre genre, int* ages, int episodesDurati
 	return series;
 }
 
-void SeriesFree (Series series) {
+void seriesFree (Series series) {
 	free(series->ages);
 	series->ages = NULL;
 	free(series);
 	series = NULL;
 }
 
-Series SeriesCopy (Series series) {
+Series seriesCopy (Series series) {
 	if (series == NULL) {
 		return NULL;
 	}
-	Series new_series = SeriesCreate(series->episodesNum, series->genre, series->ages, series->episodesDuration);
+	Series new_series = seriesCreate(series->episodesNum, series->genre, series->ages, series->episodesDuration);
 	if (new_series == NULL) {
 		return NULL;
 	}
 	return new_series;
+}
+
+int compareSeriesByGenre(Series series_a, Series series_b) {
+	return strcmp(series_a->genre, series_b->genre);
+}
+
+Genre seriesGetGenre (Series series) {
+	if (series == NULL) {
+		return NULL;
+	}
+	return series->genre;
 }

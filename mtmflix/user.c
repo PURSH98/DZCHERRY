@@ -6,7 +6,7 @@ struct user_t {
 	Friends friends; //set of pointers?
 };
 
-User UserCreate(int age, Series fav_series, Friends friends) {
+User userCreate(int age, Series fav_series, Friends friends) {
 	User user = malloc(sizeof(User));
 	if (user == NULL) {
 		return NULL;
@@ -17,29 +17,29 @@ User UserCreate(int age, Series fav_series, Friends friends) {
 	return user;
 }
 
-User UserCopy (User user) {
+User userCopy (User user) {
 	if (user == NULL) {
 		return NULL;
 	}
-	User new_user = UserCreate(user->age, user->fav_series, user->friends);
+	User new_user = userCreate(user->age, user->fav_series, user->friends);
 	if (new_user == NULL) {
 		return NULL;
 	}
 	return new_user;
 }
 
-void UserFree(User user) {
+void userFree(User user) {
 	user->fav_series = NULL; //we don't need to delete other users or series
 	user->friends = NULL;
 	free(user);
 	user = NULL;
 }
 
-MtmFlixResult UserAddFavSeries (User user, Series series) {
+MtmFlixResult userAddFavSeries (User user, Series series) {
 
 }
 
-MtmFlixResult UserAddFriend(User user1, User user2) {
+MtmFlixResult userAddFriend(User user1, User user2) {
 
 }
 

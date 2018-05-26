@@ -2,8 +2,8 @@
 
 struct user_t {
 	int age;
-	Series fav_series; //set of pointers?
-	Friends friends; //set of pointers?
+	Series fav_series; //set of names
+	Friends friends; //set of names
 };
 
 User userCreate(int age, Series fav_series, Friends friends) {
@@ -42,34 +42,37 @@ MtmFlixResult userAddFavSeries (User user, SeriesElement series_element) {
 	//errors
 }
 
-MtmFlixResult userAddFriend(User user1, User user2) {
+// MtmFlixResult userAddFriend(User user1, User user2) {
 
-}
+// }
 
-void freeSeriesElement(SeriesElement series_element) {
-	//just set pointer to null?
-}
+// void freeSeriesElement(SeriesElement series_element) {
+// 	//just set pointer to null?
+// }
 
-int compareSeriesElements(SeriesElement series_element_a, SeriesElement series_element_b) {
-	//compare names
-}
+// int compareSeriesElements(SeriesElement series_element_a, SeriesElement series_element_b) {
+// 	//compare names
+// }
 
-SeriesElement copySeriesElement (Series_element series_element) {
+// SeriesElement copySeriesElement (Series_element series_element) {
+// 	if (series_element == NULL) {
+// 		return NULL;
+// 	}
 
-}
+// }
 
-void freeFriendElement(SeriesElement series_element) {
-	//just set pointer to null?
-}
+// void freeFriendElement(SeriesElement series_element) {
+// 	//just set pointer to null?
+// }
 
-int compareFriendElements(SeriesElement series_element_a, SeriesElement series_element_b) {
-	//irrelevant, can compare names, for example
-}
+// int compareFriendElements(SeriesElement series_element_a, SeriesElement series_element_b) {
+// 	//irrelevant, can compare names, for example
+// }
 
-SeriesElement copyFriendElement (Friend_element friend_element) {
+// SeriesElement copyFriendElement (Friend_element friend_element) {
 
-}
+// }
 
-MtmFlixResult UserRemoveFriend(User user1, User user2) {
+// MtmFlixResult UserRemoveFriend(User user1, User user2) {
 
-}
+// }

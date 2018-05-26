@@ -32,7 +32,7 @@ bool stringCheck (char* string) {
 typedef struct key_val_pairs {
   void* key;
   void* value;
-} * KeyValuePair;
+} *KeyValuePair;
 
 /* Adapted from the reference implementation
    of copyString */

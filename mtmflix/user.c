@@ -17,3 +17,11 @@ MtmFlixResult UserAddFriend(User user1, User user2) {
 MtmFlixResult UserRemoveFriend(User user1, User user2) {
 
 }
+
+User UserCopy {
+
+}
+
+void UserFree {
+
+}

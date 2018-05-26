@@ -9,3 +9,8 @@ static ??? SeriesMapToList (Map map, Type type) { //what does it return? we have
 	//for series in series
 	//add series contents to list
 }
+
+
+StringCopy
+StringCompare
+StringFree

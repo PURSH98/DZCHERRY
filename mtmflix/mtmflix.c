@@ -31,14 +31,10 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream);
 
 
 MtmFlix mtmFlixCreate() {
-	//create a network
 	MtmFlix mtmflix = malloc(sizeof(MtmFlix));
-	mtmflix->user = mapCreate();
-	mtmflix->series = mapCreate();
-	//проверить, что они не возвращают ошибку
-	//возможно, сначала инициализировать их на NULL?
+	mtmflix->user = mapCreate(UserCopy, StringCopy, UserFree, StringFree, StringCompare);
+	mtmflix->series = mapCreate(SeriesCopy, StringCopy, SeriesFree, StringFree, StringCompare);
 	return mtmflix;
-	//errors
 }
 
 void mtmFlixDestroy(MtmFlix mtmflix) {
@@ -49,6 +45,7 @@ void mtmFlixDestroy(MtmFlix mtmflix) {
 	mtmflix = NULL;
 	//destroy a network
 }
+
 
 MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNum, Genre genre, int* ages, int episodesDuration) {
 	Series series = SeriesCreate(episodesNum, genre, ages, episodesDuration);

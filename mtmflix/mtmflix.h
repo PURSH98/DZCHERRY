@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include "mtm_ex3.h"
 
+#include "list.h"
+
+
 /*typedef enum {
 	MTMFLIX_SUCCESS,
 	MTMFLIX_OUT_OF_MEMORY,

@@ -1,6 +1,8 @@
 //ifndef include
+#include "mtmflix.h"
+#include "series.h"
 
-struct mtmFlix_t {
+struct series_t {
 	//Name name;
 	int episodesNum;
 	Genre genre;

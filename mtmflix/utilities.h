@@ -3,9 +3,13 @@
 
 //https://moodle.technion.ac.il/mod/hsuforum/discuss.php?d=440
 
-// checkstring
+typedef struct key_val_pair_t* KeyValuePair;
+
 // copystring
-// deletestring
+char* copyString(char* str);
+void freeString(char* str);
+int compareStrings(char* str_a, char* str_b);
+bool stringCheck (char* string);
 
 // maptolist
 List mapToList(Map map, ListResult* status);

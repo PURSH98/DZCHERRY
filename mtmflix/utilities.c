@@ -3,18 +3,30 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "mtmflix.h"
-#include "map.h"
-#include "list.h"
-
-// StringCopy
-// StringCompare
-// StringFree
+#include "utilities.h"
 
 //create a private copy of a string. do we need this?
 // const char* stringDuplicate(char* str) {
 // 	char* copy = malloc(strlen(str) + 1);
 // 	return copy ? strcpy(copy, str) : NULL;
 // }
+
+char* copyString(char* str) {
+  int length = strlen(str);
+  char* new_str = malloc(length+1);
+  // TODO: handle memory allocation error
+  assert(new_str);
+  strcpy(new_str, str);
+  return new_str;
+}
+
+void freeString(char* str) {
+  free(str);
+}
+
+int compareStrings(char* str_a, char* str_b) {
+  return strcmp(str_a, str_b);
+}
 
 bool stringCheck (char* string) {
 	int length = strlen(string);
@@ -32,7 +44,7 @@ bool stringCheck (char* string) {
 typedef struct key_val_pair_t {
   void* key;
   void* value;
-} *KeyValuePair;
+};
 
 /* Adapted from the reference implementation
    of copyString */

@@ -13,7 +13,7 @@
 
 const char* copyString(const char* str) {
   int length = strlen(str);
-  const char* new_str = malloc(length+1);
+  char* new_str = malloc(length+1);
   // TODO: handle memory allocation error
   assert(new_str);
   strcpy(new_str, str);
@@ -85,8 +85,4 @@ List mapToList(Map map, ListResult* status) {
     }
   }
   return newList;
-}
-
-int main() {
-  return 0;
 }

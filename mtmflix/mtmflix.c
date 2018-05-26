@@ -1,10 +1,14 @@
+#ifndef MTMFLIX_C_
+#define MTMFLIX_C_
+
 #include <stdlib.h>
 #include <string.h>
 #include "mtmflix.h"
 #include "utilities.h"
-#include "series.h"
 #include "user.h"
 #include "assert.h"
+
+#endif /* MTMFLIX_C_ */
 
 int seriesListCompare(ListElement list_element_a, ListElement list_element_b);
 
@@ -70,7 +74,7 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (age <= MTM_MIN_AGE || age >= MTM_MAX_AGE) {
 		return MTMFLIX_ILLEGAL_AGE;
 	}
-	User user = userCreate(age, NULL, NULL);
+	User user = userCreate(age);
 	if (user == NULL) {
 		return MTMFLIX_OUT_OF_MEMORY;
 	}

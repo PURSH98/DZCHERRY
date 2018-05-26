@@ -8,7 +8,7 @@ typedef struct key_val_pair_t {
   void* value;
 }* KeyValuePair;
 
-char* copyString(char* str);
+const char* copyString(const char* str);
 void freeString(char* str);
 int compareStrings(char* str_a, char* str_b);
 bool stringCheck(const char* string);

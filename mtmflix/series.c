@@ -1,6 +1,10 @@
 //ifndef include
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
 #include "mtmflix.h"
 #include "series.h"
+
 
 struct series_t {
 	//Name name;
@@ -11,7 +15,7 @@ struct series_t {
 };
 
 Series seriesCreate (int episodesNum, Genre genre, int* ages, int episodesDuration) {
-	Series series = malloc(sizeof(Series));
+	Series series = (Series)malloc(sizeof(Series));
 	if (series == NULL) {
 		return NULL;
 	}
@@ -21,11 +25,12 @@ Series seriesCreate (int episodesNum, Genre genre, int* ages, int episodesDurati
 	if (ages == NULL) {
 		series->ages = NULL; //specified in the pdf
 	} else {
-		series->ages = malloc(sizeof(ages));
+		// Don't know the length; use a constant
+		series->ages = (int*)malloc(sizeof(*ages)*2);
 		if (series->ages == NULL) {
 			return NULL;
 		}
-		memcpy(series->ages, ages, sizeof(ages));
+		memcpy(series->ages, ages, sizeof(*ages)*2);
 		if (series->ages[0] < MTM_MIN_AGE) {
 			series->ages[0] = MTM_MIN_AGE; //where do those constants come from?
 		}
@@ -56,7 +61,7 @@ Series seriesCopy (Series series) {
 }
 
 int compareSeriesByGenre(Series series_a, Series series_b) {
-	return strcmp(series_a->genre, series_b->genre);
+	return strcmp(seriesGetGenre(series_a), seriesGetGenre(series_b));
 }
 
 char* seriesGetGenre (Series series) {
@@ -75,4 +80,5 @@ char* seriesGetGenre (Series series) {
 	}
 	// Unreachable
 	assert(false);
+	return NULL;
 }

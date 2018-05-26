@@ -1,14 +1,9 @@
-#ifndef MTMFLIX_C_
-#define MTMFLIX_C_
-
 #include <stdlib.h>
 #include <string.h>
 #include "mtmflix.h"
 #include "utilities.h"
 #include "user.h"
 #include "assert.h"
-
-#endif /* MTMFLIX_C_ */
 
 int seriesListCompare(ListElement list_element_a, ListElement list_element_b);
 

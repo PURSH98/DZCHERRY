@@ -32,18 +32,29 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream);
 
 MtmFlix mtmFlixCreate() {
 	MtmFlix mtmflix = malloc(sizeof(MtmFlix));
+	if (mtmflix == NULL) {
+		return NULL;
+	}
 	mtmflix->user = mapCreate(UserCopy, StringCopy, UserFree, StringFree, StringCompare);
+	if (mtmflix->user == NULL) {
+		mtmFlixDestroy(mtmflix);
+		return NULL;
+	}
 	mtmflix->series = mapCreate(SeriesCopy, StringCopy, SeriesFree, StringFree, StringCompare);
+	if (mtmflix->series == NULL) {
+		mtmFlixDestroy(mtmflix);
+		return NULL;
+	}
 	return mtmflix;
 }
 
 void mtmFlixDestroy(MtmFlix mtmflix) {
-	//DESTROY ALL FIELDS
 	mapDestroy(mtmflix->user);
+	mtmflix->user = NULL;
 	mapDestroy(mtmflix->series);
+	mtmflix->series = NULL;
 	free(mtmflix);
 	mtmflix = NULL;
-	//destroy a network
 }
 
 

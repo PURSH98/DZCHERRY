@@ -14,3 +14,5 @@ static ??? SeriesMapToList (Map map, Type type) { //what does it return? we have
 StringCopy
 StringCompare
 StringFree
+
+createprivetestringcopy

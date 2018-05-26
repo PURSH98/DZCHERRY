@@ -8,9 +8,12 @@ struct mtmFlix_t {
 	int episodesDuration;
 };
 
-Series SeriesCreate (const char* name, int episodesNum, Genre genre, int* ages, int episodesDuration) {
+Series SeriesCreate (int episodesNum, Genre genre, int* ages, int episodesDuration) {
 	Series series = malloc(sizeof(Series));
-	//series-> name = name; //apparently we can't have it here, as it is a key
+	if (series == NULL) {
+		return NULL;
+	}
+	//check parameters!
 	series->episodesNum = episodesNum;
 	series->genre = genre;
 	series ages = ages;
@@ -18,10 +21,14 @@ Series SeriesCreate (const char* name, int episodesNum, Genre genre, int* ages, 
 	return series;
 }
 
-void SeriesFree {
-	
+void SeriesFree (Series series) {
+	free(series->ages);
+	series->ages = NULL;
+	free(series);
+	series = NULL;
 }
 
-Series SeriesCopy {
-
+Series SeriesCopy (Series series) {
+	Series new_series = SeriesCreate(series->episodesNum, series->genre, series->ages, series->episodesDuration);
+	return new_series;
 }

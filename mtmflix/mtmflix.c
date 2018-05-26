@@ -215,3 +215,7 @@ int main() {
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
 
 }
+
+MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream){
+
+}

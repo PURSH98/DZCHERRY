@@ -179,12 +179,14 @@ MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const ch
 MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
 	userAddFriend(mapGet(mtmflix->user, username1), username2);
 	return MTMFLIX_SUCCESS;
+	//add errors
 
 }
 
 MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
 	userRemoveFriend(mapGet(mtmflix->user, username1), username2);
 	return MTMFLIX_SUCCESS;
+	//add errors
 }
 
 int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {

@@ -6,23 +6,21 @@
 #include "utilities.h"
 #include "set.h"
 
-//create a private copy of a string. do we need this?
-// const char* stringDuplicate(char* str) {
-// 	char* copy = malloc(strlen(str) + 1);
-// 	return copy ? strcpy(copy, str) : NULL;
-// }
-
+//creates a const copy of a given string
 const char* copyString(const char* str) {
   int length = strlen(str);
   char* new_str = malloc(length+1);
-  // TODO: handle memory allocation error
+  if (new_str == NULL) {
+    return NULL; //DO SOMETHING WITH THIS
+  }
   assert(new_str);
   strcpy(new_str, str);
   return new_str;
 }
 
-void freeString(char* str) {
-  free(str);
+//frees a string
+void freeString(const char* str) {
+  free((void*)str);
 }
 
 int compareStrings(void * str_a, void * str_b) {
@@ -32,20 +30,15 @@ int compareStrings(void * str_a, void * str_b) {
 bool stringCheck(const char* string) {
 	int length = strlen(string);
 	for (int i = 0; i < length; i++) {
-		if (!((string[i] >= 'A' && string[i] <= 'Z') || (string[i] >= 'a' && string[i] <= 'z') || (string[i] >= '0' && string[i] <= '9'))) {
+		if (!((string[i] >= 'A' && string[i] <= 'Z') || 
+      (string[i] >= 'a' && string[i] <= 'z') || 
+      (string[i] >= '0' && string[i] <= '9'))) {
 			return false;
 		}
 	}
 	return true;
 }
 
-//map element to set element
-//list element to set element
-
-
-
-/* Adapted from the reference implementation
-   of copyString */
 ListElement copyKeyValuePair(ListElement keyValuePair) {
   assert(keyValuePair);
   KeyValuePair copy = malloc(sizeof(KeyValuePair));

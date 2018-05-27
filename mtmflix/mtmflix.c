@@ -67,12 +67,10 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 		(MapDataElement)user)) {
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY; break;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS; break;
-		// Unreachable
 		default : assert(false);
 	}
-	// Unreachable
 	assert(false);
-	return MTMFLIX_NO_USERS;
+	return MTMFLIX_NULL_ARGUMENT;
 }
 
 MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username) {
@@ -87,9 +85,8 @@ MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username) {
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
 		default : assert(false); //we're not supposed to get here
 	}
-	// Unreachable
 	assert(false);
-	return MTMFLIX_NO_USERS;
+	return MTMFLIX_NULL_ARGUMENT;
 }
 
 MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, 
@@ -247,6 +244,8 @@ MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1,
 	return MTMFLIX_SUCCESS;
 }
 
+//a comparator helper function that helps to sort series by genre;
+//series with the same genre are ordered alphabetically 
 static int seriesListCompare(ListElement list_element_a, 
 	ListElement list_element_b) {
 	void* series_a = ((KeyValuePair)list_element_a)->value;

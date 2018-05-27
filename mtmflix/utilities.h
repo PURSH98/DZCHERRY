@@ -10,7 +10,7 @@ typedef struct key_val_pair_t {
 }* KeyValuePair;
 
 const char* copyString(const char* str);
-void freeString(char* str);
+void freeString(const char* str);
 int compareStrings(void * str_a, void * str_b);
 bool stringCheck(const char* string);
 

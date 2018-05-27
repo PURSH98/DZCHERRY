@@ -7,3 +7,4 @@ void seriesFree (Series series);
 Series seriesCopy (Series series);
 char* seriesGetGenre (Series series);
 int compareSeriesByGenre(Series series_a, Series series_b);
+int seriesGetEpisodeDuration(Series series);

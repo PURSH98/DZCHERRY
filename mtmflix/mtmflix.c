@@ -6,6 +6,8 @@
 #include "assert.h"
 
 int seriesListCompare(ListElement list_element_a, ListElement list_element_b);
+static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2);
+static int getSeriesRank(Series series, User user);
 
 struct mtmFlix_t {
 	Map series;     // keys: string; values: Series
@@ -212,9 +214,99 @@ int main() {
 }
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
-
+    ListResult list_result;
+    List users_node = mapKeyToList(mtmflix->users, &list_result);
+    // TODO: handle status
+    // case (status) {
+    // }
+    listSort(users_node,compareStrings);
+    LIST_FOREACH(ListElement ,list_iter,users_node) {
+        User user=mapGet(mtmflix->users,list_iter);
+        ListResult listResult;
+        List fav_series=setToList(userGetFavSeries(user),&listResult);
+        List friends=setToList(userGetFriends(user),&list_result);
+        int age=userGetAge(user);
+        mtmPrintUser((char*)list_iter,age,friends,fav_series);
+        //free functions are needed here(probably)
+    }
+    return MTMFLIX_SUCCESS;
 }
 
 MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream){
+    //checking params
+	if(count==0){
+		count=mapGetSize(mtmflix->series);
+	}
+    ListResult listResult;
+    List series_list=mapToList(mtmflix->series,&listResult);
+	User user=mapGet(mtmflix->users,(char*)username);
+	LIST_FOREACH(KeyValuePair,iterator,series_list){
+	    Series series=mapGet(mtmflix->series,listGetKey(iterator));
+		int series_rank=getSeriesRank(series,user);
+		listPutValue(iterator,&series_rank);
+	}
+	listSort(series_list, (CompareListElements) seriesRankCompare);
+	int i=0;
+    LIST_FOREACH(KeyValuePair,iterator,series_list) {
+    	if(i>=count){
+			return MTMFLIX_SUCCESS;
+    	}
+        Series series = mapGet(mtmflix->series, listGetKey(iterator));
+        mtmPrintSeries((char *) listGetKey(iterator), seriesGetGenre(series));
+        i++;
+    }
+    return MTMFLIX_SUCCESS;
+}
 
+static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2){
+    if(series_1==NULL||series_2==NULL){
+        return 0;
+    }
+    int rank_series_1=*(int*)listGetValue(series_1);
+    int rank_series_2=*(int*)listGetValue(series_2);
+    if(rank_series_1==rank_series_2){
+        return strcmp((char*)series_2,(char*)series_1);
+    }
+    return rank_series_2-rank_series_1;
+}
+
+static int rank_F_Count(Series series, User user){
+    int F=0;
+    Set user_friends=userGetFriends(user);
+    SET_FOREACH(User,iterator,user_friends){
+        Set friend_fav_series=userGetFavSeries(iterator);
+        if(setIsIn(friend_fav_series,series)){
+            F++;
+        }
+    }
+    return F;
+}
+
+static int rank_G_Count(Series series,User user){
+    int G=0;
+    Set user_fav_series=userGetFavSeries(user);
+    SET_FOREACH(Series,iterator,user_fav_series){
+        if(compareSeriesByGenre(series,iterator)==0){
+            G++;
+        }
+    }
+    return G;
+}
+
+static int rank_L_Count(User user){
+    double L=0;
+    Set user_fav_series=userGetFavSeries(user);
+    int num_of_fav_series=setGetSize(user_fav_series);
+    SET_FOREACH(Series,iterator,user_fav_series){
+        L+=seriesGetEpisodeDuration(iterator)/(double)num_of_fav_series;
+    }
+    return (int)L;
+}
+
+static int getSeriesRank(Series series, User user){
+    int F=rank_F_Count(series,user);
+    int G=rank_G_Count(series,user);
+    int L=rank_L_Count(user);
+	int rank=(int)((G*F)/(1.0+abs(seriesGetEpisodeDuration(series)-L)));
+    return rank;
 }

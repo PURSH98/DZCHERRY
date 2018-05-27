@@ -225,7 +225,7 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
         List friends=setToList(userGetFriends(user),&list_result);
         int age=userGetAge(user);
         mtmPrintUser((char*)list_iter,age,friends,fav_series);
-        //free functions are needed here
+        //free functions are needed here(probably)
     }
     return MTMFLIX_SUCCESS;
 }
@@ -234,6 +234,44 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, i
     //checking params
     ListResult listResult;
     List series_list=mapKeyToList(mtmflix->series,&listResult);
+
+
+}
+
+static int rank_F_Count(Series series, User user){
+    int F=0;
+    Set user_friends=userGetFriends(user);
+    SET_FOREACH(User,iterator,user_friends){
+        Set friend_fav_series=userGetFavSeries(iterator);
+        if(setIsIn(friend_fav_series,series)){
+            F++;
+        }
+    }
+    return F;
+}
+
+static int rank_G_Count(Series series,User user){
+    int G=0;
+    Set user_fav_series=userGetFavSeries(user);
+    SET_FOREACH(Series,iterator,user_fav_series){
+        if(compareSeriesByGenre(series,iterator)==0){
+            G++;
+        }
+    }
+    return G;
+}
+
+static int rank_L_Count(Series series,User user){
+    double L=0;
+    Set user_fav_series=userGetFavSeries(user);
+    SET_FOREACH()
+}
+
+static int getSeriesRank(MtmFlix mtmFlix, Series series, User user){
+    int F=rank_F_Count(series,user);
+    int G=rank_G_Count(series,user);
+
+
 
 
 }

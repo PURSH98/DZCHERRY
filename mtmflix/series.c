@@ -82,3 +82,10 @@ char* seriesGetGenre (Series series) {
 	assert(false);
 	return NULL;
 }
+
+int seriesGetEpisodeDuration(Series series){
+    if(series==NULL){
+        return 0;
+    }
+    return series->episodesDuration;
+}

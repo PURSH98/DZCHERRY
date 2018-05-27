@@ -152,7 +152,9 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 	LIST_FOREACH(KeyValuePair,list_iter,series_node) {
 		void* key = (KeyValuePair)list_iter->key;
 		void* value = (KeyValuePair)list_iter->value;
-		mtmPrintSeries((char*)key, seriesGetGenre((Series)value)); //check
+		const char* series_string=mtmPrintSeries((char*)key,
+								 seriesGetGenre((Series)value)); //check
+		fprintf(outputStream, "%s", series_string);
 	}
 	return MTMFLIX_SUCCESS;
 }
@@ -171,7 +173,9 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
         List fav_series=mtmSetToList(userGetFavSeries(user),&listResult);
         List friends=mtmSetToList(userGetFriends(user),&list_result);
         int age=userGetAge(user);
-        mtmPrintUser((char*)list_iter,age,friends,fav_series);
+        const char* user_string = mtmPrintUser((char*)list_iter,age,
+        										friends,fav_series);
+        fprintf(outputStream, "%s", user_string);
         //free functions are needed here(probably)
     }
     return MTMFLIX_SUCCESS;
@@ -278,7 +282,9 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
 			return MTMFLIX_SUCCESS;
     	}
         Series series = mapGet(mtmflix->series, listGetKey(iterator));
-        mtmPrintSeries((char *) listGetKey(iterator), seriesGetGenre(series));
+        const char* series_string = mtmPrintSeries((char *) listGetKey(iterator),
+         									seriesGetGenre(series));
+        fprintf(outputStream, "%s", series);
         i++;
     }
     return MTMFLIX_SUCCESS;

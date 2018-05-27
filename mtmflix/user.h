@@ -11,3 +11,4 @@ MtmFlixResult userAddFavSeries (User user, char* series_name);
 Set userGetFriends(User user);
 int userGetAge(User user);
 Set userGetFavSeries(User user);
+MtmFlixResult userDeleteFavSeries(User user, char* series_name);

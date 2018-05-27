@@ -165,27 +165,27 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputSt
 }
 
 MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName) {
- 	userAddFavSeries(mapGet(mtmflix->user, username), seriesName);//misspelling?
+ 	userAddFavSeries(mapGet(mtmflix->user, username), seriesName);
  	return MTMFLIX_SUCCESS;
  	//add errors
 }
 
 MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName) {
-	userDeleteFavSeries(mapGet(mtmflix->user, username1), seriesName);//misspelling?
+	userDeleteFavSeries(mapGet(mtmflix->user, username1), seriesName);
 	return MTMFLIX_SUCCESS;
 	//add errors
 }
 
 
 MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
-	userAddFriend(mapGet(mtmflix->user, username1), username2);//misspelling?
+	userAddFriend(mapGet(mtmflix->user, username1), username2);
 	return MTMFLIX_SUCCESS;
 	//add errors
 
 }
 
 MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
-	userRemoveFriend(mapGet(mtmflix->user, username1), username2);//misspelling?
+	userRemoveFriend(mapGet(mtmflix->user, username1), username2);
 	return MTMFLIX_SUCCESS;
 	//add errors
 }
@@ -219,7 +219,7 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
     // TODO: handle status
     // case (status) {
     // }
-    listSort(users_node, compareStrings);
+    listSort(users_node,compareStrings);
     LIST_FOREACH(ListElement ,list_iter,users_node) {
         User user=mapGet(mtmflix->users,list_iter);
         ListResult listResult;
@@ -245,7 +245,7 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, i
 		int series_rank=getSeriesRank(series,user);
 		listPutValue(iterator,&series_rank);
 	}
-	listSort(series_list,(ListElement)seriesRankCompare);
+	listSort(series_list, (CompareListElements) seriesRankCompare);
 	int i=0;
     LIST_FOREACH(KeyValuePair,iterator,series_list) {
     	if(i>=count){
@@ -260,7 +260,7 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, i
 
 static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2){
     if(series_1==NULL||series_2==NULL){
-        return NULL;
+        return 0;
     }
     int rank_series_1=*(int*)listGetValue(series_1);
     int rank_series_2=*(int*)listGetValue(series_2);

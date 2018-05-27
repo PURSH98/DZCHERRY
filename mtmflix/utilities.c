@@ -25,8 +25,8 @@ void freeString(char* str) {
   free(str);
 }
 
-int compareStrings(char* str_a, char* str_b) {
-  return strcmp(str_a, str_b);
+int compareStrings(void * str_a, void * str_b) {
+  return strcmp((char*)str_a, (char*)str_b);
 }
 
 bool stringCheck(const char* string) {

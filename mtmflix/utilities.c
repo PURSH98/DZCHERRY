@@ -29,6 +29,9 @@ int compareStrings(void * str_a, void * str_b) {
 
 bool stringCheck(const char* string) {
 	int length = strlen(string);
+	if(length==0){
+        return false;
+	}
 	for (int i = 0; i < length; i++) {
 		if (!((string[i] >= 'A' && string[i] <= 'Z') || 
       (string[i] >= 'a' && string[i] <= 'z') || 

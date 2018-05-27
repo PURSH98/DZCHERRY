@@ -16,7 +16,7 @@ struct mtmFlix_t {
 };
 
 MtmFlix mtmFlixCreate() {
-	MtmFlix mtmflix = malloc(sizeof(MtmFlix));
+	MtmFlix mtmflix = malloc(sizeof(*mtmflix));
 	if (mtmflix == NULL) {
 		return NULL;
 	}
@@ -56,7 +56,7 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (mapContains(mtmflix->users, (MapKeyElement) username)) {
 		return MTMFLIX_USERNAME_ALREADY_USED;
 	}
-	if (age <= MTM_MIN_AGE || age >= MTM_MAX_AGE) {
+	if (age < MTM_MIN_AGE || age > MTM_MAX_AGE) {
 		return MTMFLIX_ILLEGAL_AGE;
 	}
 	User user = userCreate(age);

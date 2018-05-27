@@ -246,9 +246,11 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, i
 		listPutValue(iterator,&series_rank);
 	}
 	listSort(series_list,(ListElement)seriesRankCompare);
-
-
-
+    LIST_FOREACH(KeyValuePair,iterator,series_list) {
+        Series series = mapGet(mtmflix->series, listGetKey(iterator));
+        mtmPrintSeries((char *) listGetKey(iterator), seriesGetGenre(series));
+    }
+    return MTMFLIX_SUCCESS;
 }
 
 static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2){

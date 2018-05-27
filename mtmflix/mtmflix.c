@@ -223,8 +223,8 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
     LIST_FOREACH(ListElement ,list_iter,users_node) {
         User user=mapGet(mtmflix->users,list_iter);
         ListResult listResult;
-        List fav_series=ourSetToList(userGetFavSeries(user),&listResult);
-        List friends=ourSetToList(userGetFriends(user),&list_result);
+        List fav_series=mtmSetToList(userGetFavSeries(user),&listResult);
+        List friends=mtmSetToList(userGetFriends(user),&list_result);
         int age=userGetAge(user);
         mtmPrintUser((char*)list_iter,age,friends,fav_series);
         //free functions are needed here(probably)

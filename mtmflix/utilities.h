@@ -18,7 +18,7 @@ List mapToList(Map map, ListResult* status);
 // There _is_ a function setToList in libmtm.a;
 // however, it is not declared in the set.h;
 // using our own implementation.
-List ourSetToList(Set set, ListResult* status);
+List mtmSetToList(Set set, ListResult* status);
 List mapKeyToList(Map map, ListResult* status);
 void listPutValue(KeyValuePair listElement, void* value);
 void* listGetValue(KeyValuePair listElement);

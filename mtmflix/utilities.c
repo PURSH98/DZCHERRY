@@ -88,7 +88,7 @@ List mapToList(Map map, ListResult* status) {
   return newList;
 }
 
-List ourSetToList(Set set, ListResult* status){
+List mtmSetToList(Set set, ListResult* status){
     *status=LIST_SUCCESS;
     if (set == NULL) {
         *status = LIST_NULL_ARGUMENT;

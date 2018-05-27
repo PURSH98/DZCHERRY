@@ -283,7 +283,7 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
         Series series = mapGet(mtmflix->series, listGetKey(iterator));
         const char* series_string = mtmPrintSeries((char *) listGetKey(iterator),
          									seriesGetGenre(series));
-        fprintf(outputStream, "%s", series);
+        fprintf(outputStream, "%s", series_string);
         i++;
     }
     return MTMFLIX_SUCCESS;

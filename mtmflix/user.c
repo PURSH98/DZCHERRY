@@ -10,6 +10,7 @@ struct user_t {
 	Set friends; //set of names
 };
 
+//creates a user instance given user's age
 User userCreate(int age) {
 	User user = malloc(sizeof(User));
 	if (user == NULL) {

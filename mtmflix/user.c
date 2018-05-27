@@ -68,3 +68,24 @@ MtmFlixResult userRemoveFriend(User user1, const char* username) {
 	return MTMFLIX_SUCCESS;
 	//add errors
 }
+
+Set userGetFavSeries(User user){
+    if(user==NULL){
+        return NULL;
+    }
+    return user->fav_series;
+}
+
+int userGetAge(User user){
+    if(user==NULL){
+        return 0;
+    }
+    return user->age;
+}
+
+Set userGetFriends(User user){
+    if(user==NULL){
+        return NULL;
+    }
+    return user->friends;
+}

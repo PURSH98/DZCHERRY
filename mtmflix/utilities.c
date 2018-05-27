@@ -4,6 +4,7 @@
 #include <assert.h>
 #include "mtmflix.h"
 #include "utilities.h"
+#include "set.h"
 
 //create a private copy of a string. do we need this?
 // const char* stringDuplicate(char* str) {
@@ -24,8 +25,8 @@ void freeString(char* str) {
   free(str);
 }
 
-int compareStrings(char* str_a, char* str_b) {
-  return strcmp(str_a, str_b);
+int compareStrings(void * str_a, void * str_b) {
+  return strcmp((char*)str_a, (char*)str_b);
 }
 
 bool stringCheck(const char* string) {
@@ -86,3 +87,81 @@ List mapToList(Map map, ListResult* status) {
   }
   return newList;
 }
+
+List setToList(Set set, ListResult* status){
+    *status=LIST_SUCCESS;
+    if (set == NULL) {
+        *status = LIST_NULL_ARGUMENT;
+        return NULL;
+    }
+    List newList = listCreate((CopyListElement)copyString,
+            (FreeListElement)freeString);
+    int setSize = setGetSize(set);
+    if (setSize == 0) {
+        return newList;
+    }
+    SET_FOREACH(ListElement, setElement, set) {
+        ListElement listElement = malloc(sizeof(ListElement));
+        if (listElement == NULL) {
+            *status = LIST_OUT_OF_MEMORY;
+            return NULL;
+        }
+        listElement = setElement;
+        if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
+            *status = LIST_INVALID_CURRENT;
+            return NULL;
+        }
+    }
+    return newList;
+}
+
+List mapKeyToList(Map map, ListResult* status){
+    *status=LIST_SUCCESS;
+    if (map == NULL) {
+        *status = LIST_NULL_ARGUMENT;
+        return NULL;
+    }
+    List newList = listCreate((CopyListElement)copyString,
+            (FreeListElement)freeString);
+    int mapSize = mapGetSize(map);
+    if (mapSize == 0) {
+        return newList;
+    }
+    MAP_FOREACH(ListElement, mapKeyElement, map) {
+        ListElement listElement = malloc(sizeof(ListElement));
+        if (listElement == NULL) {
+            *status = LIST_OUT_OF_MEMORY;
+            return NULL;
+        }
+        listElement = mapKeyElement;
+        if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
+            *status = LIST_INVALID_CURRENT;
+            return NULL;
+        }
+    }
+    return newList;
+}
+
+void listPutValue(KeyValuePair listElement, void* value){
+    if(listElement==NULL||value==NULL){
+        return;
+    }
+    listElement->value=value;
+}
+
+void* listGetValue(KeyValuePair listElement){
+    if(listElement==NULL){
+        return NULL;
+    }
+    return listElement->value;
+}
+
+void* listGetKey(KeyValuePair listElement){
+    if(listElement==NULL){
+        return NULL;
+    }
+    return listElement->key;
+}
+
+
+

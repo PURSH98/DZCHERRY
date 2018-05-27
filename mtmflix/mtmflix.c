@@ -217,12 +217,17 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
     // TODO: handle status
     // case (status) {
     // }
-    listSort(users_node, seriesListCompare);
+    listSort(users_node, compareStrings);
     LIST_FOREACH(ListElement ,list_iter,users_node) {
-
+        User user=mapGet(mtmflix->users,list_iter);
+        ListResult listResult;
+        List fav_series=setToList(userGetFavSeries(user),&listResult);
+        List friends=setToList(userGetFriends(user),&list_result);
+        int age=userGetAge(user);
+        mtmPrintUser(list_iter,age,friends,fav_series);
+        //free functions are needed here
     }
     return MTMFLIX_SUCCESS;
-
 }
 
 MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream){

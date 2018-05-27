@@ -165,23 +165,47 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputSt
 }
 
 MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName) {
+	if (mtmflix == NULL || username == NULL || seriesName == NULL) {
+		return MTMFLIX_NULL_ARGUMENT;
+	}
+	if (!mapContains(mtmflix->users, (MapKeyElement)username)) {
+		return MTMFLIX_USER_DOES_NOT_EXIST;
+	}
+	if (!mapContains(mtmflix->series, (MapKeyElement)seriesName)) {
+		return MTMFLIX_SERIES_DOES_NOT_EXIST;
+	}
+	if (userGetAge(mapGet(mtmflix->users, (MapKeyElement)username)) <= seriesGetMinAge(mapGet(mtmflix->series, (MapKeyElement)seriesName)) ||
+		userGetAge(mapGet(mtmflix->users, (MapKeyElement)username)) >= seriesGetMaxAge(mapGet(mtmflix->series, (MapKeyElement)seriesName))) {
+		return MTMFLIX_USER_NOT_IN_THE_RIGHT_AGE;
+	}
  	userAddFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), seriesName);
  	return MTMFLIX_SUCCESS;
- 	//add errors
 }
 
 MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName) {
+	if (mtmflix == NULL || username == NULL || seriesName == NULL) {
+		return MTMFLIX_NULL_ARGUMENT;
+	}
+	if (!mapContains(mtmflix->users, (MapKeyElement)username)) {
+		return MTMFLIX_USER_DOES_NOT_EXIST;
+	}
+	if (!mapContains(mtmflix->series, (MapKeyElement)seriesName)) {
+		return MTMFLIX_SERIES_DOES_NOT_EXIST;
+	}
 	userDeleteFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), seriesName);
 	return MTMFLIX_SUCCESS;
-	//add errors
 }
 
 
 MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
+	if (mtmflix == NULL || username1 == NULL || username2 == NULL) {
+		return MTMFLIX_NULL_ARGUMENT;
+	}
+	if (!mapContains(mtmflix->users, (MapKeyElement)username1) || !mapContains(mtmflix->users, (MapKeyElement)username2)) {
+		return MTMFLIX_USER_DOES_NOT_EXIST;
+	}
 	userAddFriend(mapGet(mtmflix->users, (MapKeyElement)username1), username2);
 	return MTMFLIX_SUCCESS;
-	//add errors
-
 }
 
 MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2) {

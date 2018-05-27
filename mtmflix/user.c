@@ -41,32 +41,28 @@ void userFree(User user) {
 }
 
 MtmFlixResult userAddFavSeries(User user, const char* series_name) {
-	//series must be a series element here
-	switch(setAdd(user->fav_series, (SetElement)series_name)) {
-		default : return MTMFLIX_SUCCESS;
-	}
-	// Unreachable
-	assert(false);
-	return MTMFLIX_NO_SERIES;
+	assert(user != NULL && series_name != NULL); //we check those arguments before passing them to the function
+	setAdd(user->fav_series, (SetElement)series_name);
+	return MTMFLIX_SUCCESS;
 }
 
 MtmFlixResult userDeleteFavSeries(User user, const char* series_name) {
+	assert(user != NULL && series_name != NULL); //we check those arguments before passing them to the function
 	setRemove(user->fav_series, (SetElement)series_name);
 	return MTMFLIX_SUCCESS;
-	//add errors
 }
 
 
 MtmFlixResult userAddFriend(User user1, const char* username) {
+	assert(user1 != NULL && username != NULL); //we check those arguments before passing them to the function
 	setAdd(user1->friends, (SetElement)username);
 	return MTMFLIX_SUCCESS;
-	//add errors
 }
 
 MtmFlixResult userRemoveFriend(User user1, const char* username) {
+	assert(user1 != NULL && username != NULL); //we check those arguments before passing them to the function
 	setRemove(user1->friends, (SetElement)username);
 	return MTMFLIX_SUCCESS;
-	//add errors
 }
 
 Set userGetFavSeries(User user){

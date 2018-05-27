@@ -89,3 +89,23 @@ int seriesGetEpisodeDuration(Series series){
     }
     return series->episodesDuration;
 }
+
+int seriesGetMinAge (Series series) {
+	if (series == NULL) {
+		return 0;
+	}
+	if (series->ages == NULL) {
+		return MTM_MIN_AGE; //check
+	}
+	return series->ages[0];
+}
+
+int seriesGetMaxAge (Series series) {
+	if (series == NULL) {
+		return 0;
+	}
+	if (series->ages == NULL) {
+		return MTM_MAX_AGE; //check
+	}
+	return series->ages[1];
+}

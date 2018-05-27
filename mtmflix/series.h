@@ -8,3 +8,5 @@ Series seriesCopy (Series series);
 char* seriesGetGenre (Series series);
 int compareSeriesByGenre(Series series_a, Series series_b);
 int seriesGetEpisodeDuration(Series series);
+int seriesGetMaxAge (Series series);
+int seriesGetMinAge (Series series);

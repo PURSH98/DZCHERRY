@@ -94,7 +94,8 @@ List setToList(Set set, ListResult* status){
         *status = LIST_NULL_ARGUMENT;
         return NULL;
     }
-    List newList = listCreate(copyString,freeString);
+    List newList = listCreate((CopyListElement)copyString,
+            (FreeListElement)freeString);
     int setSize = setGetSize(set);
     if (setSize == 0) {
         return newList;
@@ -120,7 +121,8 @@ List mapKeyToList(Map map, ListResult* status){
         *status = LIST_NULL_ARGUMENT;
         return NULL;
     }
-    List newList = listCreate(copyString,freeString);
+    List newList = listCreate((CopyListElement)copyString,
+            (FreeListElement)freeString);
     int mapSize = mapGetSize(map);
     if (mapSize == 0) {
         return newList;

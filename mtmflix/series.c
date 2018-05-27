@@ -14,7 +14,8 @@ struct series_t {
 	int episodesDuration;
 };
 
-Series seriesCreate (int episodesNum, Genre genre, int* ages, int episodesDuration) {
+Series seriesCreate (int episodesNum, Genre genre, int* ages, 
+	int episodesDuration) {
 	Series series = (Series)malloc(sizeof(Series));
 	if (series == NULL) {
 		return NULL;
@@ -53,7 +54,8 @@ Series seriesCopy (Series series) {
 	if (series == NULL) {
 		return NULL;
 	}
-	Series new_series = seriesCreate(series->episodesNum, series->genre, series->ages, series->episodesDuration);
+	Series new_series = seriesCreate(series->episodesNum, series->genre, 
+		series->ages, series->episodesDuration);
 	if (new_series == NULL) {
 		return NULL;
 	}

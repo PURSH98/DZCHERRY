@@ -36,12 +36,16 @@ MtmFlix mtmFlixCreate() {
 	if (mtmflix == NULL) {
 		return NULL;
 	}
-	mtmflix->users = mapCreate((copyMapDataElements)userCopy, (copyMapKeyElements)copyString, (freeMapDataElements)userFree, (freeMapKeyElements)freeString, (compareMapKeyElements)compareStrings);
+	mtmflix->users = mapCreate((copyMapDataElements)userCopy, 
+		(copyMapKeyElements)copyString, (freeMapDataElements)userFree, 
+		(freeMapKeyElements)freeString, (compareMapKeyElements)compareStrings);
 	if (mtmflix->users == NULL) {
 		mtmFlixDestroy(mtmflix);
 		return NULL;
 	}
-	mtmflix->series = mapCreate((copyMapDataElements)seriesCopy, (copyMapKeyElements)copyString, (freeMapDataElements)seriesFree, (freeMapKeyElements)freeString, (compareMapKeyElements)compareStrings);
+	mtmflix->series = mapCreate((copyMapDataElements)seriesCopy, 
+		(copyMapKeyElements)copyString, (freeMapDataElements)seriesFree, 
+		(freeMapKeyElements)freeString, (compareMapKeyElements)compareStrings);
 	if (mtmflix->series == NULL) {
 		mtmFlixDestroy(mtmflix);
 		return NULL;
@@ -63,7 +67,7 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
 	if (!stringCheck(username)) {
-		return MTMFLIX_ILLEGAL_USERNAME; //why are errors commented out in header? and why there's no such error?
+		return MTMFLIX_ILLEGAL_USERNAME;
 	}
 	if (mapContains(mtmflix->users, (MapKeyElement) username)) {
 		return MTMFLIX_USERNAME_ALREADY_USED;
@@ -75,9 +79,10 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (user == NULL) {
 		return MTMFLIX_OUT_OF_MEMORY;
 	}
-	switch (mapPut(mtmflix->users, (MapKeyElement)username, (MapDataElement)user)) {
+	switch (mapPut(mtmflix->users, (MapKeyElement)username, 
+		(MapDataElement)user)) {
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY; break;
-		case MAP_SUCCESS : return MTMFLIX_SUCCESS; break; //check stilistic guidelines
+		case MAP_SUCCESS : return MTMFLIX_SUCCESS; break; //check stylistic guidelines
 		// Unreachable
 		default : assert(false);
 	}
@@ -94,15 +99,15 @@ MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username) {
 	switch (mapRemove (mtmflix->users, (MapKeyElement)username)) {
 		case MAP_ITEM_DOES_NOT_EXIST : return MTMFLIX_USER_DOES_NOT_EXIST;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
-		// Unreachable
-		default : assert(false);
+		default : assert(false); //we're not supposed to get here
 	}
 	// Unreachable
 	assert(false);
 	return MTMFLIX_NO_USERS;
 }
 
-MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNum, Genre genre, int* ages, int episodesDuration) {
+MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, 
+	int episodesNum, Genre genre, int* ages, int episodesDuration) {
 	if (mtmflix == NULL || name == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
@@ -122,15 +127,15 @@ MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNu
 	if (series == NULL) {
 		return MTMFLIX_OUT_OF_MEMORY;
 	}
-	switch (mapPut(mtmflix->series, (MapKeyElement)name, (MapDataElement)series)) {
+	switch (mapPut(mtmflix->series, (MapKeyElement)name, 
+		(MapDataElement)series)) {
+		case MAP_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
-		case MAP_SUCCESS : return MTMFLIX_SUCCESS; //check stilistic guidelines
-		// Unreachable
-		default : assert(false);
+		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
+		default : assert(false); //we're not supposed to get here
 	}
-	// Unreachable
 	assert(false);
-	return MTMFLIX_NO_USERS;
+	return MTMFLIX_NULL_ARGUMENT;//we're not supposed to get here
 }
 
 MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name) {
@@ -139,17 +144,17 @@ MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
 	switch (mapRemove (mtmflix->series, (MapKeyElement)name)) {
+		case MAP_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
 		case MAP_ITEM_DOES_NOT_EXIST : return MTMFLIX_NO_SERIES;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
-		// Unreachable
-		default : assert(false);
+		default : assert(false); //we're not supposed to get here
 	}
-	// Unreachable
 	assert(false);
-	return MTMFLIX_NO_USERS;
+	return MTMFLIX_NULL_ARGUMENT;//we're not supposed to get here
 }
 
-MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputStream) {
+MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, 
+	FILE* outputStream) {
 	ListResult list_result;
 	List series_node = mapToList(mtmflix->series, &list_result);
 	// TODO: handle status
@@ -164,7 +169,8 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputSt
 	return MTMFLIX_SUCCESS;
 }
 
-MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName) {
+MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, 
+	const char* seriesName) {
 	if (mtmflix == NULL || username == NULL || seriesName == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
@@ -174,15 +180,19 @@ MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const cha
 	if (!mapContains(mtmflix->series, (MapKeyElement)seriesName)) {
 		return MTMFLIX_SERIES_DOES_NOT_EXIST;
 	}
-	if (userGetAge(mapGet(mtmflix->users, (MapKeyElement)username)) <= seriesGetMinAge(mapGet(mtmflix->series, (MapKeyElement)seriesName)) ||
-		userGetAge(mapGet(mtmflix->users, (MapKeyElement)username)) >= seriesGetMaxAge(mapGet(mtmflix->series, (MapKeyElement)seriesName))) {
+	if (userGetAge(mapGet(mtmflix->users, (MapKeyElement)username)) <= 
+		seriesGetMinAge(mapGet(mtmflix->series, (MapKeyElement)seriesName)) ||
+		userGetAge(mapGet(mtmflix->users, (MapKeyElement)username)) >= 
+		seriesGetMaxAge(mapGet(mtmflix->series, (MapKeyElement)seriesName))) {
 		return MTMFLIX_USER_NOT_IN_THE_RIGHT_AGE;
 	}
- 	userAddFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), seriesName);
+ 	userAddFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), 
+ 		seriesName);
  	return MTMFLIX_SUCCESS;
 }
 
-MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName) {
+MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, 
+	const char* seriesName) {
 	if (mtmflix == NULL || username == NULL || seriesName == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
@@ -192,26 +202,37 @@ MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const ch
 	if (!mapContains(mtmflix->series, (MapKeyElement)seriesName)) {
 		return MTMFLIX_SERIES_DOES_NOT_EXIST;
 	}
-	userDeleteFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), seriesName);
+	userDeleteFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), 
+		seriesName);
 	return MTMFLIX_SUCCESS;
 }
 
 
-MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
+MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, 
+	const char* username2) {
 	if (mtmflix == NULL || username1 == NULL || username2 == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
-	if (!mapContains(mtmflix->users, (MapKeyElement)username1) || !mapContains(mtmflix->users, (MapKeyElement)username2)) {
+	if (!mapContains(mtmflix->users, (MapKeyElement)username1) || 
+		!mapContains(mtmflix->users, (MapKeyElement)username2)) {
 		return MTMFLIX_USER_DOES_NOT_EXIST;
 	}
 	userAddFriend(mapGet(mtmflix->users, (MapKeyElement)username1), username2);
 	return MTMFLIX_SUCCESS;
 }
 
-MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2) {
-	userRemoveFriend(mapGet(mtmflix->users, (MapKeyElement)username1), username2);
+MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, 
+	const char* username2) {
+	if (mtmflix == NULL || username1 == NULL || username2 == NULL) {
+		return MTMFLIX_NULL_ARGUMENT;
+	}
+	if (!mapContains(mtmflix->users, (MapKeyElement)username1) || 
+		!mapContains(mtmflix->users, (MapKeyElement)username2)) {
+		return MTMFLIX_USER_DOES_NOT_EXIST;
+	}
+	userRemoveFriend(mapGet(mtmflix->users, (MapKeyElement)username1), 
+		username2);
 	return MTMFLIX_SUCCESS;
-	//add errors
 }
 
 int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {
@@ -224,17 +245,6 @@ int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {
 	void* key_a = ((KeyValuePair)list_element_a)->key;
 	void* key_b = ((KeyValuePair)list_element_b)->key;
 	return strcmp(key_a, key_b);
-}
-
-// а эти сделай ты (и заодно проверь, пожалуйста, что Report выше работает)
-// MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream); 
-
-// MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream); 
-
-// Windows expects a main function
-// in a console app.
-int main() {
-	return 0;
 }
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
@@ -256,7 +266,8 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
     return MTMFLIX_SUCCESS;
 }
 
-MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream){
+MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, 
+	int count, FILE* outputStream){
     //checking params
 	if(count==0){
 		count=mapGetSize(mtmflix->series);
@@ -334,3 +345,9 @@ static int getSeriesRank(Series series, User user){
 	int rank=(int)((G*F)/(1.0+abs(seriesGetEpisodeDuration(series)-L)));
     return rank;
 }
+
+int main() {
+	return 0;
+}
+
+

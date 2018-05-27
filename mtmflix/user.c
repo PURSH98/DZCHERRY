@@ -16,8 +16,10 @@ User userCreate(int age) {
 		return NULL;
 	}
 	user->age = age;
-	user->fav_series = setCreate((copySetElements)copyString, (freeSetElements)freeString, (compareSetElements)compareStrings);
-	user->friends = setCreate((copySetElements)copyString, (freeSetElements)freeString, (compareSetElements)compareStrings);
+	user->fav_series = setCreate((copySetElements)copyString, 
+		(freeSetElements)freeString, (compareSetElements)compareStrings);
+	user->friends = setCreate((copySetElements)copyString, 
+		(freeSetElements)freeString, (compareSetElements)compareStrings);
 	return user;
 }
 

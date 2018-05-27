@@ -2,7 +2,8 @@
 
 typedef struct series_t* Series;
 
-Series seriesCreate (int episodesNum, Genre genre, int* ages, int episodesDuration);
+Series seriesCreate (int episodesNum, Genre genre, int* ages, 
+	int episodesDuration);
 void seriesFree (Series series);
 Series seriesCopy (Series series);
 char* seriesGetGenre (Series series);

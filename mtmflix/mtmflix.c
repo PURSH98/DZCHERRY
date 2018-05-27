@@ -5,7 +5,7 @@
 #include "user.h"
 #include "assert.h"
 
-int seriesListCompare(ListElement list_element_a, ListElement list_element_b);
+static int seriesListCompare(ListElement list_element_a, ListElement list_element_b);
 static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2);
 static int getSeriesRank(Series series, User user);
 
@@ -173,6 +173,26 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 	return MTMFLIX_SUCCESS;
 }
 
+
+MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
+    ListResult list_result;
+    List users_node = mapKeyToList(mtmflix->users, &list_result);
+    // TODO: handle status
+    // case (status) {
+    // }
+    listSort(users_node,compareStrings);
+    LIST_FOREACH(ListElement ,list_iter,users_node) {
+        User user=mapGet(mtmflix->users,list_iter);
+        ListResult listResult;
+        List fav_series=mtmSetToList(userGetFavSeries(user),&listResult);
+        List friends=mtmSetToList(userGetFriends(user),&list_result);
+        int age=userGetAge(user);
+        mtmPrintUser((char*)list_iter,age,friends,fav_series);
+        //free functions are needed here(probably)
+    }
+    return MTMFLIX_SUCCESS;
+}
+
 MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, 
 	const char* seriesName) {
 	if (mtmflix == NULL || username == NULL || seriesName == NULL) {
@@ -239,7 +259,8 @@ MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1,
 	return MTMFLIX_SUCCESS;
 }
 
-int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {
+static int seriesListCompare(ListElement list_element_a, 
+	ListElement list_element_b) {
 	void* series_a = ((KeyValuePair)list_element_a)->value;
 	void* series_b = ((KeyValuePair)list_element_b)->value;
 	int genre_comparison_result = compareSeriesByGenre(series_a, series_b);
@@ -251,24 +272,6 @@ int seriesListCompare(ListElement list_element_a, ListElement list_element_b) {
 	return strcmp(key_a, key_b);
 }
 
-MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
-    ListResult list_result;
-    List users_node = mapKeyToList(mtmflix->users, &list_result);
-    // TODO: handle status
-    // case (status) {
-    // }
-    listSort(users_node,compareStrings);
-    LIST_FOREACH(ListElement ,list_iter,users_node) {
-        User user=mapGet(mtmflix->users,list_iter);
-        ListResult listResult;
-        List fav_series=mtmSetToList(userGetFavSeries(user),&listResult);
-        List friends=mtmSetToList(userGetFriends(user),&list_result);
-        int age=userGetAge(user);
-        mtmPrintUser((char*)list_iter,age,friends,fav_series);
-        //free functions are needed here(probably)
-    }
-    return MTMFLIX_SUCCESS;
-}
 
 MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, 
 	int count, FILE* outputStream){

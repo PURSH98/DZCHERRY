@@ -95,7 +95,9 @@ MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username) {
 	if (mtmflix == NULL || username == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	} 
-	//iterate over users to remove from friends
+	MAP_FOREACH(char*, username1, mtmflix->users) {
+		mtmFlixRemoveFriend(mtmflix, username1, username);
+	}
 	switch (mapRemove (mtmflix->users, (MapKeyElement)username)) {
 		case MAP_ITEM_DOES_NOT_EXIST : return MTMFLIX_USER_DOES_NOT_EXIST;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
@@ -139,9 +141,11 @@ MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name,
 }
 
 MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name) {
-	//iterate over users to remove from preferences
 	if (mtmflix == NULL || name == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
+	}
+	MAP_FOREACH(char*, username, mtmflix->users) {
+		mtmFlixSeriesLeave(mtmflix, username, name);
 	}
 	switch (mapRemove (mtmflix->series, (MapKeyElement)name)) {
 		case MAP_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
@@ -349,5 +353,4 @@ static int getSeriesRank(Series series, User user){
 int main() {
 	return 0;
 }
-
 

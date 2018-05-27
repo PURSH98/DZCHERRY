@@ -232,9 +232,15 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
 
 MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream){
     //checking params
+	if(count==0){
+		count=mapGetSize(mtmflix->series);
+	}
     ListResult listResult;
     List series_list=mapKeyToList(mtmflix->series,&listResult);
+	User user=mapGet(mtmflix->users,username);
+}
 
+int seriesRankCompare(Series series_1, Series series_2,User user){
 
 }
 
@@ -274,7 +280,7 @@ static int rank_L_Count(User user){
 static int getSeriesRank(Series series, User user){
     int F=rank_F_Count(series,user);
     int G=rank_G_Count(series,user);
-    int L=rank_L_Count(series,user);
+    int L=rank_L_Count(user);
 	int rank=(G*F)/(1.0+abs(seriesGetEpisodeDuration(series)-L));
     return rank;
 }

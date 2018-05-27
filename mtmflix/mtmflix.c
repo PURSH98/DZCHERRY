@@ -5,7 +5,8 @@
 #include "user.h"
 #include "assert.h"
 
-static int seriesListCompare(ListElement list_element_a, ListElement list_element_b);
+static int seriesListCompare(ListElement list_element_a, 
+	ListElement list_element_b);
 static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2);
 static int getSeriesRank(Series series, User user);
 
@@ -13,23 +14,6 @@ struct mtmFlix_t {
 	Map series;     // keys: string; values: Series
 	Map users;       // keys: string; values: User
 };
-
-// MtmFlix mtmFlixCreate();
-// void mtmFlixDestroy(MtmFlix mtmflix);
-
-// MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name, int episodesNum, Genre genre, int* ages, int episodesDuration);
-// MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name);
-// MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username, const char* seriesName);
-// MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, const char* seriesName);
-
-// MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age);
-// MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username);
-// MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, const char* username2);
-// MtmFlixResult mtmFlixRemoveFriend(MtmFlix mtmflix, const char* username1, const char* username2);
-// MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, int count, FILE* outputStream);
-
-// MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, FILE* outputStream);
-// MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream);
 
 MtmFlix mtmFlixCreate() {
 	MtmFlix mtmflix = malloc(sizeof(MtmFlix));
@@ -82,7 +66,7 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	switch (mapPut(mtmflix->users, (MapKeyElement)username, 
 		(MapDataElement)user)) {
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY; break;
-		case MAP_SUCCESS : return MTMFLIX_SUCCESS; break; //check stylistic guidelines
+		case MAP_SUCCESS : return MTMFLIX_SUCCESS; break;
 		// Unreachable
 		default : assert(false);
 	}
@@ -164,7 +148,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 	// TODO: handle status
 	// case (status) {
 	// }
-	listSort(series_node, seriesListCompare); //not sure about the first parameter
+	listSort(series_node, seriesListCompare);
 	LIST_FOREACH(KeyValuePair,list_iter,series_node) {
 		void* key = (KeyValuePair)list_iter->key;
 		void* value = (KeyValuePair)list_iter->value;

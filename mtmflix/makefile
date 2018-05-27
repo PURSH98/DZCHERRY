@@ -2,7 +2,7 @@ CC = gcc
 OBJS = mtmflix.o user.o series.o utilities.o
 EXEC = prog
 DEBUG_FLAG = # now empty, assign -g for debug 
-COMP_FLAG = -std=c99 -Wall -Werror -pedantic-errors
+COMP_FLAG = -std=c99 -Wall -Werror -pedantic-errors -DNDEBUG
 LIN_FLAG = -L. -lmtm -lmtm_ex3
 $(EXEC) : $(OBJS)
 $(CC) $(DEBUG_FLAG) $(OBJS) -o $@

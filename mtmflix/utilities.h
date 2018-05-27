@@ -17,3 +17,6 @@ bool stringCheck(const char* string);
 List mapToList(Map map, ListResult* status);
 List setToList(Set set, ListResult* status);
 List mapKeyToList(Map map, ListResult* status);
+void listPutValue(KeyValuePair listElement, void* value);
+void* listGetValue(KeyValuePair listElement);
+void* listGetKey(KeyValuePair listElement);

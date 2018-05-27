@@ -140,5 +140,26 @@ List mapKeyToList(Map map, ListResult* status){
     return newList;
 }
 
+void listPutValue(KeyValuePair listElement, void* value){
+    if(listElement==NULL||value==NULL){
+        return;
+    }
+    listElement->value=value;
+}
+
+void* listGetValue(KeyValuePair listElement){
+    if(listElement==NULL){
+        return NULL;
+    }
+    return listElement->value;
+}
+
+void* listGetKey(KeyValuePair listElement){
+    if(listElement==NULL){
+        return NULL;
+    }
+    return listElement->key;
+}
+
 
 

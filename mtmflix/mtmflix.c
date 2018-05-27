@@ -6,6 +6,8 @@
 #include "assert.h"
 
 int seriesListCompare(ListElement list_element_a, ListElement list_element_b);
+static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2);
+static int getSeriesRank(Series series, User user);
 
 struct mtmFlix_t {
 	Map series;     // keys: string; values: Series
@@ -236,12 +238,29 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, i
 		count=mapGetSize(mtmflix->series);
 	}
     ListResult listResult;
-    List series_list=mapKeyToList(mtmflix->series,&listResult);
-	User user=mapGet(mtmflix->users,username);
+    List series_list=mapToList(mtmflix->series,&listResult);
+	User user=mapGet(mtmflix->users,(char*)username);
+	LIST_FOREACH(KeyValuePair,iterator,series_list){
+	    Series series=mapGet(mtmflix->series,listGetKey(iterator));
+		int series_rank=getSeriesRank(series,user);
+		listPutValue(iterator,&series_rank);
+	}
+	listSort(series_list,(ListElement)seriesRankCompare);
+
+
+
 }
 
-int seriesRankCompare(Series series_1, Series series_2,User user){
-
+static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2){
+    if(series_1==NULL||series_2==NULL){
+        return NULL;
+    }
+    int rank_series_1=*(int*)listGetValue(series_1);
+    int rank_series_2=*(int*)listGetValue(series_2);
+    if(rank_series_1==rank_series_2){
+        return strcmp((char*)series_2,(char*)series_1);
+    }
+    return rank_series_2-rank_series_1;
 }
 
 static int rank_F_Count(Series series, User user){
@@ -274,13 +293,13 @@ static int rank_L_Count(User user){
     SET_FOREACH(Series,iterator,user_fav_series){
         L+=seriesGetEpisodeDuration(iterator)/(double)num_of_fav_series;
     }
-    return L;
+    return (int)L;
 }
 
 static int getSeriesRank(Series series, User user){
     int F=rank_F_Count(series,user);
     int G=rank_G_Count(series,user);
     int L=rank_L_Count(user);
-	int rank=(G*F)/(1.0+abs(seriesGetEpisodeDuration(series)-L));
+	int rank=(int)((G*F)/(1.0+abs(seriesGetEpisodeDuration(series)-L)));
     return rank;
 }

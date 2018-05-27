@@ -261,7 +261,7 @@ static int rank_G_Count(Series series,User user){
     return G;
 }
 
-static int rank_L_Count(Series series,User user){
+static int rank_L_Count(User user){
     double L=0;
     Set user_fav_series=userGetFavSeries(user);
     int num_of_fav_series=setGetSize(user_fav_series);
@@ -271,13 +271,10 @@ static int rank_L_Count(Series series,User user){
     return L;
 }
 
-static int getSeriesRank(MtmFlix mtmFlix, Series series, User user){
+static int getSeriesRank(Series series, User user){
     int F=rank_F_Count(series,user);
     int G=rank_G_Count(series,user);
     int L=rank_L_Count(series,user);
-
-
-
-
-
+	int rank=(G*F)/(1.0+abs(seriesGetEpisodeDuration(series)-L));
+    return rank;
 }

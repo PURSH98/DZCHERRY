@@ -62,7 +62,7 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (mapContains(mtmflix->users, (MapKeyElement) username)) {
 		return MTMFLIX_USERNAME_ALREADY_USED;
 	}
-	if (age <= MTM_MIN_AGE || age >= MTM_MAX_AGE) {
+	if (age < MTM_MIN_AGE || age > MTM_MAX_AGE) {
 		return MTMFLIX_ILLEGAL_AGE;
 	}
 	User user = userCreate(age);
@@ -237,9 +237,9 @@ MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username,
 	if (!mapContains(mtmflix->series, (MapKeyElement)seriesName)) {
 		return MTMFLIX_SERIES_DOES_NOT_EXIST;
 	}
-	if (userGetAge(mapGet(mtmflix->users, (MapKeyElement)username)) <= 
+	if (userGetAge(mapGet(mtmflix->users, (MapKeyElement)username)) < 
 		seriesGetMinAge(mapGet(mtmflix->series, (MapKeyElement)seriesName)) ||
-		userGetAge(mapGet(mtmflix->users, (MapKeyElement)username)) >= 
+		userGetAge(mapGet(mtmflix->users, (MapKeyElement)username)) > 
 		seriesGetMaxAge(mapGet(mtmflix->series, (MapKeyElement)seriesName))) {
 		return MTMFLIX_USER_NOT_IN_THE_RIGHT_AGE;
 	}

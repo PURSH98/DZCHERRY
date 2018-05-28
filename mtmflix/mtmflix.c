@@ -189,11 +189,9 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
-    printf("\nReporting users...\n");
 	if(mtmflix==NULL || outputStream == NULL){
 		return MTMFLIX_NULL_ARGUMENT;
 	}
-	printf("We have %d users\n", mapGetSize(mtmflix->users));
 	if (mapGetSize(mtmflix->users)==0){
 		return MTMFLIX_NO_USERS;
 	}

@@ -9,6 +9,9 @@ static int seriesListCompare(ListElement list_element_a,
 	ListElement list_element_b);
 static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2);
 static int getSeriesRank(Series series, User user);
+static int rank_L_Count(User user);
+static int rank_G_Count(Series series,User user);
+static int rank_F_Count(Series series, User user);
 
 struct mtmFlix_t {
 	Map series;     // keys: string; values: Series
@@ -327,6 +330,9 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
     return MTMFLIX_SUCCESS;
 }
 
+//Compares ranks of two series
+//Ranks of series are assigned to the
+//value field of series KeyValuePair
 static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2){
     if(series_1==NULL||series_2==NULL){
         return 0;
@@ -339,6 +345,8 @@ static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2){
     return rank_series_2-rank_series_1;
 }
 
+//Counts number of friends of user
+//who like a given series
 static int rank_F_Count(Series series, User user){
     int F=0;
     Set user_friends=userGetFriends(user);
@@ -351,6 +359,9 @@ static int rank_F_Count(Series series, User user){
     return F;
 }
 
+//Counts number of series which are
+//liked by user and are from the same
+//genre as series
 static int rank_G_Count(Series series,User user){
     int G=0;
     Set user_fav_series=userGetFavSeries(user);
@@ -362,6 +373,8 @@ static int rank_G_Count(Series series,User user){
     return G;
 }
 
+//Counts the average duration
+//of series that are liked by user
 static int rank_L_Count(User user){
     double L=0;
     Set user_fav_series=userGetFavSeries(user);
@@ -372,6 +385,8 @@ static int rank_L_Count(User user){
     return (int)L;
 }
 
+//Counts the rank of the given series
+//for the given user using F, G, L numbers
 static int getSeriesRank(Series series, User user){
     int F=rank_F_Count(series,user);
     int G=rank_G_Count(series,user);

@@ -27,6 +27,8 @@ int compareStrings(void * str_a, void * str_b) {
   return strcmp((char*)str_a, (char*)str_b);
 }
 
+//Checks if the string can be
+//legal series or user name
 bool stringCheck(const char* string) {
 	int length = strlen(string);
 	if(length==0){
@@ -42,6 +44,8 @@ bool stringCheck(const char* string) {
 	return true;
 }
 
+//Creates a copy of the element of the
+//specific type list, which stores key-value pairs
 ListElement copyKeyValuePair(ListElement keyValuePair) {
   assert(keyValuePair);
   KeyValuePair copy = malloc(sizeof(KeyValuePair));
@@ -57,6 +61,8 @@ void freeKeyValuePair(ListElement keyValuePair) {
   free(keyValuePair);
 }
 
+//Creates a list based on the given map
+//List does store elements as key-value pairs
 List mapToList(Map map, ListResult* status) {
   *status = LIST_SUCCESS;
   if (map == NULL) {
@@ -84,6 +90,7 @@ List mapToList(Map map, ListResult* status) {
   return newList;
 }
 
+//Creates a list based on the give set
 List mtmSetToList(Set set, ListResult* status){
     *status=LIST_SUCCESS;
     if (set == NULL) {
@@ -111,6 +118,7 @@ List mtmSetToList(Set set, ListResult* status){
     return newList;
 }
 
+//Creates a simple list based on the given map
 List mapKeyToList(Map map, ListResult* status){
     *status=LIST_SUCCESS;
     if (map == NULL) {
@@ -138,6 +146,8 @@ List mapKeyToList(Map map, ListResult* status){
     return newList;
 }
 
+//Puts value into the value field
+//of list element of the key-value type
 void listPutValue(KeyValuePair listElement, void* value){
     if(listElement==NULL||value==NULL){
         return;
@@ -145,6 +155,8 @@ void listPutValue(KeyValuePair listElement, void* value){
     listElement->value=value;
 }
 
+//Returns value of list element
+//of the key-value type
 void* listGetValue(KeyValuePair listElement){
     if(listElement==NULL){
         return NULL;
@@ -152,6 +164,8 @@ void* listGetValue(KeyValuePair listElement){
     return listElement->value;
 }
 
+//Returns key of list element
+//of the key-value type
 void* listGetKey(KeyValuePair listElement){
     if(listElement==NULL){
         return NULL;

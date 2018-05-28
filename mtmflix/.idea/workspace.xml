@@ -63,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mtmflix.c" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mtmflix.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mtmflix.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="55" column="28" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="28" />
+            <state relative-caret-position="251">
+              <caret line="250" selection-start-line="250" selection-end-line="250" />
             </state>
           </provider>
         </entry>
@@ -81,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.c" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
+            <state relative-caret-position="394">
+              <caret line="30" column="38" lean-forward="true" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -143,8 +143,8 @@
         <option value="$PROJECT_DIR$/series.c" />
         <option value="$PROJECT_DIR$/set_test.c" />
         <option value="$PROJECT_DIR$/newtests/main.c" />
-        <option value="$PROJECT_DIR$/mtmflix.c" />
         <option value="$PROJECT_DIR$/user.c" />
+        <option value="$PROJECT_DIR$/mtmflix.c" />
       </list>
     </option>
   </component>
@@ -214,12 +214,12 @@
       <option name="presentableId" value="Default" />
       <updated>1527451851071</updated>
       <workItem from="1527451854445" duration="4199000" />
-      <workItem from="1527500812444" duration="10781000" />
+      <workItem from="1527500812444" duration="10939000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14980000" />
+    <option name="totallyTimeSpent" value="15138000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -433,17 +433,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mtmflix.c">
+    <entry file="file://$PROJECT_DIR$/user.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="55" column="28" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="28" />
+        <state relative-caret-position="394">
+          <caret line="30" column="38" lean-forward="true" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user.c">
+    <entry file="file://$PROJECT_DIR$/mtmflix.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
+        <state relative-caret-position="251">
+          <caret line="250" selection-start-line="250" selection-end-line="250" />
         </state>
       </provider>
     </entry>

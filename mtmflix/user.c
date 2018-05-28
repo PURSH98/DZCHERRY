@@ -50,7 +50,7 @@ void userFree(User user) {
 //adds the series to the list of the user's favorite series
 MtmFlixResult userAddFavSeries(User user, const char* series_name) {
 	//we check those arguments before passing them to the function
-	assert(user != NULL && series_name != NULL);
+	assert(user != NULL && series_name != NULL && user->fav_series != NULL);
 	switch (setAdd(user->fav_series, (SetElement)series_name)) {
 		case SET_SUCCESS : return MTMFLIX_SUCCESS;
 		//not supposed to happen
@@ -69,7 +69,7 @@ MtmFlixResult userAddFavSeries(User user, const char* series_name) {
 //removes the series from the list of the user's favorite series
 MtmFlixResult userDeleteFavSeries(User user, const char* series_name) {
 	//we check those arguments before passing them to the function
-	assert(user != NULL && series_name != NULL);
+	assert(user != NULL && series_name != NULL && user->fav_series != NULL);
 	setRemove(user->fav_series, (SetElement)series_name);
 	return MTMFLIX_SUCCESS;
 }

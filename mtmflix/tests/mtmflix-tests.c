@@ -394,7 +394,7 @@ void finalCheck() {
     while (*string != '\0') {
         if ((ch1 != *string)) {
             printf("Fail in OutputFileFromTest line %d. Details:\n", line);
-            printf("Mismatch with the string at line: %d:\n\"", (__LINE__ - 89 + line));
+            printf("Mismatch with the string at line: %d:\n\"", (__LINE__ - 90 + line));
             while (*error != '\n') {
                 printf("%c", *error);
                 ++error;

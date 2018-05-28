@@ -31,6 +31,7 @@ Series seriesCreate (int episodesNum, Genre genre, int* ages,
 	} else {
 		series->ages = (int*)malloc(sizeof(*ages)*2);
 		if (series->ages == NULL) {
+		    seriesFree(series);
 			return NULL;
 		}
 		memcpy(series->ages, ages, sizeof(*ages)*2);

@@ -451,7 +451,3 @@ static int getSeriesRank(MtmFlix mtmFlix, Series series,
 	int rank=(int)( (G*F) /(1.0+abs(seriesGetEpisodeDuration(series)-L)));
     return rank;
 }
-
-int main () {
-	return 0;
-}

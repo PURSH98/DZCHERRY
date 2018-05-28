@@ -187,7 +187,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
-	if(mtmflix==NULL || outputStream ==NULL){
+	if(mtmflix == NULL || outputStream == NULL){
 		return MTMFLIX_NULL_ARGUMENT;
 	}
 	if (mapGetSize(mtmflix->users)==0){

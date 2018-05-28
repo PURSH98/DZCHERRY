@@ -158,12 +158,19 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 	    seriesNum=mapGetSize(mtmflix->series);
 	}
 	listSort(series_list, seriesListCompare);
+	char* prev_genre=NULL;
 	int genre_count=0;
 	LIST_FOREACH(KeyValuePair,list_iter,series_list) {
 		void* key = (KeyValuePair)list_iter->key;
 		void* value = (KeyValuePair)list_iter->value;
-		fprintf(outputStream, "%s",
-                mtmPrintSeries((char*)key, seriesGetGenre((Series)value)));
+		if(strcmp(prev_genre,seriesGetGenre((Series)value))==0){
+			genre_count=0;
+			prev_genre=seriesGetGenre((Series)value);
+		}
+		if(genre_count<seriesNum) {
+			fprintf(outputStream, "%s",
+					mtmPrintSeries((char *) key, seriesGetGenre((Series) value)));
+		}
 	}
 	return MTMFLIX_SUCCESS;
 }

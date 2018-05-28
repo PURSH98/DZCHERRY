@@ -87,6 +87,7 @@ char* seriesGetGenre (Series series) {
         case HORROR : return "HORROR";
 	}
 	// Unreachable
+	printf("Unreachable genre: %d\n", series->genre);
 	assert(false);
 	return NULL;
 }

@@ -8,9 +8,9 @@
 static int seriesListCompare(ListElement list_element_a, 
 	ListElement list_element_b);
 static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2);
-static int getSeriesRank(Series series, User user);
+static int getSeriesRank(MtmFlix mtmFlix, Series series, User user);
 static int rank_L_Count(User user);
-static int rank_G_Count(Series series,User user);
+static int rank_G_Count(MtmFlix mtmFlix, Series series,User user);
 static int rank_F_Count(Series series, User user);
 
 struct mtmFlix_t {
@@ -337,7 +337,7 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
 	User user=mapGet(mtmflix->users,(char*)username);
 	LIST_FOREACH(KeyValuePair,iterator,series_list){
 	    Series series=mapGet(mtmflix->series,listGetKey(iterator));
-		int series_rank=getSeriesRank(series,user);
+		int series_rank=getSeriesRank(mtmflix, series, user);
 		listPutValue(iterator,&series_rank);
 	}
 	listSort(series_list, (CompareListElements) seriesRankCompare);
@@ -387,11 +387,12 @@ static int rank_F_Count(Series series, User user){
 //Counts number of series which are
 //liked by user and are from the same
 //genre as series
-static int rank_G_Count(Series series,User user){
+static int rank_G_Count(MtmFlix mtmflix, Series series, User user){
     int G=0;
     Set user_fav_series=userGetFavSeries(user);
-    SET_FOREACH(Series,iterator,user_fav_series){
-        if(compareSeriesByGenre(series,iterator)==0){
+    SET_FOREACH(Series,series_name,user_fav_series){
+        Series iter_series = (Series)mapGet(mtmflix->series, series_name);
+        if(compareSeriesByGenre(series,iter_series)==0){
             G++;
         }
     }
@@ -412,9 +413,9 @@ static int rank_L_Count(User user){
 
 //Counts the rank of the given series
 //for the given user using F, G, L numbers
-static int getSeriesRank(Series series, User user){
+static int getSeriesRank(MtmFlix mtmFlix, Series series, User user){
     int F=rank_F_Count(series,user);
-    int G=rank_G_Count(series,user);
+    int G=rank_G_Count(mtmFlix, series,user);
     int L=rank_L_Count(user);
 	int rank=(int)((G*F)/(1.0+abs(seriesGetEpisodeDuration(series)-L)));
     return rank;

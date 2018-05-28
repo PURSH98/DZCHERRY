@@ -5,7 +5,7 @@
 #include "mtmflix.h"
 #include "utilities.h"
 #include "set.h"
-#define KEY_VALUE_SIZE
+#define KEY_VALUE_SIZE 3
 
 //creates a const copy of a given string
 const char* copyString(const char* str) {
@@ -88,8 +88,7 @@ List mapToList(Map map, ListResult* status) {
     return newList;
   }
   MAP_FOREACH(MapKeyElement, map_key, map) {
-    KeyValuePair listElement = malloc(sizeof(KeyValuePair)
-            *KEY_VALUE_SIZE);
+    KeyValuePair listElement = malloc(sizeof(KeyValuePair)*KEY_VALUE_SIZE);
     if (listElement == NULL) {
       *status = LIST_OUT_OF_MEMORY;
       listDestroy(newList);

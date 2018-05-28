@@ -11,8 +11,8 @@ User userCopy (User user);
 void userFree(User user);
 
 MtmFlixResult userAddFavSeries (User user, const char* series_name);
-MtmFlixResult userAddFriend(User user1, const char* username);
-MtmFlixResult userRemoveFriend(User user1, const char* username);
+MtmFlixResult userAddFriend(User user1, const char* username2);
+MtmFlixResult userRemoveFriend(User user1, const char* username2);
 MtmFlixResult userAddFavSeries(User user, const char* series_name);
 MtmFlixResult userDeleteFavSeries(User user, const char* series_name);
 MtmFlixResult userAddFavSeries (User user, const char* series_name);

@@ -1,39 +1,41 @@
-//ifndef include
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include "mtmflix.h"
 #include "series.h"
 
-
+//this type defines a series
+//episodesNum is a number of episodes in the series,
+//genre is its genre,
+//ages is an array of two integers: minimal and maximal age to watch this series
+//episodeDuration is an average episode duration
 struct series_t {
-	//Name name;
 	int episodesNum;
 	Genre genre;
 	int* ages;
 	int episodesDuration;
 };
 
+//creates a series instance given the number of episodes, the ages array,
+//and the average episode duration
 Series seriesCreate (int episodesNum, Genre genre, int* ages, 
 	int episodesDuration) {
 	Series series = (Series)malloc(sizeof(*series));
 	if (series == NULL) {
 		return NULL;
 	}
-	//check parameters!
 	series->episodesNum = episodesNum;
 	series->genre = genre;
 	if (ages == NULL) {
-		series->ages = NULL; //specified in the pdf
+		series->ages = NULL;
 	} else {
-		// Don't know the length; use a constant
 		series->ages = (int*)malloc(sizeof(*ages)*2);
 		if (series->ages == NULL) {
 			return NULL;
 		}
 		memcpy(series->ages, ages, sizeof(*ages)*2);
 		if (series->ages[0] < MTM_MIN_AGE) {
-			series->ages[0] = MTM_MIN_AGE; //where do those constants come from?
+			series->ages[0] = MTM_MIN_AGE;
 		}
 		if (series->ages[1] > MTM_MAX_AGE) {
 			series->ages[1] = MTM_MAX_AGE;
@@ -43,6 +45,7 @@ Series seriesCreate (int episodesNum, Genre genre, int* ages,
 	return series;
 }
 
+//frees a series instance
 void seriesFree (Series series) {
 	free(series->ages);
 	series->ages = NULL;
@@ -50,6 +53,7 @@ void seriesFree (Series series) {
 	series = NULL;
 }
 
+//copies a series instance
 Series seriesCopy (Series series) {
 	if (series == NULL) {
 		return NULL;
@@ -62,6 +66,7 @@ Series seriesCopy (Series series) {
 	return new_series;
 }
 
+//helper function used to sort series alphabetically by genre
 int compareSeriesByGenre(Series series_a, Series series_b) {
 	return strcmp(seriesGetGenre(series_a), seriesGetGenre(series_b));
 }

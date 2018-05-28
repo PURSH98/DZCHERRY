@@ -132,6 +132,9 @@ MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name) {
 	if (mtmflix == NULL || name == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
+	if (!mapContains(mtmflix->series, (MapKeyElement)name)) {
+		return MTMFLIX_SERIES_DOES_NOT_EXIST;
+	}
 	MAP_FOREACH(char*, username, mtmflix->users) {
 		mtmFlixSeriesLeave(mtmflix, username, name);
 	}
@@ -147,7 +150,7 @@ MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name) {
 
 MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, 
 	FILE* outputStream) {
-    if(mtmflix==NULL){
+    if(mtmflix==NULL || outputStream == NULL){
         return MTMFLIX_NULL_ARGUMENT;
     }
     if(mapGetSize(mtmflix->series)==0){
@@ -175,7 +178,8 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 		}
 		if(genre_count<seriesNum) {
 			fprintf(outputStream, "%s",
-					mtmPrintSeries((char *) key, seriesGetGenre((Series) value)));
+					mtmPrintSeries((char *) key, 
+						seriesGetGenre((Series) value)));
 		}
 	}
 	return MTMFLIX_SUCCESS;
@@ -183,7 +187,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
-	if(mtmflix==NULL){
+	if(mtmflix==NULL || outputStream ==NULL){
 		return MTMFLIX_NULL_ARGUMENT;
 	}
 	if (mapGetSize(mtmflix->users)==0){
@@ -395,3 +399,6 @@ static int getSeriesRank(Series series, User user){
     return rank;
 }
 
+int main () {
+	return 0;
+}

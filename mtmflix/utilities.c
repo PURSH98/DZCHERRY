@@ -23,6 +23,7 @@ void freeString(const char* str) {
   free((void*)str);
 }
 
+//compares two strings
 int compareStrings(void * str_a, void * str_b) {
   return strcmp((char*)str_a, (char*)str_b);
 }
@@ -57,6 +58,7 @@ ListElement copyKeyValuePair(ListElement keyValuePair) {
   return copy;
 }
 
+//frees memory allocated to a key-value pair
 void freeKeyValuePair(ListElement keyValuePair) {
   free(keyValuePair);
 }
@@ -172,6 +174,3 @@ void* listGetKey(KeyValuePair listElement){
     }
     return listElement->key;
 }
-
-
-

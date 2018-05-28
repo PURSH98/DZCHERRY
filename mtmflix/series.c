@@ -66,6 +66,7 @@ int compareSeriesByGenre(Series series_a, Series series_b) {
 	return strcmp(seriesGetGenre(series_a), seriesGetGenre(series_b));
 }
 
+//given a series instance returns its genre
 char* seriesGetGenre (Series series) {
 	if (series == NULL) {
 		return NULL;
@@ -85,6 +86,7 @@ char* seriesGetGenre (Series series) {
 	return NULL;
 }
 
+//given a series instance returns episode duration
 int seriesGetEpisodeDuration(Series series){
     if(series==NULL){
         return 0;
@@ -92,6 +94,7 @@ int seriesGetEpisodeDuration(Series series){
     return series->episodesDuration;
 }
 
+//given a series instance returns the minimal age to watch the series
 int seriesGetMinAge (Series series) {
 	if (series == NULL) {
 		return 0;
@@ -102,6 +105,7 @@ int seriesGetMinAge (Series series) {
 	return series->ages[0];
 }
 
+//given a series instance returns the maximal age to watch the series
 int seriesGetMaxAge (Series series) {
 	if (series == NULL) {
 		return 0;

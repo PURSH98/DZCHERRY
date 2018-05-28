@@ -8,10 +8,10 @@
 static int seriesListCompare(ListElement list_element_a, 
 	ListElement list_element_b);
 static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2);
-static int getSeriesRank(MtmFlix mtmFlix, Series series, User user);
+static int getSeriesRank(MtmFlix mtmFlix, const char* series_name, User user);
 static int rank_L_Count(User user);
 static int rank_G_Count(MtmFlix mtmFlix, Series series,User user);
-static int rank_F_Count(Series series, User user);
+static int rank_F_Count(const char* series_name, User user);
 
 struct mtmFlix_t {
 	Map series;     // keys: string; values: Series
@@ -336,8 +336,8 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
     List series_list=mapToList(mtmflix->series,&listResult);
 	User user=mapGet(mtmflix->users,(char*)username);
 	LIST_FOREACH(KeyValuePair,iterator,series_list){
-	    Series series=mapGet(mtmflix->series,listGetKey(iterator));
-		int series_rank=getSeriesRank(mtmflix, series, user);
+	    //Series series=mapGet(mtmflix->series,listGetKey(iterator));
+		int series_rank=getSeriesRank(mtmflix, listGetKey(iterator), user);
 		listPutValue(iterator,&series_rank);
 	}
 	listSort(series_list, (CompareListElements) seriesRankCompare);
@@ -376,12 +376,12 @@ static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2){
 
 //Counts number of friends of user
 //who like a given series
-static int rank_F_Count(Series series, User user){
+static int rank_F_Count(const char* series_name, User user){
     int F=0;
     Set user_friends=userGetFriends(user);
     SET_FOREACH(User,iterator,user_friends){
         Set friend_fav_series=userGetFavSeries(iterator);
-        if(setIsIn(friend_fav_series,series)){
+        if(setIsIn(friend_fav_series,(SetElement)series_name)){
             F++;
         }
     }
@@ -417,12 +417,13 @@ static int rank_L_Count(User user){
 
 //Counts the rank of the given series
 //for the given user using F, G, L numbers
-static int getSeriesRank(MtmFlix mtmFlix, Series series, User user){
+static int getSeriesRank(MtmFlix mtmFlix, const char* series_name, User user){
+    Series series=mapGet(mtmFlix->series,(MapKeyElement)series_name);
     if(userGetAge(user)<seriesGetMinAge(series)||
             userGetAge(user)>seriesGetMaxAge(series)){
         return 0;
     }
-    int F=rank_F_Count(series,user);
+    int F=rank_F_Count(series_name,user);
     int G=rank_G_Count(mtmFlix, series,user);
     int L=rank_L_Count(user);
 	int rank=(int)((G*F)/(1.0+abs(seriesGetEpisodeDuration(series)-L)));

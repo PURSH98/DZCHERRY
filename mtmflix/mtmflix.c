@@ -38,6 +38,9 @@ MtmFlix mtmFlixCreate() {
 }
 
 void mtmFlixDestroy(MtmFlix mtmflix) {
+	if(mtmflix==NULL){
+		return;
+	}
 	mapDestroy(mtmflix->users);
 	mtmflix->users = NULL;
 	mapDestroy(mtmflix->series);

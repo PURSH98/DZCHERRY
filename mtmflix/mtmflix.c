@@ -403,6 +403,6 @@ static int getSeriesRank(Series series, User user){
     return rank;
 }
 
-//int main () {
-//	return 0;
-//}
+int main () {
+	return 0;
+}

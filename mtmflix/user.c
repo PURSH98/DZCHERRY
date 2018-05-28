@@ -20,7 +20,6 @@ User userCreate(int age) {
 	user->age = age;
 	user->fav_series = setCreate((copySetElements)copyString, 
 		(freeSetElements)freeString, (compareSetElements)compareStrings);
-	assert(user->fav_series != NULL);
 	user->friends = setCreate((copySetElements)copyString, 
 		(freeSetElements)freeString, (compareSetElements)compareStrings);
 	return user;
@@ -72,8 +71,18 @@ MtmFlixResult userDeleteFavSeries(User user, const char* series_name) {
 MtmFlixResult userAddFriend(User user1, const char* username2) {
 	//we check those arguments before passing them to the function
 	assert(user1 != NULL && username2 != NULL);
-	setAdd(user1->friends, (SetElement)username2);
-	return MTMFLIX_SUCCESS;
+	switch (setAdd(user1->friends, (SetElement)username2)) {
+		case SET_SUCCESS : return MTMFLIX_SUCCESS;
+		//not supposed to happen
+		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
+		case SET_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
+		case SET_ITEM_ALREADY_EXISTS : return MTMFLIX_SUCCESS;
+		//not supposed to happen
+		case SET_ITEM_DOES_NOT_EXIST: return MTMFLIX_NULL_ARGUMENT;
+	}
+	assert(false);
+	//we won't get here
+	return MTMFLIX_NULL_ARGUMENT;
 }
 
 //given a user instance (user1), and a name of another user,

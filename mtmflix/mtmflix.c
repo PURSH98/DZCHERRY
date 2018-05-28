@@ -242,9 +242,15 @@ MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username,
 		seriesGetMaxAge(mapGet(mtmflix->series, (MapKeyElement)seriesName))) {
 		return MTMFLIX_USER_NOT_IN_THE_RIGHT_AGE;
 	}
- 	userAddFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), 
- 		seriesName);
- 	return MTMFLIX_SUCCESS;
+ 	switch userAddFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), 
+ 		seriesName) {
+ 		case MTMFLIX_SUCCESS : return MTMFLIX_SUCCESS;
+ 		case MTMFLIX_OUT_OF_MEMORY : exit(0);
+ 		case MTMFLIX_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
+ 	}
+ 	//we won't get here
+ 	assert(false);
+ 	return MTMFLIX_NULL_ARGUMENT;
 }
 
 MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, 

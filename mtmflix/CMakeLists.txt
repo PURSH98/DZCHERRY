@@ -21,5 +21,5 @@ add_executable(mtmflix
         utilities.h)
 
 target_link_libraries(mtmflix ${CMAKE_SOURCE_DIR}/maclibs/libmtm_ex3.a ${CMAKE_SOURCE_DIR}/maclibs/libmtm.a)
-set(CMAKE_C_FLAGS "-std=c99 -Wall -Werror -pedantic-errors -DNDEBUG")
+set(CMAKE_C_FLAGS "-std=c99 -Wall -Werror -pedantic-errors -g -O0")
 

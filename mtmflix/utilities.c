@@ -5,6 +5,7 @@
 #include "mtmflix.h"
 #include "utilities.h"
 #include "set.h"
+#define KEY_VALUE_SIZE
 
 //creates a const copy of a given string
 const char* copyString(const char* str) {
@@ -87,15 +88,18 @@ List mapToList(Map map, ListResult* status) {
     return newList;
   }
   MAP_FOREACH(MapKeyElement, map_key, map) {
-    KeyValuePair listElement = malloc(sizeof(KeyValuePair));
+    KeyValuePair listElement = malloc(sizeof(KeyValuePair)
+            *KEY_VALUE_SIZE);
     if (listElement == NULL) {
       *status = LIST_OUT_OF_MEMORY;
+      listDestroy(newList);
       return NULL;
     }
     listElement->key   = map_key;
     listElement->value = mapGet(map, map_key);
     if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
       *status = LIST_INVALID_CURRENT;
+      listDestroy(newList);
       return NULL;
     }
   }
@@ -119,11 +123,13 @@ List mtmSetToList(Set set, ListResult* status){
         ListElement listElement = malloc(sizeof(ListElement));
         if (listElement == NULL) {
             *status = LIST_OUT_OF_MEMORY;
+            listDestroy(newList);
             return NULL;
         }
         listElement = setElement;
         if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
             *status = LIST_INVALID_CURRENT;
+            listDestroy(newList);
             return NULL;
         }
     }
@@ -147,11 +153,13 @@ List mapKeyToList(Map map, ListResult* status){
         ListElement listElement = malloc(sizeof(ListElement));
         if (listElement == NULL) {
             *status = LIST_OUT_OF_MEMORY;
+            listDestroy(newList);
             return NULL;
         }
         listElement = mapKeyElement;
         if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
             *status = LIST_INVALID_CURRENT;
+            listDestroy(newList);
             return NULL;
         }
     }

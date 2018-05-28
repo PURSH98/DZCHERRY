@@ -47,8 +47,8 @@
       <file leaf-file-name="mtmflix.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mtmflix.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="362" selection-start-line="362" selection-end-line="362" />
+            <state relative-caret-position="195">
+              <caret line="460" selection-start-line="460" selection-end-line="460" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -234,12 +234,12 @@
       <option name="presentableId" value="Default" />
       <updated>1527451851071</updated>
       <workItem from="1527451854445" duration="4199000" />
-      <workItem from="1527500812444" duration="26255000" />
+      <workItem from="1527500812444" duration="26375000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30454000" />
+    <option name="totallyTimeSpent" value="30574000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -247,7 +247,7 @@
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.1625" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" visible="true" weight="0.2369146" />
+      <window_info active="true" anchor="bottom" id="Messages" order="7" visible="true" weight="0.2369146" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.3292011" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3292011" />
@@ -481,8 +481,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mtmflix.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="362" selection-start-line="362" selection-end-line="362" />
+        <state relative-caret-position="195">
+          <caret line="460" selection-start-line="460" selection-end-line="460" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

@@ -458,7 +458,6 @@ static int getSeriesRank(MtmFlix mtmFlix, Series series,
     }
     int F=rank_F_Count(mtmFlix,series_name,user);
     int G=rank_G_Count(mtmFlix,series,user);
-<<<<<<< HEAD
     int L=rank_L_Count(mtmFlix,user);
 	int rank=round( (G*F) / (1.0 + abs(seriesGetEpisodeDuration(series)-L)) );
 	printf("\n%s: F: %d, G: %d, L: %d, rank: %d\n", series_name, F, G, L, rank);
@@ -468,9 +467,3 @@ static int getSeriesRank(MtmFlix mtmFlix, Series series,
 //int main () {
 //	return 0;
 //}
-=======
-    int L=rank_L_Count(mtmFlix, user);
-	int rank=(int)( (G*F) /(1.0+abs(seriesGetEpisodeDuration(series)-L)));
-    return rank;
-}
->>>>>>> a83a1e761248f928aab77c1a7b41e07133f4b519

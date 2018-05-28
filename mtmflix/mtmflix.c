@@ -265,7 +265,7 @@ MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username,
 	const char* seriesName) {
 	if (mtmflix == NULL || username == NULL || seriesName == NULL || 
 		mtmflix->users == NULL) {
-		return MTMFLIX_NULL_ARGUMENT;//check
+		return MTMFLIX_NULL_ARGUMENT;
 	}
 	if (!mapContains(mtmflix->users, (MapKeyElement)username)) {
 		return MTMFLIX_USER_DOES_NOT_EXIST;

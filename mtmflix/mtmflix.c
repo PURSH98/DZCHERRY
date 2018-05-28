@@ -277,7 +277,7 @@ MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username,
 	const char* seriesName) {
 	if (mtmflix == NULL || username == NULL || seriesName == NULL || 
 		mtmflix->users == NULL) {
-		return MTMFLIX_NULL_ARGUMENT;//check
+		return MTMFLIX_NULL_ARGUMENT;
 	}
 	if (!mapContains(mtmflix->users, (MapKeyElement)username)) {
 		return MTMFLIX_USER_DOES_NOT_EXIST;
@@ -294,13 +294,19 @@ MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username,
 MtmFlixResult mtmFlixAddFriend(MtmFlix mtmflix, const char* username1, 
 	const char* username2) {
 	if (mtmflix == NULL || username1 == NULL || username2 == NULL) {
+		free ((void*)username1);
+		free ((void*)username2);
 		return MTMFLIX_NULL_ARGUMENT;
 	}
 	if (!mapContains(mtmflix->users, (MapKeyElement)username1) || 
 		!mapContains(mtmflix->users, (MapKeyElement)username2)) {
+		free ((void*) username1);
+		free ((void*) username2);
 		return MTMFLIX_USER_DOES_NOT_EXIST;
 	}
 	userAddFriend(mapGet(mtmflix->users, (MapKeyElement)username1), username2);
+	free ((void*) username1);
+	free ((void*) username2);
 	return MTMFLIX_SUCCESS;
 }
 

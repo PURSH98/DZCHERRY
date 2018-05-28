@@ -177,6 +177,12 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
+	if(mtmflix==NULL){
+		return NULL;
+	}
+	if (mapGetSize(mtmflix->users)==0){
+		return MTMFLIX_NO_USERS;
+	}
     ListResult list_result;
     List users_list = mapKeyToList(mtmflix->users, &list_result);
     switch (list_result){

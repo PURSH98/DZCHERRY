@@ -51,8 +51,18 @@ void userFree(User user) {
 MtmFlixResult userAddFavSeries(User user, const char* series_name) {
 	//we check those arguments before passing them to the function
 	assert(user != NULL && series_name != NULL);
-	setAdd(user->fav_series, (SetElement)series_name);
-	return MTMFLIX_SUCCESS;
+	switch (setAdd(user->fav_series, (SetElement)series_name)) {
+		case SET_SUCCESS : return MTMFLIX_SUCCESS;
+		//not supposed to happen
+		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
+		case SET_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
+		case SET_ITEM_ALREADY_EXISTS : return MTMFLIX_SUCCESS;
+		//not supposed to happen
+		case SET_ITEM_DOES_NOT_EXIST: return MTMFLIX_NULL_ARGUMENT;
+	}
+	assert(false);
+	//we won't get here
+	return MTMFLIX_NULL_ARGUMENT;
 }
 
 //given a name of a series and a user, 

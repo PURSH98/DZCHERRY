@@ -35,8 +35,8 @@
       <file leaf-file-name="main.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/newtests/main.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="835" column="29" lean-forward="true" selection-start-line="835" selection-start-column="29" selection-end-line="835" selection-end-column="29" />
+            <state relative-caret-position="333">
+              <caret line="850" column="23" selection-start-line="850" selection-start-column="23" selection-end-line="850" selection-end-column="23" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -93,8 +93,8 @@
       <file leaf-file-name="mtmflix.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mtmflix.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="169" column="22" selection-start-line="169" selection-start-column="22" selection-end-line="169" selection-end-column="22" />
+            <state relative-caret-position="380">
+              <caret line="178" column="26" selection-start-line="178" selection-start-column="26" selection-end-line="178" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -111,8 +111,8 @@
       <file leaf-file-name="series.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/series.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="86" column="36" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="36" />
+            <state relative-caret-position="85">
+              <caret line="74" column="6" selection-start-line="74" selection-start-column="6" selection-end-line="74" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -139,8 +139,8 @@
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/utilities.c" />
         <option value="$PROJECT_DIR$/series.c" />
-        <option value="$PROJECT_DIR$/newtests/main.c" />
         <option value="$PROJECT_DIR$/user.c" />
+        <option value="$PROJECT_DIR$/newtests/main.c" />
         <option value="$PROJECT_DIR$/mtmflix.c" />
       </list>
     </option>
@@ -211,12 +211,12 @@
       <option name="presentableId" value="Default" />
       <updated>1527451851071</updated>
       <workItem from="1527451854445" duration="4199000" />
-      <workItem from="1527500812444" duration="5980000" />
+      <workItem from="1527500812444" duration="6535000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10179000" />
+    <option name="totallyTimeSpent" value="10734000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -360,13 +360,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/series.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="86" column="36" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/user.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
@@ -396,10 +389,17 @@
         <state relative-caret-position="-136" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/series.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="74" column="6" selection-start-line="74" selection-start-column="6" selection-end-line="74" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/newtests/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="835" column="29" lean-forward="true" selection-start-line="835" selection-start-column="29" selection-end-line="835" selection-end-column="29" />
+        <state relative-caret-position="333">
+          <caret line="850" column="23" selection-start-line="850" selection-start-column="23" selection-end-line="850" selection-end-column="23" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -408,8 +408,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mtmflix.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="169" column="22" selection-start-line="169" selection-start-column="22" selection-end-line="169" selection-end-column="22" />
+        <state relative-caret-position="380">
+          <caret line="178" column="26" selection-start-line="178" selection-start-column="26" selection-end-line="178" selection-end-column="26" />
         </state>
       </provider>
     </entry>

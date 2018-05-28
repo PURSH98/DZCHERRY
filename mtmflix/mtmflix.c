@@ -175,6 +175,8 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 		if(strcmp(prev_genre,seriesGetGenre((Series)value))!=0){
 			genre_count=0;
 			prev_genre=seriesGetGenre((Series)value);
+		} else {
+		    genre_count++;
 		}
 		if(genre_count<seriesNum) {
 			fprintf(outputStream, "%s",

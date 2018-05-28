@@ -73,8 +73,10 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 		(MapDataElement)user)) {
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
+		//we won't get here
 		default : assert(false);
 	}
+	//we won't get here
 	assert(false);
 	return MTMFLIX_NULL_ARGUMENT;
 }

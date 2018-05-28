@@ -25,17 +25,11 @@ Series: s3
 Series: s4
 -User 1:
 Series 's4', Genre: ROMANCE.
-Series 's2', Genre: COMEDY.
 Series 's0', Genre: SCIENCE FICTION.
-Series 's1', Genre: SCIENCE FICTION.
 Series 's3', Genre: ROMANCE.
-Series 's5', Genre: HORROR.
 -User 2:
-Series 's4', Genre: ROMANCE.
-Series 's2', Genre: COMEDY.
-Series 's0', Genre: SCIENCE FICTION.
 Series 's1', Genre: SCIENCE FICTION.
-Series 's3', Genre: ROMANCE.
+Series 's0', Genre: SCIENCE FICTION.
 Series 's5', Genre: HORROR.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ TEST 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -68,34 +62,24 @@ Series: s0
 Series: s6
 -User 1:
 Series 's7', Genre: ROMANCE.
-Series 's1', Genre: SCIENCE FICTION.
 Series 's9', Genre: ROMANCE.
 Series 's4', Genre: ROMANCE.
-Series 's2', Genre: COMEDY.
 Series 's3', Genre: ROMANCE.
 Series 's8', Genre: ROMANCE.
 Series 's0', Genre: SCIENCE FICTION.
 Series 's6', Genre: ROMANCE.
-Series 's5', Genre: HORROR.
 -User 2:
 Series 's7', Genre: ROMANCE.
 Series 's1', Genre: SCIENCE FICTION.
-Series 's9', Genre: ROMANCE.
-Series 's4', Genre: ROMANCE.
-Series 's2', Genre: COMEDY.
-Series 's3', Genre: ROMANCE.
 Series 's8', Genre: ROMANCE.
 Series 's0', Genre: SCIENCE FICTION.
-Series 's6', Genre: ROMANCE.
 Series 's5', Genre: HORROR.
 -User 3:
 Series 's7', Genre: ROMANCE.
 Series 's1', Genre: SCIENCE FICTION.
 Series 's9', Genre: ROMANCE.
-Series 's4', Genre: ROMANCE.
 Series 's2', Genre: COMEDY.
 Series 's3', Genre: ROMANCE.
-Series 's8', Genre: ROMANCE.
 Series 's0', Genre: SCIENCE FICTION.
 Series 's6', Genre: ROMANCE.
 Series 's5', Genre: HORROR.
@@ -107,105 +91,59 @@ Series 's4', Genre: ROMANCE.
 Series 's2', Genre: COMEDY.
 Series 's3', Genre: ROMANCE.
 Series 's8', Genre: ROMANCE.
-Series 's0', Genre: SCIENCE FICTION.
-Series 's6', Genre: ROMANCE.
 Series 's5', Genre: HORROR.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ TEST 3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -User 2:
-Series 's10', Genre: COMEDY.
-Series 's26', Genre: HORROR.
-Series 's3', Genre: ROMANCE.
-Series 's0', Genre: ROMANCE.
-Series 's13', Genre: DRAMA.
-Series 's28', Genre: HORROR.
-Series 's5', Genre: HORROR.
+Series 's16', Genre: DOCUMENTARY.
+Series 's8', Genre: ROMANCE.
 Series 's21', Genre: DOCUMENTARY.
-Series 's20', Genre: HORROR.
-Series 's7', Genre: ROMANCE.
+Series 's10', Genre: COMEDY.
 Series 's23', Genre: DOCUMENTARY.
-Series 's19', Genre: COMEDY.
-Series 's9', Genre: ROMANCE.
-Series 's25', Genre: HORROR.
+Series 's0', Genre: ROMANCE.
+Series 's5', Genre: HORROR.
+Series 's15', Genre: DOCUMENTARY.
+Series 's27', Genre: HORROR.
+Series 's7', Genre: ROMANCE.
+Series 's29', Genre: HORROR.
 Series 's1', Genre: ROMANCE.
 Series 's12', Genre: COMEDY.
 Series 's4', Genre: ROMANCE.
-Series 's27', Genre: HORROR.
-Series 's2', Genre: COMEDY.
-Series 's17', Genre: DOCUMENTARY.
-Series 's16', Genre: DOCUMENTARY.
-Series 's29', Genre: HORROR.
-Series 's6', Genre: ROMANCE.
-Series 's22', Genre: DOCUMENTARY.
-Series 's15', Genre: DOCUMENTARY.
-Series 's14', Genre: DRAMA.
-Series 's8', Genre: ROMANCE.
 Series 's24', Genre: DOCUMENTARY.
-Series 's11', Genre: COMEDY.
+Series 's26', Genre: HORROR.
 -User 3:
-Series 's10', Genre: COMEDY.
-Series 's26', Genre: HORROR.
-Series 's3', Genre: ROMANCE.
-Series 's0', Genre: ROMANCE.
-Series 's13', Genre: DRAMA.
-Series 's28', Genre: HORROR.
-Series 's5', Genre: HORROR.
 Series 's21', Genre: DOCUMENTARY.
 Series 's20', Genre: HORROR.
-Series 's7', Genre: ROMANCE.
-Series 's23', Genre: DOCUMENTARY.
+Series 's10', Genre: COMEDY.
+Series 's3', Genre: ROMANCE.
+Series 's0', Genre: ROMANCE.
 Series 's19', Genre: COMEDY.
-Series 's9', Genre: ROMANCE.
+Series 's13', Genre: DRAMA.
 Series 's25', Genre: HORROR.
-Series 's1', Genre: ROMANCE.
-Series 's12', Genre: COMEDY.
-Series 's4', Genre: ROMANCE.
-Series 's27', Genre: HORROR.
-Series 's2', Genre: COMEDY.
-Series 's17', Genre: DOCUMENTARY.
-Series 's16', Genre: DOCUMENTARY.
-Series 's29', Genre: HORROR.
-Series 's6', Genre: ROMANCE.
-Series 's22', Genre: DOCUMENTARY.
+Series 's5', Genre: HORROR.
 Series 's15', Genre: DOCUMENTARY.
-Series 's14', Genre: DRAMA.
-Series 's8', Genre: ROMANCE.
+Series 's27', Genre: HORROR.
+Series 's7', Genre: ROMANCE.
+Series 's9', Genre: ROMANCE.
+Series 's22', Genre: DOCUMENTARY.
+Series 's1', Genre: ROMANCE.
+Series 's4', Genre: ROMANCE.
 Series 's24', Genre: DOCUMENTARY.
+Series 's2', Genre: COMEDY.
 Series 's11', Genre: COMEDY.
+Series 's14', Genre: DRAMA.
+Series 's6', Genre: ROMANCE.
 -User 4:
-Series 's10', Genre: COMEDY.
-Series 's26', Genre: HORROR.
-Series 's3', Genre: ROMANCE.
 Series 's0', Genre: ROMANCE.
-Series 's13', Genre: DRAMA.
+Series 's22', Genre: DOCUMENTARY.
+Series 's4', Genre: ROMANCE.
+Series 's24', Genre: DOCUMENTARY.
+Series 's6', Genre: ROMANCE.
+Series 's26', Genre: HORROR.
+-User 5:
+Series 's16', Genre: DOCUMENTARY.
+-User 6:
+Series 's16', Genre: DOCUMENTARY.
 Series 's28', Genre: HORROR.
-Series 's5', Genre: HORROR.
 Series 's21', Genre: DOCUMENTARY.
 Series 's20', Genre: HORROR.
-Series 's7', Genre: ROMANCE.
-Series 's23', Genre: DOCUMENTARY.
-Series 's19', Genre: COMEDY.
-Series 's9', Genre: ROMANCE.
-Series 's25', Genre: HORROR.
-Series 's1', Genre: ROMANCE.
-Series 's12', Genre: COMEDY.
-Series 's4', Genre: ROMANCE.
-Series 's27', Genre: HORROR.
-Series 's2', Genre: COMEDY.
-Series 's17', Genre: DOCUMENTARY.
-Series 's16', Genre: DOCUMENTARY.
-Series 's29', Genre: HORROR.
-Series 's6', Genre: ROMANCE.
-Series 's22', Genre: DOCUMENTARY.
-Series 's15', Genre: DOCUMENTARY.
-Series 's14', Genre: DRAMA.
-Series 's8', Genre: ROMANCE.
-Series 's24', Genre: DOCUMENTARY.
-Series 's11', Genre: COMEDY.
--User 5:
-Series 's10', Genre: COMEDY.
--User 6:
-Series 's10', Genre: COMEDY.
-Series 's26', Genre: HORROR.
-Series 's3', Genre: ROMANCE.
-Series 's0', Genre: ROMANCE.

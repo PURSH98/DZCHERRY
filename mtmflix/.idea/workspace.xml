@@ -26,8 +26,8 @@
       <file leaf-file-name="main.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/newtests/main.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="1132" selection-start-line="1132" selection-end-line="1132" />
+            <state relative-caret-position="241">
+              <caret line="1133" column="47" selection-start-line="1133" selection-start-column="47" selection-end-line="1133" selection-end-column="47" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -66,8 +66,8 @@
       <file leaf-file-name="mtmflix.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mtmflix.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-153">
-              <caret line="12" column="41" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+            <state relative-caret-position="384">
+              <caret line="353" column="62" selection-start-line="353" selection-start-column="62" selection-end-line="353" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -129,6 +129,8 @@
       <find>userAddFavSeries</find>
       <find>setT</find>
       <find>getrecommen</find>
+      <find>g_count</find>
+      <find>mtmFlixGetRecommendationsTest</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -216,12 +218,12 @@
       <option name="presentableId" value="Default" />
       <updated>1527451851071</updated>
       <workItem from="1527451854445" duration="4199000" />
-      <workItem from="1527500812444" duration="12755000" />
+      <workItem from="1527500812444" duration="13275000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16954000" />
+    <option name="totallyTimeSpent" value="17474000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -434,15 +436,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mtmflix.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="12" column="41" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+        <state relative-caret-position="384">
+          <caret line="353" column="62" selection-start-line="353" selection-start-column="62" selection-end-line="353" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/newtests/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="1132" selection-start-line="1132" selection-end-line="1132" />
+        <state relative-caret-position="241">
+          <caret line="1133" column="47" selection-start-line="1133" selection-start-column="47" selection-end-line="1133" selection-end-column="47" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

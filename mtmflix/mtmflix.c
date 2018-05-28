@@ -322,6 +322,12 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
 	if (mtmflix == NULL || username == NULL || outputStream == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
+	if (!mapContains(mtmflix->user, (MapKeyElement)username)) {
+		return MTMFLIX_USER_DOES_NOT_EXIST;
+	}
+	if (count < 0) {
+		return MTMFLIX_ILLEGAL_NUMBER;
+	}
 	if(count==0){
 		count=mapGetSize(mtmflix->series);
 	}
@@ -340,8 +346,8 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
 			return MTMFLIX_SUCCESS;
     	}
         Series series = mapGet(mtmflix->series, listGetKey(iterator));
-        const char* series_string = mtmPrintSeries((char *) listGetKey(iterator),
-         									seriesGetGenre(series));
+        const char* series_string = mtmPrintSeries((char *) 
+        	listGetKey(iterator), seriesGetGenre(series));
         fprintf(outputStream, "%s", series_string);
         i++;
     }

@@ -69,7 +69,8 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (user == NULL) {
 		return MTMFLIX_OUT_OF_MEMORY;
 	}
-	MapResult map_result = mapPut(mtmflix->users, (MapKeyElement)username, (MapDataElement)user);
+	MapResult map_result = mapPut(mtmflix->users, (MapKeyElement)username, 
+		(MapDataElement)user);
 	switch (map_result) {
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
@@ -352,7 +353,8 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
             continue;
     	}
         Series series = mapGet(mtmflix->series, listGetKey(iterator));
-        const char* series_string = mtmPrintSeries(series_name, seriesGetGenre(series));
+        const char* series_string = mtmPrintSeries(series_name, 
+        	seriesGetGenre(series));
         fprintf(outputStream, "%s", series_string);
         i++;
     }

@@ -122,8 +122,14 @@ MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name,
 	}
 	switch (mapPut(mtmflix->series, (MapKeyElement)name, 
 		(MapDataElement)series)) {
-		case MAP_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
-		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
+		case MAP_NULL_ARGUMENT : {
+		    seriesFree(series);
+		    return MTMFLIX_NULL_ARGUMENT;
+		}
+		case MAP_OUT_OF_MEMORY : {
+		    seriesFree(series);
+		    return MTMFLIX_OUT_OF_MEMORY;
+		}
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
 		assert(false);
 		default : return MTMFLIX_NULL_ARGUMENT;
@@ -189,6 +195,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 						seriesGetGenre((Series) value)));
 		}
 	}
+	listDestroy(series_list);
 	return MTMFLIX_SUCCESS;
 }
 
@@ -225,8 +232,10 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
         int age=userGetAge(user);
         fprintf(outputStream, "%s",
                 mtmPrintUser((char*)list_iter,age, friends,fav_series));
-        //free functions are needed here(probably)
+        listDestroy(friends);
+        listDestroy(fav_series);
     }
+    listDestroy(users_list);
     return MTMFLIX_SUCCESS;
 }
 

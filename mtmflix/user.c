@@ -63,12 +63,10 @@ MtmFlixResult userAddFavSeries(User user, const char* series_name) {
 		case SET_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case SET_ITEM_ALREADY_EXISTS : return MTMFLIX_SUCCESS;
 		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
-		//not supposed to happen
 		assert(false);
 		default: return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
-	//we shouldn't get here
 	return MTMFLIX_NULL_ARGUMENT;
 }
 
@@ -80,13 +78,11 @@ MtmFlixResult userDeleteFavSeries(User user, const char* series_name) {
 	switch (setRemove(user->fav_series, (SetElement)series_name)) {
 		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
 		case SET_SUCCESS: return MTMFLIX_SUCCESS;
-		//not supposed to happen
 		assert(false);
 		default: return MTMFLIX_NULL_ARGUMENT;
 	}
-	//not supposed to happen
 	assert(false);
-	return MTMFLIX_SUCCESS;
+	return MTMFLIX_NULL_ARGUMENT;
 }
 
 //given a user instance (user1), and a name of another user
@@ -96,15 +92,13 @@ MtmFlixResult userAddFriend(User user1, const char* username2) {
 	assert(user1 != NULL && username2 != NULL);
 	switch (setAdd(user1->friends, (SetElement)username2)) {
 		case SET_SUCCESS : return MTMFLIX_SUCCESS;
-		//not supposed to happen
 		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
 		case SET_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case SET_ITEM_ALREADY_EXISTS : return MTMFLIX_SUCCESS;
-		//not supposed to happen
-		case SET_ITEM_DOES_NOT_EXIST: return MTMFLIX_NULL_ARGUMENT;
+		assert(false);
+		default: return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
-	//we won't get here
 	return MTMFLIX_NULL_ARGUMENT;
 }
 

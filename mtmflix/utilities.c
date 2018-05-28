@@ -111,11 +111,13 @@ List mtmSetToList(Set set, ListResult* status){
         ListElement listElement = malloc(sizeof(ListElement));
         if (listElement == NULL) {
             *status = LIST_OUT_OF_MEMORY;
+            listDestroy(newList);
             return NULL;
         }
         listElement = setElement;
         if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
             *status = LIST_INVALID_CURRENT;
+            listDestroy(newList);
             return NULL;
         }
     }
@@ -139,11 +141,13 @@ List mapKeyToList(Map map, ListResult* status){
         ListElement listElement = malloc(sizeof(ListElement));
         if (listElement == NULL) {
             *status = LIST_OUT_OF_MEMORY;
+            listDestroy(newList);
             return NULL;
         }
         listElement = mapKeyElement;
         if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
             *status = LIST_INVALID_CURRENT;
+            listDestroy(newList);
             return NULL;
         }
     }

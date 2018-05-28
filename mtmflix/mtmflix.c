@@ -166,7 +166,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 	LIST_FOREACH(KeyValuePair,list_iter,series_list) {
 		void* key = (KeyValuePair)list_iter->key;
 		void* value = (KeyValuePair)list_iter->value;
-		if(strcmp(prev_genre,seriesGetGenre((Series)value))==0){
+		if(strcmp(prev_genre,seriesGetGenre((Series)value))!=0){
 			genre_count=0;
 			prev_genre=seriesGetGenre((Series)value);
 		}

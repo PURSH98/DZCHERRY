@@ -69,8 +69,8 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (user == NULL) {
 		return MTMFLIX_OUT_OF_MEMORY;
 	}
-	switch (mapPut(mtmflix->users, (MapKeyElement)username, 
-		(MapDataElement)user)) {
+	MapResult map_result = mapPut(mtmflix->users, (MapKeyElement)username, (MapDataElement)user);
+	switch (map_result) {
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
 		//we won't get here
@@ -190,11 +190,9 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
-    printf("\nReporting users...\n");
 	if(mtmflix==NULL || outputStream == NULL){
 		return MTMFLIX_NULL_ARGUMENT;
 	}
-	printf("We have %d users\n", mapGetSize(mtmflix->users));
 	if (mapGetSize(mtmflix->users)==0){
 		return MTMFLIX_NO_USERS;
 	}
@@ -245,7 +243,7 @@ MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username,
 		seriesGetMaxAge(mapGet(mtmflix->series, (MapKeyElement)seriesName))) {
 		return MTMFLIX_USER_NOT_IN_THE_RIGHT_AGE;
 	}
- 	switch (userAddFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), 
+ 	switch (userAddFavSeries(mapGet(mtmflix->users, (MapKeyElement)username),
  		seriesName)) {
  		case MTMFLIX_SUCCESS : return MTMFLIX_SUCCESS;
  		case MTMFLIX_OUT_OF_MEMORY : exit(0);
@@ -413,6 +411,6 @@ static int getSeriesRank(Series series, User user){
     return rank;
 }
 
-int main () {
-	return 0;
-}
+//int main () {
+//	return 0;
+//}

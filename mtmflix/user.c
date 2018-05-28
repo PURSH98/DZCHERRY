@@ -18,10 +18,8 @@ User userCreate(int age) {
 		return NULL;
 	}
 	user->age = age;
-	user->fav_series = setCreate((copySetElements)copyString, 
-		(freeSetElements)freeString, (compareSetElements)compareStrings);
-	user->friends = setCreate((copySetElements)copyString, 
-		(freeSetElements)freeString, (compareSetElements)compareStrings);
+	user->fav_series = setCreate((copySetElements)copyString, (freeSetElements)freeString, (compareSetElements)compareStrings);
+	user->friends = setCreate((copySetElements)copyString, (freeSetElements)freeString, (compareSetElements)compareStrings);
 	return user;
 }
 
@@ -30,7 +28,7 @@ User userCopy (User user) {
 	if (user == NULL) {
 		return NULL;
 	}
-	User new_user = malloc(sizeof(User));
+	User new_user = malloc(sizeof(*new_user));
 	if (new_user == NULL) {
 		return NULL;
 	}

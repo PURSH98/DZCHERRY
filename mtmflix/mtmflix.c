@@ -449,6 +449,6 @@ static int getSeriesRank(MtmFlix mtmFlix, Series series, const char* series_name
     return rank;
 }
 
-int main () {
-	return 0;
-}
+//int main () {
+//	return 0;
+//}

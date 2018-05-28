@@ -13,6 +13,9 @@ struct user_t {
 //creates a user instance given user's age
 //it will be used as a value in a key-value pair in a map of users
 User userCreate(int age) {
+	//age limits are already checked in the calling function
+	assert(age >= MTM_MIN_AGE);
+	assert(age <= MTM_MAX_AGE);
 	User user = malloc(sizeof(*user));
 	if (user == NULL) {
 		return NULL;

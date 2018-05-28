@@ -52,7 +52,6 @@ void mtmFlixDestroy(MtmFlix mtmflix) {
 	mtmflix = NULL;
 }
 
-//check if it suites PDF
 MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (mtmflix == NULL || username == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
@@ -63,7 +62,7 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (mapContains(mtmflix->users, (MapKeyElement) username)) {
 		return MTMFLIX_USERNAME_ALREADY_USED;
 	}
-	if (age < MTM_MIN_AGE || age > MTM_MAX_AGE) {
+	if (age <= MTM_MIN_AGE || age >= MTM_MAX_AGE) {
 		return MTMFLIX_ILLEGAL_AGE;
 	}
 	User user = userCreate(age);
@@ -244,11 +243,13 @@ MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username,
 		seriesGetMaxAge(mapGet(mtmflix->series, (MapKeyElement)seriesName))) {
 		return MTMFLIX_USER_NOT_IN_THE_RIGHT_AGE;
 	}
- 	switch userAddFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), 
- 		seriesName) {
+ 	switch (userAddFavSeries(mapGet(mtmflix->users, (MapKeyElement)username), 
+ 		seriesName)) {
  		case MTMFLIX_SUCCESS : return MTMFLIX_SUCCESS;
  		case MTMFLIX_OUT_OF_MEMORY : exit(0);
  		case MTMFLIX_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
+ 		//we won't get here
+ 		default : return MTMFLIX_NULL_ARGUMENT;
  	}
  	//we won't get here
  	assert(false);
@@ -257,8 +258,9 @@ MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username,
 
 MtmFlixResult mtmFlixSeriesLeave(MtmFlix mtmflix, const char* username, 
 	const char* seriesName) {
-	if (mtmflix == NULL || username == NULL || seriesName == NULL) {
-		return MTMFLIX_NULL_ARGUMENT;
+	if (mtmflix == NULL || username == NULL || seriesName == NULL || 
+		mtmflix->users == NULL) {
+		return MTMFLIX_NULL_ARGUMENT;//check
 	}
 	if (!mapContains(mtmflix->users, (MapKeyElement)username)) {
 		return MTMFLIX_USER_DOES_NOT_EXIST;

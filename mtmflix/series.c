@@ -16,7 +16,7 @@ struct series_t {
 
 Series seriesCreate (int episodesNum, Genre genre, int* ages, 
 	int episodesDuration) {
-	Series series = (Series)malloc(sizeof(Series));
+	Series series = (Series)malloc(sizeof(*series));
 	if (series == NULL) {
 		return NULL;
 	}

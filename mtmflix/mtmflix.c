@@ -46,6 +46,7 @@ void mtmFlixDestroy(MtmFlix mtmflix) {
 	mtmflix = NULL;
 }
 
+//check if it suites PDF
 MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (mtmflix == NULL || username == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
@@ -65,8 +66,8 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	}
 	switch (mapPut(mtmflix->users, (MapKeyElement)username, 
 		(MapDataElement)user)) {
-		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY; break;
-		case MAP_SUCCESS : return MTMFLIX_SUCCESS; break;
+		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
+		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
 		default : assert(false);
 	}
 	assert(false);
@@ -140,18 +141,27 @@ MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name) {
 
 MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, 
 	FILE* outputStream) {
+    if(mtmflix==NULL){
+        return MTMFLIX_NULL_ARGUMENT;
+    }
+    if(mapGetSize(mtmflix->series)==0){
+        return MTMFLIX_NO_SERIES;
+    }
 	ListResult list_result;
-	List series_node = mapToList(mtmflix->series, &list_result);
-	// TODO: handle status
-	// case (status) {
-	// }
-	listSort(series_node, seriesListCompare);
-	LIST_FOREACH(KeyValuePair,list_iter,series_node) {
+	List series_list = mapToList(mtmflix->series, &list_result);
+	switch (list_result){
+        case LIST_NULL_ARGUMENT:return MTMFLIX_NULL_ARGUMENT;
+        case LIST_OUT_OF_MEMORY:return MTMFLIX_OUT_OF_MEMORY;
+	}
+	if(seriesNum==0){
+	    seriesNum=mapGetSize(mtmflix->series);
+	}
+	listSort(series_list, seriesListCompare);
+	LIST_FOREACH(KeyValuePair,list_iter,series_list) {
 		void* key = (KeyValuePair)list_iter->key;
 		void* value = (KeyValuePair)list_iter->value;
-		const char* series_string=mtmPrintSeries((char*)key,
-								 seriesGetGenre((Series)value)); //check
-		fprintf(outputStream, "%s", series_string);
+		fprintf(outputStream, "%s",
+                mtmPrintSeries((char*)key, seriesGetGenre((Series)value)));
 	}
 	return MTMFLIX_SUCCESS;
 }

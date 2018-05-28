@@ -13,7 +13,7 @@ struct user_t {
 //creates a user instance given user's age
 //it will be used as a value in a key-value pair in a map of users
 User userCreate(int age) {
-	User user = malloc(sizeof(User));
+	User user = malloc(sizeof(*user));
 	if (user == NULL) {
 		return NULL;
 	}

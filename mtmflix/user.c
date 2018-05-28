@@ -13,6 +13,9 @@ struct user_t {
 //creates a user instance given user's age
 //it will be used as a value in a key-value pair in a map of users
 User userCreate(int age) {
+	//age limits are already checked in the calling function
+	assert(age >= MTM_MIN_AGE);
+	assert(age <= MTM_MAX_AGE);
 	User user = malloc(sizeof(*user));
 	if (user == NULL) {
 		return NULL;
@@ -25,7 +28,7 @@ User userCreate(int age) {
 	return user;
 }
 
-//creater a copy of a user instance, returns a new user
+//creates a copy of a user instance, returns a new user
 User userCopy (User user) {
 	if (user == NULL) {
 		return NULL;
@@ -42,7 +45,9 @@ User userCopy (User user) {
 
 //deletes a user
 void userFree(User user) {
+	setDestroy(user->fav_series);
 	user->fav_series = NULL;
+	setDestroy(user->fav_series);
 	user->friends = NULL;
 	free(user);
 	user = NULL;
@@ -52,18 +57,16 @@ void userFree(User user) {
 //adds the series to the list of the user's favorite series
 MtmFlixResult userAddFavSeries(User user, const char* series_name) {
 	//we check those arguments before passing them to the function
-	assert(user != NULL && series_name != NULL && user->fav_series != NULL);
+	assert(user != NULL && series_name != NULL);
 	switch (setAdd(user->fav_series, (SetElement)series_name)) {
 		case SET_SUCCESS : return MTMFLIX_SUCCESS;
-		//not supposed to happen
-		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
 		case SET_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case SET_ITEM_ALREADY_EXISTS : return MTMFLIX_SUCCESS;
-		//not supposed to happen
-		case SET_ITEM_DOES_NOT_EXIST: return MTMFLIX_NULL_ARGUMENT;
+		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
+		assert(false);
+		default: return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
-	//we won't get here
 	return MTMFLIX_NULL_ARGUMENT;
 }
 
@@ -71,9 +74,15 @@ MtmFlixResult userAddFavSeries(User user, const char* series_name) {
 //removes the series from the list of the user's favorite series
 MtmFlixResult userDeleteFavSeries(User user, const char* series_name) {
 	//we check those arguments before passing them to the function
-	assert(user != NULL && series_name != NULL && user->fav_series != NULL);
-	setRemove(user->fav_series, (SetElement)series_name);
-	return MTMFLIX_SUCCESS;
+	assert(user != NULL && series_name != NULL);
+	switch (setRemove(user->fav_series, (SetElement)series_name)) {
+		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
+		case SET_SUCCESS: return MTMFLIX_SUCCESS;
+		assert(false);
+		default: return MTMFLIX_NULL_ARGUMENT;
+	}
+	assert(false);
+	return MTMFLIX_NULL_ARGUMENT;
 }
 
 //given a user instance (user1), and a name of another user
@@ -83,15 +92,13 @@ MtmFlixResult userAddFriend(User user1, const char* username2) {
 	assert(user1 != NULL && username2 != NULL);
 	switch (setAdd(user1->friends, (SetElement)username2)) {
 		case SET_SUCCESS : return MTMFLIX_SUCCESS;
-		//not supposed to happen
 		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
 		case SET_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case SET_ITEM_ALREADY_EXISTS : return MTMFLIX_SUCCESS;
-		//not supposed to happen
-		case SET_ITEM_DOES_NOT_EXIST: return MTMFLIX_NULL_ARGUMENT;
+		assert(false);
+		default: return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
-	//we won't get here
 	return MTMFLIX_NULL_ARGUMENT;
 }
 

@@ -70,14 +70,14 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 	if (user == NULL) {
 		return MTMFLIX_OUT_OF_MEMORY;
 	}
-	MapResult map_result = mapPut(mtmflix->users, (MapKeyElement)username, (MapDataElement)user);
+	MapResult map_result = mapPut(mtmflix->users, (MapKeyElement)username, 
+		(MapDataElement)user);
 	switch (map_result) {
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
-		//we won't get here
-		default : assert(false);
+		assert(false);		
+		default : return MTMFLIX_NULL_ARGUMENT;
 	}
-	//we won't get here
 	assert(false);
 	return MTMFLIX_NULL_ARGUMENT;
 }
@@ -90,9 +90,11 @@ MtmFlixResult mtmFlixRemoveUser(MtmFlix mtmflix, const char* username) {
 		mtmFlixRemoveFriend(mtmflix, username1, username);
 	}
 	switch (mapRemove (mtmflix->users, (MapKeyElement)username)) {
+		case MAP_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
 		case MAP_ITEM_DOES_NOT_EXIST : return MTMFLIX_USER_DOES_NOT_EXIST;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
-		default : assert(false); //we're not supposed to get here
+		assert(false);
+		default :  return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
 	return MTMFLIX_NULL_ARGUMENT;
@@ -124,7 +126,8 @@ MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name,
 		case MAP_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
-		default : assert(false); //we're not supposed to get here
+		assert(false);
+		default : return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
 	return MTMFLIX_NULL_ARGUMENT;//we're not supposed to get here
@@ -144,10 +147,11 @@ MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name) {
 		case MAP_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
 		case MAP_ITEM_DOES_NOT_EXIST : return MTMFLIX_NO_SERIES;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
-		default : assert(false); //we're not supposed to get here
+		assert(false);
+		default : return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
-	return MTMFLIX_NULL_ARGUMENT;//we're not supposed to get here
+	return MTMFLIX_NULL_ARGUMENT;
 }
 
 MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum, 
@@ -433,6 +437,10 @@ static int rank_L_Count(MtmFlix mtmFlix, User user){
 //Counts the rank of the given series
 //for the given user using F, G, L numbers
 static int getSeriesRank(MtmFlix mtmFlix, Series series, const char* series_name, User user){
+    if(userGetAge(user)>seriesGetMaxAge(series)||
+            userGetAge(user)<seriesGetMinAge(series)){
+        return 0;
+    }
     int F=rank_F_Count(mtmFlix,series_name,user);
     int G=rank_G_Count(mtmFlix,series,user);
     int L=rank_L_Count(mtmFlix,user);
@@ -441,6 +449,6 @@ static int getSeriesRank(MtmFlix mtmFlix, Series series, const char* series_name
     return rank;
 }
 
-//int main () {
-//	return 0;
-//}
+int main () {
+	return 0;
+}

@@ -61,7 +61,7 @@ Series seriesCopy (Series series) {
 	Series new_series = seriesCreate(series->episodesNum, series->genre, 
 		series->ages, series->episodesDuration);
 	if (new_series == NULL) {
-		return NULL;
+		return NULL;//added for readability
 	}
 	return new_series;
 }
@@ -71,7 +71,7 @@ int compareSeriesByGenre(Series series_a, Series series_b) {
 	return strcmp(seriesGetGenre(series_a), seriesGetGenre(series_b));
 }
 
-//given a series instance returns its genre
+//given a series instance returns its genre as astring
 char* seriesGetGenre (Series series) {
 	if (series == NULL) {
 		return NULL;
@@ -87,7 +87,6 @@ char* seriesGetGenre (Series series) {
         case HORROR : return "HORROR";
 	}
 	// Unreachable
-	printf("Unreachable genre: %d\n", series->genre);
 	assert(false);
 	return NULL;
 }

@@ -322,7 +322,7 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
 	if (mtmflix == NULL || username == NULL || outputStream == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
-	if (!mapContains(mtmflix->user, (MapKeyElement)username)) {
+	if (!mapContains(mtmflix->users, (MapKeyElement)username)) {
 		return MTMFLIX_USER_DOES_NOT_EXIST;
 	}
 	if (count < 0) {

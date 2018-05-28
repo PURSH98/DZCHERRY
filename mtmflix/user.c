@@ -28,7 +28,7 @@ User userCopy (User user) {
 	if (user == NULL) {
 		return NULL;
 	}
-	User new_user = malloc(sizeof(User));
+	User new_user = malloc(sizeof(*new_user));
 	if (new_user == NULL) {
 		return NULL;
 	}

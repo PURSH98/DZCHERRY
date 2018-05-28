@@ -5,8 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/Users/macbook/tmp/mtm/mtmflix/mtmflix.c" "/Users/macbook/tmp/mtm/mtmflix/cmake-build-debug/CMakeFiles/mtmflix.dir/mtmflix.c.o"
+  "/Users/macbook/tmp/mtm/mtmflix/newtests/main.c" "/Users/macbook/tmp/mtm/mtmflix/cmake-build-debug/CMakeFiles/mtmflix.dir/newtests/main.c.o"
   "/Users/macbook/tmp/mtm/mtmflix/series.c" "/Users/macbook/tmp/mtm/mtmflix/cmake-build-debug/CMakeFiles/mtmflix.dir/series.c.o"
-  "/Users/macbook/tmp/mtm/mtmflix/tests/mtmFlixTestEx.c" "/Users/macbook/tmp/mtm/mtmflix/cmake-build-debug/CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o"
   "/Users/macbook/tmp/mtm/mtmflix/user.c" "/Users/macbook/tmp/mtm/mtmflix/cmake-build-debug/CMakeFiles/mtmflix.dir/user.c.o"
   "/Users/macbook/tmp/mtm/mtmflix/utilities.c" "/Users/macbook/tmp/mtm/mtmflix/cmake-build-debug/CMakeFiles/mtmflix.dir/utilities.c.o"
   )

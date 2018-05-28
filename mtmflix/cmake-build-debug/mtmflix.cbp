@@ -95,6 +95,15 @@
 		<Unit filename="/Users/macbook/tmp/mtm/mtmflix/mtmflix.h">
 			<Option target="mtmflix"/>
 		</Unit>
+		<Unit filename="/Users/macbook/tmp/mtm/mtmflix/newtests/main.c">
+			<Option target="mtmflix"/>
+		</Unit>
+		<Unit filename="/Users/macbook/tmp/mtm/mtmflix/newtests/test_utilities.h">
+			<Option target="mtmflix"/>
+		</Unit>
+		<Unit filename="/Users/macbook/tmp/mtm/mtmflix/newtests/test_utilities_2.h">
+			<Option target="mtmflix"/>
+		</Unit>
 		<Unit filename="/Users/macbook/tmp/mtm/mtmflix/series.c">
 			<Option target="mtmflix"/>
 		</Unit>
@@ -102,12 +111,6 @@
 			<Option target="mtmflix"/>
 		</Unit>
 		<Unit filename="/Users/macbook/tmp/mtm/mtmflix/set.h">
-			<Option target="mtmflix"/>
-		</Unit>
-		<Unit filename="/Users/macbook/tmp/mtm/mtmflix/tests/mtmFlixTestEx.c">
-			<Option target="mtmflix"/>
-		</Unit>
-		<Unit filename="/Users/macbook/tmp/mtm/mtmflix/tests/test_utilities.h">
 			<Option target="mtmflix"/>
 		</Unit>
 		<Unit filename="/Users/macbook/tmp/mtm/mtmflix/user.c">

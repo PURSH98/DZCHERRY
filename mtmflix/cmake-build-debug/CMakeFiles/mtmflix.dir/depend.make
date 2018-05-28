@@ -11,17 +11,19 @@ CMakeFiles/mtmflix.dir/mtmflix.c.o: ../set.h
 CMakeFiles/mtmflix.dir/mtmflix.c.o: ../user.h
 CMakeFiles/mtmflix.dir/mtmflix.c.o: ../utilities.h
 
+CMakeFiles/mtmflix.dir/newtests/main.c.o: ../list.h
+CMakeFiles/mtmflix.dir/newtests/main.c.o: ../mtm_ex3.h
+CMakeFiles/mtmflix.dir/newtests/main.c.o: ../mtmflix.h
+CMakeFiles/mtmflix.dir/newtests/main.c.o: ../newtests/main.c
+CMakeFiles/mtmflix.dir/newtests/main.c.o: ../newtests/test_utilities.h
+CMakeFiles/mtmflix.dir/newtests/main.c.o: ../newtests/test_utilities_2.h
+CMakeFiles/mtmflix.dir/newtests/main.c.o: ../set.h
+
 CMakeFiles/mtmflix.dir/series.c.o: ../list.h
 CMakeFiles/mtmflix.dir/series.c.o: ../mtm_ex3.h
 CMakeFiles/mtmflix.dir/series.c.o: ../mtmflix.h
 CMakeFiles/mtmflix.dir/series.c.o: ../series.c
 CMakeFiles/mtmflix.dir/series.c.o: ../series.h
-
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o: ../list.h
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o: ../mtm_ex3.h
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o: ../mtmflix.h
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o: ../tests/mtmFlixTestEx.c
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o: ../tests/test_utilities.h
 
 CMakeFiles/mtmflix.dir/user.c.o: ../list.h
 CMakeFiles/mtmflix.dir/user.c.o: ../map.h

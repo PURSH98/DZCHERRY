@@ -57,28 +57,28 @@ include CMakeFiles/mtmflix.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/mtmflix.dir/flags.make
 
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o: CMakeFiles/mtmflix.dir/flags.make
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o: ../tests/mtmFlixTestEx.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macbook/tmp/mtm/mtmflix/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o   -c /Users/macbook/tmp/mtm/mtmflix/tests/mtmFlixTestEx.c
+CMakeFiles/mtmflix.dir/newtests/main.c.o: CMakeFiles/mtmflix.dir/flags.make
+CMakeFiles/mtmflix.dir/newtests/main.c.o: ../newtests/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macbook/tmp/mtm/mtmflix/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/mtmflix.dir/newtests/main.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mtmflix.dir/newtests/main.c.o   -c /Users/macbook/tmp/mtm/mtmflix/newtests/main.c
 
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/macbook/tmp/mtm/mtmflix/tests/mtmFlixTestEx.c > CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.i
+CMakeFiles/mtmflix.dir/newtests/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mtmflix.dir/newtests/main.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/macbook/tmp/mtm/mtmflix/newtests/main.c > CMakeFiles/mtmflix.dir/newtests/main.c.i
 
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/macbook/tmp/mtm/mtmflix/tests/mtmFlixTestEx.c -o CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.s
+CMakeFiles/mtmflix.dir/newtests/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mtmflix.dir/newtests/main.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/macbook/tmp/mtm/mtmflix/newtests/main.c -o CMakeFiles/mtmflix.dir/newtests/main.c.s
 
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o.requires:
+CMakeFiles/mtmflix.dir/newtests/main.c.o.requires:
 
-.PHONY : CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o.requires
+.PHONY : CMakeFiles/mtmflix.dir/newtests/main.c.o.requires
 
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o.provides: CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o.requires
-	$(MAKE) -f CMakeFiles/mtmflix.dir/build.make CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o.provides.build
-.PHONY : CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o.provides
+CMakeFiles/mtmflix.dir/newtests/main.c.o.provides: CMakeFiles/mtmflix.dir/newtests/main.c.o.requires
+	$(MAKE) -f CMakeFiles/mtmflix.dir/build.make CMakeFiles/mtmflix.dir/newtests/main.c.o.provides.build
+.PHONY : CMakeFiles/mtmflix.dir/newtests/main.c.o.provides
 
-CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o.provides.build: CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o
+CMakeFiles/mtmflix.dir/newtests/main.c.o.provides.build: CMakeFiles/mtmflix.dir/newtests/main.c.o
 
 
 CMakeFiles/mtmflix.dir/mtmflix.c.o: CMakeFiles/mtmflix.dir/flags.make
@@ -179,7 +179,7 @@ CMakeFiles/mtmflix.dir/utilities.c.o.provides.build: CMakeFiles/mtmflix.dir/util
 
 # Object files for target mtmflix
 mtmflix_OBJECTS = \
-"CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o" \
+"CMakeFiles/mtmflix.dir/newtests/main.c.o" \
 "CMakeFiles/mtmflix.dir/mtmflix.c.o" \
 "CMakeFiles/mtmflix.dir/series.c.o" \
 "CMakeFiles/mtmflix.dir/user.c.o" \
@@ -188,7 +188,7 @@ mtmflix_OBJECTS = \
 # External object files for target mtmflix
 mtmflix_EXTERNAL_OBJECTS =
 
-mtmflix: CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o
+mtmflix: CMakeFiles/mtmflix.dir/newtests/main.c.o
 mtmflix: CMakeFiles/mtmflix.dir/mtmflix.c.o
 mtmflix: CMakeFiles/mtmflix.dir/series.c.o
 mtmflix: CMakeFiles/mtmflix.dir/user.c.o
@@ -205,7 +205,7 @@ CMakeFiles/mtmflix.dir/build: mtmflix
 
 .PHONY : CMakeFiles/mtmflix.dir/build
 
-CMakeFiles/mtmflix.dir/requires: CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o.requires
+CMakeFiles/mtmflix.dir/requires: CMakeFiles/mtmflix.dir/newtests/main.c.o.requires
 CMakeFiles/mtmflix.dir/requires: CMakeFiles/mtmflix.dir/mtmflix.c.o.requires
 CMakeFiles/mtmflix.dir/requires: CMakeFiles/mtmflix.dir/series.c.o.requires
 CMakeFiles/mtmflix.dir/requires: CMakeFiles/mtmflix.dir/user.c.o.requires

@@ -1,4 +1,7 @@
-//ifndef include
+#ifndef SERIES_H_
+#define SERIES_H_
+
+#include "mtm_ex3.h"
 
 typedef struct series_t* Series;
 
@@ -11,3 +14,5 @@ int compareSeriesByGenre(Series series_a, Series series_b);
 int seriesGetEpisodeDuration(Series series);
 int seriesGetMaxAge (Series series);
 int seriesGetMinAge (Series series);
+
+#endif /*SERIES_H_*/

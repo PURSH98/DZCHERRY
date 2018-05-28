@@ -1,4 +1,6 @@
-//ifndef include
+#ifndef USER_H_
+#define USER_H_
+
 #include "set.h"
 #include "series.h"
 
@@ -18,3 +20,5 @@ MtmFlixResult userAddFavSeries (User user, const char* series_name);
 Set userGetFriends(User user);
 int userGetAge(User user);
 Set userGetFavSeries(User user);
+
+#endif /*USER_H_*/

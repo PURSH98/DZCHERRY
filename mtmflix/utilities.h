@@ -1,8 +1,11 @@
-#include "map.h"
-#include "list.h"
-#include "set.h"
+#ifndef UTILITIES_H_
+#define UTILITIES_H_
 
 //https://moodle.technion.ac.il/mod/hsuforum/discuss.php?d=440
+
+#include "map.h"
+#include "set.h"
+#include "mtm_ex3.h"
 
 typedef struct key_val_pair_t {
   void* key;
@@ -23,3 +26,5 @@ List mapKeyToList(Map map, ListResult* status);
 void listPutValue(KeyValuePair listElement, void* value);
 void* listGetValue(KeyValuePair listElement);
 void* listGetKey(KeyValuePair listElement);
+
+#endif /*UTILITIES_H_*/

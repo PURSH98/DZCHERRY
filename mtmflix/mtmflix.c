@@ -178,7 +178,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
 	if(mtmflix==NULL){
-		return NULL;
+		return MTMFLIX_NULL_ARGUMENT;
 	}
 	if (mapGetSize(mtmflix->users)==0){
 		return MTMFLIX_NO_USERS;
@@ -375,9 +375,5 @@ static int getSeriesRank(Series series, User user){
     int L=rank_L_Count(user);
 	int rank=(int)((G*F)/(1.0+abs(seriesGetEpisodeDuration(series)-L)));
     return rank;
-}
-
-int main() {
-	return 0;
 }
 

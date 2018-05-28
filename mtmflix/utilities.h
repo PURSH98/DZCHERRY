@@ -10,6 +10,10 @@ typedef struct key_val_pair_t {
   void* value;
 }* KeyValuePair;
 
+KeyValuePair createKeyValuePair(void* key, void* value);
+KeyValuePair copyKeyValuePair(KeyValuePair key_value_pair);
+void freeKeyValuePair(KeyValuePair key_value_pair);
+
 const char* copyString(const char* str);
 void freeString(const char* str);
 int compareStrings(void * str_a, void * str_b);

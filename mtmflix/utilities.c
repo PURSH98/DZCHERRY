@@ -5,6 +5,7 @@
 #include "mtmflix.h"
 #include "utilities.h"
 #include "set.h"
+#define KEY_VALUE_SIZE 3
 
 //creates a const copy of a given string
 const char* copyString(const char* str) {
@@ -45,9 +46,19 @@ bool stringCheck(const char* string) {
 	return true;
 }
 
+KeyValuePair createKeyValuePair(void* key, void* value) {
+    KeyValuePair key_value_pair = malloc(sizeof(KeyValuePair));
+    if (key_value_pair == NULL) {
+        return NULL;
+    }
+    key_value_pair->key   = key;
+    key_value_pair->value = value;
+    return key_value_pair;
+}
+
 //Creates a copy of the element of the
 //specific type list, which stores key-value pairs
-ListElement copyKeyValuePair(ListElement keyValuePair) {
+KeyValuePair copyKeyValuePair(KeyValuePair keyValuePair) {
   assert(keyValuePair);
   KeyValuePair copy = malloc(sizeof(KeyValuePair));
   if (keyValuePair == NULL) {
@@ -59,7 +70,7 @@ ListElement copyKeyValuePair(ListElement keyValuePair) {
 }
 
 //frees memory allocated to a key-value pair
-void freeKeyValuePair(ListElement keyValuePair) {
+void freeKeyValuePair(KeyValuePair keyValuePair) {
   free(keyValuePair);
 }
 
@@ -71,13 +82,13 @@ List mapToList(Map map, ListResult* status) {
     *status = LIST_NULL_ARGUMENT;
     return NULL;
   }
-  List newList = listCreate(copyKeyValuePair, freeKeyValuePair);
+  List newList = listCreate((CopyListElement)copyKeyValuePair, (FreeListElement)freeKeyValuePair);
   int mapSize = mapGetSize(map);
   if (mapSize == 0) {
     return newList;
   }
   MAP_FOREACH(MapKeyElement, map_key, map) {
-    KeyValuePair listElement = malloc(sizeof(KeyValuePair));
+    KeyValuePair listElement = malloc(sizeof(KeyValuePair)*KEY_VALUE_SIZE);
     if (listElement == NULL) {
       *status = LIST_OUT_OF_MEMORY;
       listDestroy(newList);
@@ -157,6 +168,7 @@ List mapKeyToList(Map map, ListResult* status){
 //Puts value into the value field
 //of list element of the key-value type
 void listPutValue(KeyValuePair listElement, void* value){
+    printf("Putting %d\n", *(int*)value);
     if(listElement==NULL||value==NULL){
         return;
     }

@@ -85,7 +85,8 @@ List mapToList(Map map, ListResult* status) {
     *status = LIST_NULL_ARGUMENT;
     return NULL;
   }
-  List newList = listCreate((CopyListElement)copyKeyValuePair, (FreeListElement)freeKeyValuePair);
+  List newList = listCreate((CopyListElement)copyKeyValuePair, 
+    (FreeListElement)freeKeyValuePair);
   int mapSize = mapGetSize(map);
   if (mapSize == 0) {
     return newList;

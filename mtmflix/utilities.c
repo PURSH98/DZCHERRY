@@ -47,7 +47,8 @@ bool stringCheck(const char* string) {
 }
 
 KeyValuePair createKeyValuePair(void* key, void* value) {
-    KeyValuePair key_value_pair = malloc(sizeof(KeyValuePair));
+    KeyValuePair key_value_pair = malloc(sizeof(KeyValuePair)*
+            KEY_VALUE_SIZE);
     if (key_value_pair == NULL) {
         return NULL;
     }
@@ -60,9 +61,11 @@ KeyValuePair createKeyValuePair(void* key, void* value) {
 //specific type list, which stores key-value pairs
 KeyValuePair copyKeyValuePair(KeyValuePair keyValuePair) {
   assert(keyValuePair);
-  KeyValuePair copy = malloc(sizeof(KeyValuePair));
+  KeyValuePair copy = malloc(sizeof(KeyValuePair)*
+          KEY_VALUE_SIZE);
   if (keyValuePair == NULL) {
-    return NULL;
+      freeKeyValuePair(copy);
+      return NULL;
   }
   copy->key   = ((KeyValuePair) keyValuePair)->key;
   copy->value = ((KeyValuePair) keyValuePair)->value;

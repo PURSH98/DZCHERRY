@@ -9,11 +9,13 @@
 static int seriesListCompare(ListElement list_element_a, 
 	ListElement list_element_b);
 static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2);
-static int getSeriesRank(MtmFlix mtmFlix, Series series, 
+static int* getSeriesRank(MtmFlix mtmFlix, Series series,
 	const char* series_name, User user);
 static int rank_L_Count(MtmFlix mtmFlix, User user);
 static int rank_G_Count(MtmFlix mtmFlix, Series series,User user);
 static int rank_F_Count(MtmFlix mtmFlix, const char* series_name, User user);
+List getSeriesWithRanks(MtmFlix mtmFlix,Map series,CopyListElement copyKeyValuePair,
+                        FreeListElement freeKeyValuePair, User user);
 
 struct mtmFlix_t {
 	Map series;     // keys: string; values: Series
@@ -347,21 +349,10 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
 	if(count==0){
 		count=mapGetSize(mtmflix->series);
 	}
-    ListResult listResult;
-    List series_list=mapToList(mtmflix->series,&listResult);
-    List series_with_ranks=listCreate((CopyListElement)copyKeyValuePair, 
-    	(FreeListElement)freeKeyValuePair);
+    //ListResult listResult;
 	User user=mapGet(mtmflix->users,(char*)username);
-	LIST_FOREACH(KeyValuePair,iterator,series_list){
-	    char* series_name = (char*)listGetKey(iterator);
-	    Series series = (Series)mapGet(mtmflix->series, 
-	    	(MapKeyElement)series_name);
-        int* series_rank = malloc(sizeof(int));
-		*series_rank = getSeriesRank(mtmflix, series, series_name, user);
-		KeyValuePair series_w_rank = createKeyValuePair(series_name,
-			series_rank);
-		listInsertLast(series_with_ranks, (ListElement)series_w_rank);
-	}
+	List series_with_ranks=getSeriesWithRanks(mtmflix,mtmflix->series,(CopyListElement)copyKeyValuePair,
+                                                (FreeListElement)freeKeyValuePair, user);
 	listSort(series_with_ranks, (CompareListElements)seriesRankCompare);
 	int i=0;
     LIST_FOREACH(KeyValuePair,iterator,series_with_ranks) {
@@ -386,8 +377,20 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
         }
     }
     listDestroy(series_with_ranks);
-    listDestroy(series_list);
     return MTMFLIX_SUCCESS;
+}
+
+List getSeriesWithRanks(MtmFlix mtmFlix,Map series,CopyListElement copyKeyValuePair,
+                        FreeListElement freeKeyValuePair, User user){
+    List ranked_list=listCreate(copyKeyValuePair,freeKeyValuePair);
+    MAP_FOREACH(MapKeyElement,map_iter,series){
+        int* cur_rank = getSeriesRank(mtmFlix,
+                mapGet(series,map_iter),map_iter,user);
+        char* copyKey=malloc(sizeof(*copyKey)*strlen((char*)map_iter));
+        KeyValuePair new_elem = createKeyValuePair((void*)copyKey,(void*)cur_rank);
+        listInsertLast(ranked_list,(ListElement)new_elem);
+    }
+    return ranked_list;
 }
 
 //Compares ranks of two series
@@ -450,7 +453,7 @@ static int rank_L_Count(MtmFlix mtmFlix, User user){
 
 //Counts the rank of the given series
 //for the given user using F, G, L numbers
-static int getSeriesRank(MtmFlix mtmFlix, Series series, 
+static int* getSeriesRank(MtmFlix mtmFlix, Series series,
 	const char* series_name, User user){
     if(userGetAge(user)>seriesGetMaxAge(series)||
             userGetAge(user)<seriesGetMinAge(series)){
@@ -459,8 +462,9 @@ static int getSeriesRank(MtmFlix mtmFlix, Series series,
     int F=rank_F_Count(mtmFlix,series_name,user);
     int G=rank_G_Count(mtmFlix,series,user);
     int L=rank_L_Count(mtmFlix,user);
-	int rank=round( (G*F) / (1.0 + abs(seriesGetEpisodeDuration(series)-L)) );
-	printf("\n%s: F: %d, G: %d, L: %d, rank: %d\n", series_name, F, G, L, rank);
+    int* rank=malloc(sizeof(*rank));
+	*rank=round( (G*F) / (1.0 + abs(seriesGetEpisodeDuration(series)-L)) );
+	printf("\n%s: F: %d, G: %d, L: %d, rank: %d\n", series_name, F, G, L, *rank);
     return rank;
 }
 

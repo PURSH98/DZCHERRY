@@ -33,6 +33,8 @@ User userCopy (User user) {
 	}
 	User new_user = malloc(sizeof(User));
 	new_user->age = user->age;
+	new_user->fav_series = user->fav_series;
+	new_user->friends = user->friends;
 	if (new_user == NULL) {
 		return NULL;
 	}
@@ -67,19 +69,19 @@ MtmFlixResult userDeleteFavSeries(User user, const char* series_name) {
 
 //given a user instance (user1), and a name of another user
 //adds the second user to the first user's friend list
-MtmFlixResult userAddFriend(User user1, const char* username) {
+MtmFlixResult userAddFriend(User user1, const char* username2) {
 	//we check those arguments before passing them to the function
-	assert(user1 != NULL && username != NULL);
-	setAdd(user1->friends, (SetElement)username);
+	assert(user1 != NULL && username2 != NULL);
+	setAdd(user1->friends, (SetElement)username2);
 	return MTMFLIX_SUCCESS;
 }
 
 //given a user instance (user1), and a name of another user,
 //deletes the second user from the first user's friend list
-MtmFlixResult userRemoveFriend(User user1, const char* username) {
+MtmFlixResult userRemoveFriend(User user1, const char* username2) {
 	//we check those arguments before passing them to the function
-	assert(user1 != NULL && username != NULL);
-	setRemove(user1->friends, (SetElement)username);
+	assert(user1 != NULL && username2 != NULL);
+	setRemove(user1->friends, (SetElement)username2);
 	return MTMFLIX_SUCCESS;
 }
 

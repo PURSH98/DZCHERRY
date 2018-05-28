@@ -77,9 +77,6 @@ MtmFlixResult userAddFriend(User user1, const char* username) {
 //deletes the second user from the first user's friend list
 MtmFlixResult userRemoveFriend(User user1, const char* username) {
 	//we check those arguments before passing them to the function
-	if(user1==NULL){
-		return MTMFLIX_NULL_ARGUMENT;
-	}
 	assert(user1 != NULL && username != NULL);
 	setRemove(user1->friends, (SetElement)username);
 	return MTMFLIX_SUCCESS;

@@ -319,7 +319,8 @@ static int seriesListCompare(ListElement list_element_a,
 
 MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username, 
 	int count, FILE* outputStream){
-	if (mtmflix == NULL || username == NULL || outputStream == NULL) {
+	if (mtmflix == NULL || username == NULL || outputStream == NULL ||
+		mtmflix->users == NULL) {
 		return MTMFLIX_NULL_ARGUMENT;
 	}
 	if (!mapContains(mtmflix->users, (MapKeyElement)username)) {

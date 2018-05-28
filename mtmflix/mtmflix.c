@@ -167,7 +167,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 	    seriesNum=mapGetSize(mtmflix->series);
 	}
 	listSort(series_list, seriesListCompare);
-	char* prev_genre=NULL;
+	char* prev_genre="";
 	int genre_count=0;
 	LIST_FOREACH(KeyValuePair,list_iter,series_list) {
 		void* key = (KeyValuePair)list_iter->key;
@@ -401,6 +401,6 @@ static int getSeriesRank(Series series, User user){
     return rank;
 }
 
-int main () {
-	return 0;
-}
+//int main () {
+//	return 0;
+//}

@@ -121,7 +121,7 @@ List mtmSetToList(Set set, ListResult* status){
     if (setSize == 0) {
         return newList;
     }
-    SET_FOREACH(ListElement, setElement, set) {
+    SET_FOREACH(SetElement, setElement, set) {
         ListElement listElement = malloc(sizeof(ListElement));
         if (listElement == NULL) {
             *status = LIST_OUT_OF_MEMORY;

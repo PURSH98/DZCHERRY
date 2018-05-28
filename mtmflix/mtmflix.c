@@ -4,6 +4,7 @@
 #include "utilities.h"
 #include "user.h"
 #include "assert.h"
+#include "math.h"
 
 static int seriesListCompare(ListElement list_element_a, 
 	ListElement list_element_b);
@@ -123,8 +124,14 @@ MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name,
 	}
 	switch (mapPut(mtmflix->series, (MapKeyElement)name, 
 		(MapDataElement)series)) {
-		case MAP_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
-		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
+		case MAP_NULL_ARGUMENT : {
+		    seriesFree(series);
+		    return MTMFLIX_NULL_ARGUMENT;
+		}
+		case MAP_OUT_OF_MEMORY : {
+		    seriesFree(series);
+		    return MTMFLIX_OUT_OF_MEMORY;
+		}
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
 		assert(false);
 		default : return MTMFLIX_NULL_ARGUMENT;
@@ -190,6 +197,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 						seriesGetGenre((Series) value)));
 		}
 	}
+	listDestroy(series_list);
 	return MTMFLIX_SUCCESS;
 }
 
@@ -226,8 +234,10 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
         int age=userGetAge(user);
         fprintf(outputStream, "%s",
                 mtmPrintUser((char*)list_iter,age, friends,fav_series));
-        //free functions are needed here(probably)
+        listDestroy(friends);
+        listDestroy(fav_series);
     }
+    listDestroy(users_list);
     return MTMFLIX_SUCCESS;
 }
 
@@ -348,7 +358,7 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
 	    	(MapKeyElement)series_name);
         int* series_rank = malloc(sizeof(int));
 		*series_rank = getSeriesRank(mtmflix, series, series_name, user);
-		KeyValuePair series_w_rank = createKeyValuePair(series_name, 
+		KeyValuePair series_w_rank = createKeyValuePair(series_name,
 			series_rank);
 		listInsertLast(series_with_ranks, (ListElement)series_w_rank);
 	}
@@ -357,6 +367,7 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
     LIST_FOREACH(KeyValuePair,iterator,series_with_ranks) {
         char* name = (char*)listGetKey(iterator);
         int rank = *(int*)listGetValue(iterator);
+        printf("\n%s: %d\n", name, rank);
         Series series = (Series)mapGet(mtmflix->series, (MapKeyElement)name);
         if (rank > 0 && seriesGetMaxAge(series) >= userGetAge(user) && 
         	seriesGetMinAge(series) <= userGetAge(user)) {
@@ -383,7 +394,7 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
 //Ranks of series are assigned to the
 //value field of series KeyValuePair
 static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2){
-    if(series_1 == NULL || series_2 == NULL){
+    if(series_1 == NULL || series_2 == NULL) {
         return 0;
     }
     int rank_series_1=*(int*)listGetValue(series_1);
@@ -447,7 +458,12 @@ static int getSeriesRank(MtmFlix mtmFlix, Series series,
     }
     int F=rank_F_Count(mtmFlix,series_name,user);
     int G=rank_G_Count(mtmFlix,series,user);
-    int L=rank_L_Count(mtmFlix, user);
-	int rank=(int)( (G*F) /(1.0+abs(seriesGetEpisodeDuration(series)-L)));
+    int L=rank_L_Count(mtmFlix,user);
+	int rank=round( (G*F) / (1.0 + abs(seriesGetEpisodeDuration(series)-L)) );
+	printf("\n%s: F: %d, G: %d, L: %d, rank: %d\n", series_name, F, G, L, rank);
     return rank;
 }
+
+//int main () {
+//	return 0;
+//}

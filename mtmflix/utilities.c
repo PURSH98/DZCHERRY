@@ -76,14 +76,14 @@ List mapToList(Map map, ListResult* status) {
   if (mapSize == 0) {
     return newList;
   }
-  MAP_FOREACH(KeyValuePair, keyValuePair, map) {
+  MAP_FOREACH(MapKeyElement, map_key, map) {
     KeyValuePair listElement = malloc(sizeof(KeyValuePair));
     if (listElement == NULL) {
       *status = LIST_OUT_OF_MEMORY;
       return NULL;
     }
-    listElement->key   = keyValuePair->key;
-    listElement->value = mapGet(map, keyValuePair->key);
+    listElement->key   = map_key;
+    listElement->value = mapGet(map, map_key);
     if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
       *status = LIST_INVALID_CURRENT;
       return NULL;
@@ -133,7 +133,7 @@ List mapKeyToList(Map map, ListResult* status){
     if (mapSize == 0) {
         return newList;
     }
-    MAP_FOREACH(ListElement, mapKeyElement, map) {
+    MAP_FOREACH(MapKeyElement, mapKeyElement, map) {
         ListElement listElement = malloc(sizeof(ListElement));
         if (listElement == NULL) {
             *status = LIST_OUT_OF_MEMORY;

@@ -88,30 +88,26 @@ char* seriesGetGenre (Series series) {
 
 //given a series instance returns episode duration
 int seriesGetEpisodeDuration(Series series){
-    if(series==NULL){
-        return 0;
-    }
+    assert (series != NULL); //we check this before calling the function
     return series->episodesDuration;
 }
 
 //given a series instance returns the minimal age to watch the series
+//when there are no age restrictions, returns MTM_MIN_AGE
 int seriesGetMinAge (Series series) {
-	if (series == NULL) {
-		return 0;
-	}
+	assert (series != NULL); //we check this before calling the function
 	if (series->ages == NULL) {
-		return MTM_MIN_AGE; //check
+		return MTM_MIN_AGE;
 	}
 	return series->ages[0];
 }
 
 //given a series instance returns the maximal age to watch the series
+//when there are no age restrictions, returns MTM_MAX_AGE
 int seriesGetMaxAge (Series series) {
-	if (series == NULL) {
-		return 0;
-	}
+	assert (series != NULL); //we check this before calling the function
 	if (series->ages == NULL) {
-		return MTM_MAX_AGE; //check
+		return MTM_MAX_AGE;
 	}
 	return series->ages[1];
 }

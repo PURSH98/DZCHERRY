@@ -83,6 +83,7 @@ MtmFlixResult userRemoveFriend(User user1, const char* username) {
 }
 
 //given a user instance, returns the user's favorite series
+//returns NULL when given a NULL argument
 Set userGetFavSeries(User user){
     if(user==NULL){
         return NULL;
@@ -91,6 +92,7 @@ Set userGetFavSeries(User user){
 }
 
 //given a user instance, returns the user's age
+//returns NULL when given a NULL argument
 int userGetAge(User user){
     if(user==NULL){
         return 0;
@@ -99,6 +101,7 @@ int userGetAge(User user){
 }
 
 //given a user instance, returns the user's friends
+//returns NULL when given a NULL argument
 Set userGetFriends(User user){
     if(user==NULL){
         return NULL;

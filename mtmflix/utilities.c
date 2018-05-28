@@ -64,7 +64,7 @@ void freeKeyValuePair(ListElement keyValuePair) {
 }
 
 //Creates a list based on the given map
-//List does store elements as key-value pairs
+//List stores elements as key-value pairs
 List mapToList(Map map, ListResult* status) {
   *status = LIST_SUCCESS;
   if (map == NULL) {
@@ -92,7 +92,7 @@ List mapToList(Map map, ListResult* status) {
   return newList;
 }
 
-//Creates a list based on the give set
+//Creates a list based on the given set
 List mtmSetToList(Set set, ListResult* status){
     *status=LIST_SUCCESS;
     if (set == NULL) {

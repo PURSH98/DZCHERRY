@@ -347,7 +347,8 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
 			return MTMFLIX_SUCCESS;
     	}
     	char* series_name = listGetKey(iterator);
-    	if (setIsIn(userGetFavSeries(user), series_name)) {
+    	if (setIsIn(userGetFavSeries(user), series_name)||
+                *(int*)listGetValue(iterator)==0) {
             continue;
     	}
         Series series = mapGet(mtmflix->series, listGetKey(iterator));
@@ -417,6 +418,10 @@ static int rank_L_Count(User user){
 //Counts the rank of the given series
 //for the given user using F, G, L numbers
 static int getSeriesRank(MtmFlix mtmFlix, Series series, User user){
+    if(userGetAge(user)<seriesGetMinAge(series)||
+            userGetAge(user)>seriesGetMaxAge(series)){
+        return 0;
+    }
     int F=rank_F_Count(series,user);
     int G=rank_G_Count(mtmFlix, series,user);
     int L=rank_L_Count(user);

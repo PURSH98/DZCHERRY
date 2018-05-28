@@ -80,12 +80,14 @@ List mapToList(Map map, ListResult* status) {
     KeyValuePair listElement = malloc(sizeof(KeyValuePair));
     if (listElement == NULL) {
       *status = LIST_OUT_OF_MEMORY;
+      listDestroy(newList);
       return NULL;
     }
     listElement->key   = map_key;
     listElement->value = mapGet(map, map_key);
     if (listInsertLast(newList, listElement) != LIST_SUCCESS) {
       *status = LIST_INVALID_CURRENT;
+      listDestroy(newList);
       return NULL;
     }
   }

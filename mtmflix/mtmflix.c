@@ -4,7 +4,6 @@
 #include "utilities.h"
 #include "user.h"
 #include "assert.h"
-#include "math.h"
 
 static int seriesListCompare(ListElement list_element_a, 
 	ListElement list_element_b);
@@ -467,6 +466,6 @@ static int getSeriesRank(MtmFlix mtmFlix, Series series,
     int F=rank_F_Count(mtmFlix,series_name,user);
     int G=rank_G_Count(mtmFlix,series,user);
     int L=rank_L_Count(mtmFlix,user);
-	int rank=round( (G*F) / (1.0 + abs(seriesGetEpisodeDuration(series)-L)) );
+	int rank=(int)( (G*F) / (1.0 + abs(seriesGetEpisodeDuration(series)-L)) );
     return rank;
 }

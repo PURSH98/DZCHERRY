@@ -246,7 +246,7 @@ MtmFlixResult mtmFlixSeriesJoin(MtmFlix mtmflix, const char* username,
  	switch (userAddFavSeries(mapGet(mtmflix->users, (MapKeyElement)username),
  		seriesName)) {
  		case MTMFLIX_SUCCESS : return MTMFLIX_SUCCESS;
- 		case MTMFLIX_OUT_OF_MEMORY : exit(0);
+ 		case MTMFLIX_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
  		case MTMFLIX_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
  		//we won't get here
  		default : return MTMFLIX_NULL_ARGUMENT;

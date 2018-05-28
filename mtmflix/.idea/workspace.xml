@@ -44,7 +44,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utilities.c" pinned="false" current-in-tab="true">
+      <file leaf-file-name="utilities.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utilities.c">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="160">
@@ -90,11 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.c" pinned="false" current-in-tab="false">
+      <file leaf-file-name="user.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/user.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
+            <state relative-caret-position="224">
+              <caret line="21" column="59" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -102,8 +102,8 @@
       <file leaf-file-name="set.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/set.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="163" column="16" selection-start-line="163" selection-start-column="10" selection-end-line="163" selection-end-column="16" />
+            <state relative-caret-position="2457">
+              <caret line="165" column="3" lean-forward="true" selection-start-line="165" selection-start-column="3" selection-end-line="165" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -125,9 +125,9 @@
       <find>RUN_T</find>
       <find>getfav</find>
       <find>mtmFlixRemoveSeriesTest</find>
+      <find>userAddFavSeries</find>
       <find>setT</find>
       <find>setAdd</find>
-      <find>userAddFavSeries</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -183,7 +183,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -213,12 +213,12 @@
       <option name="presentableId" value="Default" />
       <updated>1527451851071</updated>
       <workItem from="1527451854445" duration="4199000" />
-      <workItem from="1527500812444" duration="7561000" />
+      <workItem from="1527500812444" duration="7776000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11760000" />
+    <option name="totallyTimeSpent" value="11975000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -398,20 +398,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/set.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="163" column="16" selection-start-line="163" selection-start-column="10" selection-end-line="163" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utilities.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -419,6 +405,20 @@
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/set.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2457">
+          <caret line="165" column="3" lean-forward="true" selection-start-line="165" selection-start-column="3" selection-end-line="165" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="21" column="59" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
         </state>
       </provider>
     </entry>

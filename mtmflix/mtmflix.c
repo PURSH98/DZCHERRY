@@ -430,6 +430,10 @@ static int rank_L_Count(MtmFlix mtmFlix, User user){
 //Counts the rank of the given series
 //for the given user using F, G, L numbers
 static int getSeriesRank(MtmFlix mtmFlix, Series series, const char* series_name, User user){
+    if(userGetAge(user)>seriesGetMaxAge(series)||
+            userGetAge(user)<seriesGetMinAge(series)){
+        return 0;
+    }
     int F=rank_F_Count(mtmFlix,series_name,user);
     int G=rank_G_Count(mtmFlix,series,user);
     int L=rank_L_Count(mtmFlix, user);

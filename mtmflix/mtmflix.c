@@ -9,7 +9,8 @@
 static int seriesListCompare(ListElement list_element_a, 
 	ListElement list_element_b);
 static int seriesRankCompare(KeyValuePair series_1, KeyValuePair series_2);
-static int getSeriesRank(MtmFlix mtmFlix, Series series, const char* series_name, User user);
+static int getSeriesRank(MtmFlix mtmFlix, Series series, 
+	const char* series_name, User user);
 static int rank_L_Count(MtmFlix mtmFlix, User user);
 static int rank_G_Count(MtmFlix mtmFlix, Series series,User user);
 static int rank_F_Count(MtmFlix mtmFlix, const char* series_name, User user);
@@ -123,8 +124,14 @@ MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name,
 	}
 	switch (mapPut(mtmflix->series, (MapKeyElement)name, 
 		(MapDataElement)series)) {
-		case MAP_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
-		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
+		case MAP_NULL_ARGUMENT : {
+		    seriesFree(series);
+		    return MTMFLIX_NULL_ARGUMENT;
+		}
+		case MAP_OUT_OF_MEMORY : {
+		    seriesFree(series);
+		    return MTMFLIX_OUT_OF_MEMORY;
+		}
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
 		assert(false);
 		default : return MTMFLIX_NULL_ARGUMENT;
@@ -190,6 +197,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 						seriesGetGenre((Series) value)));
 		}
 	}
+	listDestroy(series_list);
 	return MTMFLIX_SUCCESS;
 }
 
@@ -226,8 +234,10 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
         int age=userGetAge(user);
         fprintf(outputStream, "%s",
                 mtmPrintUser((char*)list_iter,age, friends,fav_series));
-        //free functions are needed here(probably)
+        listDestroy(friends);
+        listDestroy(fav_series);
     }
+    listDestroy(users_list);
     return MTMFLIX_SUCCESS;
 }
 
@@ -339,15 +349,17 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
 	}
     ListResult listResult;
     List series_list=mapToList(mtmflix->series,&listResult);
-    List series_with_ranks=listCreate((CopyListElement)copyKeyValuePair, (FreeListElement)freeKeyValuePair);
+    List series_with_ranks=listCreate((CopyListElement)copyKeyValuePair, 
+    	(FreeListElement)freeKeyValuePair);
 	User user=mapGet(mtmflix->users,(char*)username);
 	LIST_FOREACH(KeyValuePair,iterator,series_list){
 	    char* series_name = (char*)listGetKey(iterator);
-	    Series series = (Series)mapGet(mtmflix->series, (MapKeyElement)series_name);
+	    Series series = (Series)mapGet(mtmflix->series, 
+	    	(MapKeyElement)series_name);
         int* series_rank = malloc(sizeof(int));
 		*series_rank = getSeriesRank(mtmflix, series, series_name, user);
-        printf("\n%s: %d", series_name, *series_rank);
-        KeyValuePair series_w_rank = createKeyValuePair(series_name, series_rank);
+		KeyValuePair series_w_rank = createKeyValuePair(series_name,
+			series_rank);
 		listInsertLast(series_with_ranks, (ListElement)series_w_rank);
 	}
 	listSort(series_with_ranks, (CompareListElements)seriesRankCompare);
@@ -357,7 +369,8 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
         int rank = *(int*)listGetValue(iterator);
         printf("\n%s: %d\n", name, rank);
         Series series = (Series)mapGet(mtmflix->series, (MapKeyElement)name);
-        if (rank > 0 && seriesGetMaxAge(series) >= userGetAge(user) && seriesGetMinAge(series) <= userGetAge(user)) {
+        if (rank > 0 && seriesGetMaxAge(series) >= userGetAge(user) && 
+        	seriesGetMinAge(series) <= userGetAge(user)) {
     	    if(i>=count){
 			    return MTMFLIX_SUCCESS;
         	}
@@ -366,7 +379,8 @@ MtmFlixResult mtmFlixGetRecommendations(MtmFlix mtmflix, const char* username,
         	    continue;
         	}
         	Series series = mapGet(mtmflix->series, listGetKey(iterator));
-        	const char* series_string = mtmPrintSeries(series_name, seriesGetGenre(series));
+        	const char* series_string = mtmPrintSeries(series_name, 
+        		seriesGetGenre(series));
         	fprintf(outputStream, "%s", series_string);
         	i++;
         }
@@ -436,13 +450,15 @@ static int rank_L_Count(MtmFlix mtmFlix, User user){
 
 //Counts the rank of the given series
 //for the given user using F, G, L numbers
-static int getSeriesRank(MtmFlix mtmFlix, Series series, const char* series_name, User user){
+static int getSeriesRank(MtmFlix mtmFlix, Series series, 
+	const char* series_name, User user){
     if(userGetAge(user)>seriesGetMaxAge(series)||
             userGetAge(user)<seriesGetMinAge(series)){
         return 0;
     }
     int F=rank_F_Count(mtmFlix,series_name,user);
     int G=rank_G_Count(mtmFlix,series,user);
+<<<<<<< HEAD
     int L=rank_L_Count(mtmFlix,user);
 	int rank=round( (G*F) / (1.0 + abs(seriesGetEpisodeDuration(series)-L)) );
 	printf("\n%s: F: %d, G: %d, L: %d, rank: %d\n", series_name, F, G, L, rank);
@@ -452,3 +468,9 @@ static int getSeriesRank(MtmFlix mtmFlix, Series series, const char* series_name
 //int main () {
 //	return 0;
 //}
+=======
+    int L=rank_L_Count(mtmFlix, user);
+	int rank=(int)( (G*F) /(1.0+abs(seriesGetEpisodeDuration(series)-L)));
+    return rank;
+}
+>>>>>>> a83a1e761248f928aab77c1a7b41e07133f4b519

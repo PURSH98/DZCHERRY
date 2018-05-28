@@ -31,12 +31,12 @@ User userCopy (User user) {
 		return NULL;
 	}
 	User new_user = malloc(sizeof(User));
-	new_user->age = user->age;
-	new_user->fav_series = user->fav_series;
-	new_user->friends = user->friends;
 	if (new_user == NULL) {
 		return NULL;
 	}
+	new_user->age = user->age;
+	new_user->fav_series = user->fav_series;
+	new_user->friends = user->friends;
 	return new_user;
 }
 

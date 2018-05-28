@@ -150,33 +150,6 @@ mtmflix.c.s:
 	$(MAKE) -f CMakeFiles/mtmflix.dir/build.make CMakeFiles/mtmflix.dir/mtmflix.c.s
 .PHONY : mtmflix.c.s
 
-newtests/main.o: newtests/main.c.o
-
-.PHONY : newtests/main.o
-
-# target to build an object file
-newtests/main.c.o:
-	$(MAKE) -f CMakeFiles/mtmflix.dir/build.make CMakeFiles/mtmflix.dir/newtests/main.c.o
-.PHONY : newtests/main.c.o
-
-newtests/main.i: newtests/main.c.i
-
-.PHONY : newtests/main.i
-
-# target to preprocess a source file
-newtests/main.c.i:
-	$(MAKE) -f CMakeFiles/mtmflix.dir/build.make CMakeFiles/mtmflix.dir/newtests/main.c.i
-.PHONY : newtests/main.c.i
-
-newtests/main.s: newtests/main.c.s
-
-.PHONY : newtests/main.s
-
-# target to generate assembly for a file
-newtests/main.c.s:
-	$(MAKE) -f CMakeFiles/mtmflix.dir/build.make CMakeFiles/mtmflix.dir/newtests/main.c.s
-.PHONY : newtests/main.c.s
-
 series.o: series.c.o
 
 .PHONY : series.o
@@ -203,6 +176,33 @@ series.s: series.c.s
 series.c.s:
 	$(MAKE) -f CMakeFiles/mtmflix.dir/build.make CMakeFiles/mtmflix.dir/series.c.s
 .PHONY : series.c.s
+
+tests/mtmFlixTestEx.o: tests/mtmFlixTestEx.c.o
+
+.PHONY : tests/mtmFlixTestEx.o
+
+# target to build an object file
+tests/mtmFlixTestEx.c.o:
+	$(MAKE) -f CMakeFiles/mtmflix.dir/build.make CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o
+.PHONY : tests/mtmFlixTestEx.c.o
+
+tests/mtmFlixTestEx.i: tests/mtmFlixTestEx.c.i
+
+.PHONY : tests/mtmFlixTestEx.i
+
+# target to preprocess a source file
+tests/mtmFlixTestEx.c.i:
+	$(MAKE) -f CMakeFiles/mtmflix.dir/build.make CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.i
+.PHONY : tests/mtmFlixTestEx.c.i
+
+tests/mtmFlixTestEx.s: tests/mtmFlixTestEx.c.s
+
+.PHONY : tests/mtmFlixTestEx.s
+
+# target to generate assembly for a file
+tests/mtmFlixTestEx.c.s:
+	$(MAKE) -f CMakeFiles/mtmflix.dir/build.make CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.s
+.PHONY : tests/mtmFlixTestEx.c.s
 
 user.o: user.c.o
 
@@ -270,12 +270,12 @@ help:
 	@echo "... mtmflix.o"
 	@echo "... mtmflix.i"
 	@echo "... mtmflix.s"
-	@echo "... newtests/main.o"
-	@echo "... newtests/main.i"
-	@echo "... newtests/main.s"
 	@echo "... series.o"
 	@echo "... series.i"
 	@echo "... series.s"
+	@echo "... tests/mtmFlixTestEx.o"
+	@echo "... tests/mtmFlixTestEx.i"
+	@echo "... tests/mtmFlixTestEx.s"
 	@echo "... user.o"
 	@echo "... user.i"
 	@echo "... user.s"

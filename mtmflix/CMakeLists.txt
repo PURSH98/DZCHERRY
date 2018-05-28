@@ -4,9 +4,8 @@ project(mtmflix C)
 set(CMAKE_C_STANDARD 99)
 
 add_executable(mtmflix
-        ${CMAKE_SOURCE_DIR}/newtests/main.c
-        ${CMAKE_SOURCE_DIR}/newtests/test_utilities.h
-        ${CMAKE_SOURCE_DIR}/newtests/test_utilities_2.h
+        ${CMAKE_SOURCE_DIR}/tests/mtmFlixTestEx.c
+        ${CMAKE_SOURCE_DIR}/tests/test_utilities.h
         list.h
         map.h
         mtm_ex3.h

@@ -11,20 +11,18 @@ CMakeFiles/mtmflix.dir/mtmflix.c.o
  /Users/macbook/tmp/mtm/mtmflix/set.h
  /Users/macbook/tmp/mtm/mtmflix/user.h
  /Users/macbook/tmp/mtm/mtmflix/utilities.h
-CMakeFiles/mtmflix.dir/newtests/main.c.o
- /Users/macbook/tmp/mtm/mtmflix/list.h
- /Users/macbook/tmp/mtm/mtmflix/mtm_ex3.h
- /Users/macbook/tmp/mtm/mtmflix/mtmflix.h
- /Users/macbook/tmp/mtm/mtmflix/newtests/main.c
- /Users/macbook/tmp/mtm/mtmflix/newtests/test_utilities.h
- /Users/macbook/tmp/mtm/mtmflix/newtests/test_utilities_2.h
- /Users/macbook/tmp/mtm/mtmflix/set.h
 CMakeFiles/mtmflix.dir/series.c.o
  /Users/macbook/tmp/mtm/mtmflix/list.h
  /Users/macbook/tmp/mtm/mtmflix/mtm_ex3.h
  /Users/macbook/tmp/mtm/mtmflix/mtmflix.h
  /Users/macbook/tmp/mtm/mtmflix/series.c
  /Users/macbook/tmp/mtm/mtmflix/series.h
+CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o
+ /Users/macbook/tmp/mtm/mtmflix/list.h
+ /Users/macbook/tmp/mtm/mtmflix/mtm_ex3.h
+ /Users/macbook/tmp/mtm/mtmflix/mtmflix.h
+ /Users/macbook/tmp/mtm/mtmflix/tests/mtmFlixTestEx.c
+ /Users/macbook/tmp/mtm/mtmflix/tests/test_utilities.h
 CMakeFiles/mtmflix.dir/user.c.o
  /Users/macbook/tmp/mtm/mtmflix/list.h
  /Users/macbook/tmp/mtm/mtmflix/map.h

@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/mtmflix.dir/newtests/main.c.o"
+  "CMakeFiles/mtmflix.dir/tests/mtmFlixTestEx.c.o"
   "CMakeFiles/mtmflix.dir/mtmflix.c.o"
   "CMakeFiles/mtmflix.dir/series.c.o"
   "CMakeFiles/mtmflix.dir/user.c.o"

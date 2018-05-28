@@ -1130,6 +1130,8 @@ bool mtmFlixGetRecommendationsTest() {
     fclose(fp);
     const char* test1_valid = "Series 'TheOffice', Genre: COMEDY.\n";
     char* output = readFile("./mtmFlixGetRecommendations_test.out");
+    printf("\nOur:\n-->%s<--", output);
+    printf("\nExpected:\n-->%s<--", test1_valid);
     ASSERT_TEST(strcmp(output, test1_valid) == 0);
 
     // 1 series recommended, 1 should be but not age appropriate

@@ -63,7 +63,6 @@ MtmFlixResult userAddFavSeries(User user, const char* series_name) {
 		case SET_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case SET_ITEM_ALREADY_EXISTS : return MTMFLIX_SUCCESS;
 		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
-		assert(false);
 		default: return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
@@ -78,7 +77,6 @@ MtmFlixResult userDeleteFavSeries(User user, const char* series_name) {
 	switch (setRemove(user->fav_series, (SetElement)series_name)) {
 		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
 		case SET_SUCCESS: return MTMFLIX_SUCCESS;
-		assert(false);
 		default: return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
@@ -95,7 +93,6 @@ MtmFlixResult userAddFriend(User user1, const char* username2) {
 		case SET_NULL_ARGUMENT : return MTMFLIX_NULL_ARGUMENT;
 		case SET_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case SET_ITEM_ALREADY_EXISTS : return MTMFLIX_SUCCESS;
-		assert(false);
 		default: return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);

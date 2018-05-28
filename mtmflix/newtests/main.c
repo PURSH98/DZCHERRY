@@ -52,39 +52,39 @@ int main() {
     printf("\nPress any button to start the tests:. \n\n");
     getchar();
     mtmFlixUnitTest();
-//    int tests_passed = 0;
-//    int tests_number = 0;
-//    MtmFlix m = mtmFlixCreate();
-//    tests_number += mtmFlixCreateDestroyTest(&tests_passed);
-//    tests_number += addUserTest(m, &tests_passed);
-//    tests_number += removeUserTest(m, &tests_passed);
-//    tests_number += addSeriesTest(m, &tests_passed);
-//    tests_number += removeSeriesTest(m, &tests_passed);
-//    tests_number += reportSeriesTest(m, &tests_passed);
-//    tests_number += reportUsersTest(m, &tests_passed);
-//    tests_number += seriesJoinTest(m, &tests_passed);
-//    tests_number += seriesLeaveTest(m, &tests_passed);
-//    tests_number += addFriendTest(m, &tests_passed);
-//    tests_number += removeFriendTest(m, &tests_passed);
-//    tests_number += getRecommendationsTest(m, &tests_passed);
-//    mtmFlixDestroy(m);
-//    print_grade(tests_number, tests_passed);
-//    printf("-\n");
-//    FILE *f1 = fopen("OutputFileFromTest", "w");
-//    assert(f1);
-//    /**
-//    * NOTICE
-//    * If you are about to change the test code,
-//    * the test won't work properly and you might get
-//    * additional fails at the finalCheck function.
-//    */
-//    test1_again(f1);
-//    test2_again(f1);
-//    test3_again(f1);
-//    fclose(f1);
-//
-//    finalCheck();
-//    getchar();
+    int tests_passed = 0;
+    int tests_number = 0;
+    MtmFlix m = mtmFlixCreate();
+    tests_number += mtmFlixCreateDestroyTest(&tests_passed);
+    tests_number += addUserTest(m, &tests_passed);
+    tests_number += removeUserTest(m, &tests_passed);
+    tests_number += addSeriesTest(m, &tests_passed);
+    tests_number += removeSeriesTest(m, &tests_passed);
+    tests_number += reportSeriesTest(m, &tests_passed);
+    tests_number += reportUsersTest(m, &tests_passed);
+    tests_number += seriesJoinTest(m, &tests_passed);
+    tests_number += seriesLeaveTest(m, &tests_passed);
+    tests_number += addFriendTest(m, &tests_passed);
+    tests_number += removeFriendTest(m, &tests_passed);
+    tests_number += getRecommendationsTest(m, &tests_passed);
+    mtmFlixDestroy(m);
+    print_grade(tests_number, tests_passed);
+    printf("-\n");
+    FILE *f1 = fopen("OutputFileFromTest", "w");
+    assert(f1);
+    /**
+    * NOTICE
+    * If you are about to change the test code,
+    * the test won't work properly and you might get
+    * additional fails at the finalCheck function.
+    */
+    test1_again(f1);
+    test2_again(f1);
+    test3_again(f1);
+    fclose(f1);
+
+    finalCheck();
+    getchar();
     return 0;
 }
 
@@ -294,7 +294,7 @@ void test1_again(FILE *f1) {
     printf("Test 1..\n");
     MtmFlix a = mtmFlixCreate();
     int ages1[2] = {20, 80};
-    printf("Using ages %d %d\n", ages1[0], ages1[0]);
+    printf("Using ages %d %d\n", ages1[0], ages1[1]);
     assert(a);
     assert(mtmFlixAddSeries(a, "s 1", 5, DRAMA, ages1, 20) == MTMFLIX_ILLEGAL_SERIES_NAME);
     assert(mtmFlixAddSeries(a, "s1", 0, DRAMA, ages1, 20) == MTMFLIX_ILLEGAL_EPISODES_NUM);

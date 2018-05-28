@@ -10,9 +10,9 @@
 //creates a const copy of a given string
 const char* copyString(const char* str) {
   int length = strlen(str);
-  char* new_str = malloc(length+1);
+  char* new_str = malloc(sizeof(char)*length+1);
   if (new_str == NULL) {
-    return NULL; //DO SOMETHING WITH THIS
+    return NULL;
   }
   assert(new_str);
   strcpy(new_str, str);

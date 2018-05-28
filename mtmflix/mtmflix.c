@@ -75,7 +75,7 @@ MtmFlixResult mtmFlixAddUser(MtmFlix mtmflix, const char* username, int age) {
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
 		assert(false);		
-		default : MTMFLIX_NULL_ARGUMENT;
+		default : return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
 	return MTMFLIX_NULL_ARGUMENT;
@@ -126,7 +126,7 @@ MtmFlixResult mtmFlixAddSeries(MtmFlix mtmflix, const char* name,
 		case MAP_OUT_OF_MEMORY : return MTMFLIX_OUT_OF_MEMORY;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
 		assert(false);
-		default : MTMFLIX_NULL_ARGUMENT;
+		default : return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
 	return MTMFLIX_NULL_ARGUMENT;//we're not supposed to get here
@@ -147,7 +147,7 @@ MtmFlixResult mtmFlixRemoveSeries(MtmFlix mtmflix, const char* name) {
 		case MAP_ITEM_DOES_NOT_EXIST : return MTMFLIX_NO_SERIES;
 		case MAP_SUCCESS : return MTMFLIX_SUCCESS;
 		assert(false);
-		default : return MAP_NULL_ARGUMENT;
+		default : return MTMFLIX_NULL_ARGUMENT;
 	}
 	assert(false);
 	return MTMFLIX_NULL_ARGUMENT;

@@ -152,11 +152,13 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 	switch (list_result){
         case LIST_NULL_ARGUMENT:return MTMFLIX_NULL_ARGUMENT;
         case LIST_OUT_OF_MEMORY:return MTMFLIX_OUT_OF_MEMORY;
+        default:break;
 	}
 	if(seriesNum==0){
 	    seriesNum=mapGetSize(mtmflix->series);
 	}
 	listSort(series_list, seriesListCompare);
+	int genre_count=0;
 	LIST_FOREACH(KeyValuePair,list_iter,series_list) {
 		void* key = (KeyValuePair)list_iter->key;
 		void* value = (KeyValuePair)list_iter->value;
@@ -169,20 +171,30 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
     ListResult list_result;
-    List users_node = mapKeyToList(mtmflix->users, &list_result);
-    // TODO: handle status
-    // case (status) {
-    // }
-    listSort(users_node,compareStrings);
-    LIST_FOREACH(ListElement ,list_iter,users_node) {
+    List users_list = mapKeyToList(mtmflix->users, &list_result);
+    switch (list_result){
+        case LIST_NULL_ARGUMENT:return MTMFLIX_NULL_ARGUMENT;
+        case LIST_OUT_OF_MEMORY:return MTMFLIX_OUT_OF_MEMORY;
+        default:break;
+    }
+    listSort(users_list,compareStrings);
+    LIST_FOREACH(ListElement ,list_iter,users_list) {
         User user=mapGet(mtmflix->users,list_iter);
-        ListResult listResult;
-        List fav_series=mtmSetToList(userGetFavSeries(user),&listResult);
+        List fav_series=mtmSetToList(userGetFavSeries(user),&list_result);
+        switch (list_result){
+            case LIST_NULL_ARGUMENT:return MTMFLIX_NULL_ARGUMENT;
+            case LIST_OUT_OF_MEMORY:return MTMFLIX_OUT_OF_MEMORY;
+            default:break;
+        }
         List friends=mtmSetToList(userGetFriends(user),&list_result);
+        switch (list_result){
+            case LIST_NULL_ARGUMENT:return MTMFLIX_NULL_ARGUMENT;
+            case LIST_OUT_OF_MEMORY:return MTMFLIX_OUT_OF_MEMORY;
+            default:break;
+        }
         int age=userGetAge(user);
-        const char* user_string = mtmPrintUser((char*)list_iter,age,
-        										friends,fav_series);
-        fprintf(outputStream, "%s", user_string);
+        fprintf(outputStream, "%s",
+                mtmPrintUser((char*)list_iter,age, friends,fav_series));
         //free functions are needed here(probably)
     }
     return MTMFLIX_SUCCESS;

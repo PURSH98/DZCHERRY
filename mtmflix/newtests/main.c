@@ -853,6 +853,8 @@ bool mtmFlixReportSeriesTest() {
     output = readFile("./mtmFlixReportSeries_test.out");
     const char* test2_valid = "Series 'Friends', Genre: COMEDY.\n"
                               "Series 'GameOfThrones', Genre: DOCUMENTARY.\n";
+    printf("\nOur output:\n--->%s<---\n", output);
+    printf("Expected output:\n--->%s<---\n", test2_valid);
     ASSERT_TEST(result == MTMFLIX_SUCCESS && strcmp(output, test2_valid) == 0);
 
     // Report with series below, at, and above amount limitation
@@ -897,6 +899,8 @@ bool mtmFlixReportUsersTest() {
                               "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
                               "The user Rachel is 18 years old\n";
     char* output = readFile("./mtmFlixReportUsers_test.out");
+    printf("Expected output: \n%s\n", test1_valid);
+    printf("Our output: %s\n", output);
     ASSERT_TEST(result == MTMFLIX_SUCCESS && strcmp(output, test1_valid) == 0);
 
     mtmFlixDestroy(system);

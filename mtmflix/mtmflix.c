@@ -167,7 +167,7 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 	    seriesNum=mapGetSize(mtmflix->series);
 	}
 	listSort(series_list, seriesListCompare);
-	char* prev_genre=NULL;
+	char* prev_genre="";
 	int genre_count=0;
 	LIST_FOREACH(KeyValuePair,list_iter,series_list) {
 		void* key = (KeyValuePair)list_iter->key;
@@ -175,6 +175,8 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 		if(strcmp(prev_genre,seriesGetGenre((Series)value))!=0){
 			genre_count=0;
 			prev_genre=seriesGetGenre((Series)value);
+		} else {
+		    genre_count++;
 		}
 		if(genre_count<seriesNum) {
 			fprintf(outputStream, "%s",
@@ -187,9 +189,11 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
-	if(mtmflix == NULL || outputStream == NULL){
+    printf("\nReporting users...\n");
+	if(mtmflix==NULL || outputStream == NULL){
 		return MTMFLIX_NULL_ARGUMENT;
 	}
+	printf("We have %d users\n", mapGetSize(mtmflix->users));
 	if (mapGetSize(mtmflix->users)==0){
 		return MTMFLIX_NO_USERS;
 	}
@@ -201,8 +205,8 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
         default:break;
     }
     listSort(users_list,compareStrings);
-    LIST_FOREACH(ListElement ,list_iter,users_list) {
-        User user=mapGet(mtmflix->users,list_iter);
+    LIST_FOREACH(ListElement,list_iter,users_list) {
+        User user=mapGet(mtmflix->users, (MapKeyElement)list_iter);
         List fav_series=mtmSetToList(userGetFavSeries(user),&list_result);
         switch (list_result){
             case LIST_NULL_ARGUMENT:return MTMFLIX_NULL_ARGUMENT;
@@ -399,6 +403,6 @@ static int getSeriesRank(Series series, User user){
     return rank;
 }
 
-int main () {
-	return 0;
-}
+//int main () {
+//	return 0;
+//}

@@ -897,6 +897,8 @@ bool mtmFlixReportUsersTest() {
                               "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
                               "The user Rachel is 18 years old\n";
     char* output = readFile("./mtmFlixReportUsers_test.out");
+    printf("Expected output: \n%s\n", test1_valid);
+    printf("Our output: %s\n", output);
     ASSERT_TEST(result == MTMFLIX_SUCCESS && strcmp(output, test1_valid) == 0);
 
     mtmFlixDestroy(system);

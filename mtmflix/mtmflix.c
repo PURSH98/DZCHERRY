@@ -189,9 +189,11 @@ MtmFlixResult mtmFlixReportSeries(MtmFlix mtmflix, int seriesNum,
 
 
 MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
+    printf("\nReporting users...\n");
 	if(mtmflix==NULL || outputStream ==NULL){
 		return MTMFLIX_NULL_ARGUMENT;
 	}
+	printf("We have %d users\n", mapGetSize(mtmflix->users));
 	if (mapGetSize(mtmflix->users)==0){
 		return MTMFLIX_NO_USERS;
 	}
@@ -203,8 +205,8 @@ MtmFlixResult mtmFlixReportUsers(MtmFlix mtmflix, FILE* outputStream){
         default:break;
     }
     listSort(users_list,compareStrings);
-    LIST_FOREACH(ListElement ,list_iter,users_list) {
-        User user=mapGet(mtmflix->users,list_iter);
+    LIST_FOREACH(ListElement,list_iter,users_list) {
+        User user=mapGet(mtmflix->users, (MapKeyElement)list_iter);
         List fav_series=mtmSetToList(userGetFavSeries(user),&list_result);
         switch (list_result){
             case LIST_NULL_ARGUMENT:return MTMFLIX_NULL_ARGUMENT;

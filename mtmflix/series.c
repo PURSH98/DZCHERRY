@@ -77,14 +77,14 @@ char* seriesGetGenre (Series series) {
 		return NULL;
 	}
 	switch (series->genre) {
-		case SCIENCE_FICTION: return "science fiction";
-        case DRAMA : return "drama";
-        case COMEDY : return "comedy";
-        case CRIME : return "crime";
-        case MYSTERY : return "mystery";
-        case DOCUMENTARY : return "documentary";
-        case ROMANCE : return "romance";
-        case HORROR : return "horror";
+		case SCIENCE_FICTION: return "SCIENCE FICTION";
+        case DRAMA : return "DRAMA";
+        case COMEDY : return "COMEDY";
+        case CRIME : return "CRIME";
+        case MYSTERY : return "MYSTERY";
+        case DOCUMENTARY : return "DOCUMENTARY";
+        case ROMANCE : return "ROMANCE";
+        case HORROR : return "HORROR";
 	}
 	// Unreachable
 	assert(false);
